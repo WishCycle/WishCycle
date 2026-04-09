@@ -1,6 +1,6 @@
 Miniprojekt 2.Semester (Forår 2026).
 Uddannelse: Datamatiker.
-Institution: Københavns Erhversakdemi (EK).
+Institution: Københavns Erhvervsakademi (EK).
 
 Organization: WishCycle
 Owners: Emil Andersen (Mowgli-dk), Joachim Eskildsen (Joakim700)
