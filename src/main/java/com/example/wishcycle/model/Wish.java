@@ -5,14 +5,14 @@ public class Wish {
     private Long wishId;
     private String wishName;
     private String wishDescription;
-    private String wishLink;
+    private String wishURL;
 
     public Wish(Long wishId, String wishName, String wishDescription, String wishLink) {
 
         this.wishId = wishId;
         this.wishName = wishName;
         this.wishDescription = wishDescription;
-        this.wishLink = wishLink;
+        this.wishURL = wishLink;
     }
 
     public Long getWishId() {
