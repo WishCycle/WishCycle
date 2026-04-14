@@ -1,0 +1,31 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main           # Only run when pushing to the main branch
+  workflow_dispatch:   # Manual trigger from GitHub Actions UI
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest # spin up a virtual ubuntu server on GitHub
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Run Tests
+        run: mvn -B clean test
