@@ -6,11 +6,13 @@ public class WishList {
     private Long wishListId;
     private String wishListName;
     private String description;
+    private Member member;
 
-    public WishList(Long wishListId, String wishListName, String description) {
+    public WishList(Long wishListId, String wishListName, String description, Member member) {
         this.wishListId = wishListId;
         this.wishListName = wishListName;
         this.description = description;
+        this.member = member;
     }
 
     public WishList() {}
