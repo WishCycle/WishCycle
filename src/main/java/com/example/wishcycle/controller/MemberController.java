@@ -22,8 +22,8 @@ public class MemberController {
         return "loginpage";
     }
 
-    @PostMapping("/login/save")
-    public String saveUser(Member member) {
-
-    }
+//    @PostMapping("/login/save")
+//    public String saveUser(Member member) {
+//
+//    }
 }

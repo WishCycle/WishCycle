@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public class WishService {
+
     private final MemberRepository memberRepository;
     private final WishListRepository wishListRepository;
 
