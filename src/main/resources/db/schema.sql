@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS wish_list_item(
     item_id BIGINT NOT NULL PRIMARY KEY,
     wish_description VARCHAR(500),
     CONSTRAINT fk_wishid
-    FOREIGN KEY (wish_id)
+    FOREIGN KEY (item_id)
     REFERENCES item(item_id),
     CONSTRAINT fk_wishlistid
     FOREIGN KEY (wishlist_id)
