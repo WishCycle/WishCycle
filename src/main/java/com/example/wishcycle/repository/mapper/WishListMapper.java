@@ -1,4 +1,4 @@
-package com.example.wishcycle.member.mapper;
+package com.example.wishcycle.repository.mapper;
 import com.example.wishcycle.model.WishList;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
