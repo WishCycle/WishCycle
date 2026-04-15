@@ -4,7 +4,7 @@ package com.example.wishcycle.repository.jdbc;
 import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
-import com.example.wishcycle.repository.mapper.WishListMapper;
+import com.example.wishcycle.member.mapper.WishListMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 

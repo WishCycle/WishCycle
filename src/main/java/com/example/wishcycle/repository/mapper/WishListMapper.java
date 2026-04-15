@@ -1,5 +1,4 @@
-package com.example.wishcycle.repository.mapper;
-import com.example.wishcycle.model.Member;
+package com.example.wishcycle.member.mapper;
 import com.example.wishcycle.model.WishList;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -19,10 +18,5 @@ public class WishListMapper implements RowMapper<WishList> {
         return wishList;
     }
 
-    @Override
-    public Member memberRow(ResultSet rs, int rownum) throws SQLException {
-        Member member = new Member();
 
-        return member;
-    }
 }
