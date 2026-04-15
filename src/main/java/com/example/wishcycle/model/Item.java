@@ -9,7 +9,6 @@ public class Item {
     private Long price;
 
     public Item(Long wishId, String wishName, String wishDescription, String url, Long price) {
-
         this.itemId = wishId;
         this.itemName = wishName;
         this.itemDescription = wishDescription;
@@ -17,8 +16,22 @@ public class Item {
         this.price = price;
     }
 
+    public Item() {}
+
     public Long getItemId() {
         return itemId;
+    }
+
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
+    }
+
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getItemName() {
