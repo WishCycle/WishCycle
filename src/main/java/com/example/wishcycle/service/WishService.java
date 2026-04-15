@@ -18,11 +18,7 @@ public class WishService {
         this.wishListRepository = wishListRepository;
     }
 
-    public List<WishList> getPublicWishLists() {
-
-    }
-
-    public List<WishList> getPrivateWishLists() {
+    public List<WishList> getWishLists() {
 
     }
 
