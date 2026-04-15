@@ -1,4 +1,4 @@
 package com.example.wishcycle.controller;
 
-public class controllerTest {
+public class ControllerTest {
 }
