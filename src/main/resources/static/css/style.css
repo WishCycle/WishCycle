@@ -13,24 +13,47 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.02em;
     background-color: var(--cream);
     color: var(--forest-dark);
-    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    font-weight: 600; /* Semi-bold */
+    letter-spacing: -0.04em; /* Slightly tighter for large text */
+    color: var(--cream);
 }
 
 /* 3. HEADER & NAVIGATION */
 .navbar {
+    font-family: 'Inter', sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 30px 50px;
 }
 
+/* Target the logo container */
 .logo {
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--forest-dark);
+    display: flex;
+    align-items: center;
+}
+
+/* Target the actual image inside that container */
+.logo img {
+    height: 160px;    /* This controls how tall your logo is */
+    width: auto;     /* This keeps the logo from looking 'squashed' */
+    display: block;
+    border: 1px solid rgba(45, 67, 38, 0.1);
+}
+
+.slogan {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+
 }
 
 .auth-buttons {
@@ -42,7 +65,7 @@ body {
 /* Rectangle Buttons */
 .btn-login, .btn-signup {
     background-color: var(--forest-dark);
-    color: var(--text-white);
+    color: var(--cream);
     border: none;
     padding: 10px 20px;
     cursor: pointer;
@@ -55,7 +78,7 @@ body {
     width: 45px;
     height: 45px;
     background-color: var(--forest-dark);
-    color: var(--text-white);
+    color: var(--cream);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -103,4 +126,115 @@ body {
     justify-content: center;
     font-size: 1.8rem;
     color: var(--forest-dark);
+}
+
+
+
+
+
+
+
+/* --- Login Page and Sign Up Page Specific Styles --- */
+
+/* Centering the login card on the screen */
+.login-body, .signup-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-card, .signup-card {
+    background: white; /* Or var(--cream) if you want it to blend in */
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid rgba(45, 67, 38, 0.1); /* Subtle forest-green border */
+    text-align: center;
+}
+
+.login-logo img, .signup-logo img {
+    height: 60px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(45, 67, 38, 0.1)
+}
+
+.login-card h2, .signup-card h2 {
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 10px;
+    color: var(--forest-dark);
+}
+
+.login-card p, .signup-card p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--forest-dark);
+    margin-bottom: 30px;
+}
+
+.login-logo-container, .signup-logo-container {
+    padding-bottom: 20px;   /* Space between logo and the line */
+    margin-bottom: 25px;    /* Space between the line and the text below */
+    border-bottom: 1px solid rgba(45, 67, 38, 0.15); /* Light forest-green line */
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.login-logo-container img, .signup-logo-container img {
+    height: 160px; /* Adjust based on your logo's look */
+    width: auto;
+}
+
+/* Input Styles */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--forest-dark);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--forest-dark);
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.input-group input:focus {
+    outline: 2px solid var(--forest-dark);
+    border-color: var(--forest-dark);
+}
+
+/* Reusing the Forest Green for the main button */
+.btn-primary {
+    width: 100%;
+    background-color: var(--forest-dark);
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.login-footer, .signup-footer {
+    margin-top: 25px;
+    font-size: 0.85rem;
+}
+
+.login-footer a, .signup-footer a {
+    color: var(--forest-dark);
+    font-weight: 600;
+    text-decoration: none;
 }
