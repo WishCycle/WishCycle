@@ -12,13 +12,10 @@ import java.util.List;
 public class WishService {
     private final MemberRepository memberRepository;
     private final WishListRepository wishListRepository;
-    private final ItemRepository wishRepository;
 
-
-    public WishService(MemberRepository memberRepository, WishListRepository wishListRepository, ItemRepository wishRepository) {
+    public WishService(MemberRepository memberRepository, WishListRepository wishListRepository) {
         this.memberRepository = memberRepository;
         this.wishListRepository = wishListRepository;
-        this.wishRepository = wishRepository;
     }
 
     public List<WishList> getPublicWishLists() {
