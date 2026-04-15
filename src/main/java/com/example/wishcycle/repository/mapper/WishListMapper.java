@@ -1,4 +1,5 @@
 package com.example.wishcycle.repository.mapper;
+import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -16,5 +17,12 @@ public class WishListMapper implements RowMapper<WishList> {
         wishList.setWishListName(rs.getString("wishlist_name"));
         wishList.setDescription(rs.getString("wishlist_desc"));
         return wishList;
+    }
+
+    @Override
+    public Member memberRow(ResultSet rs, int rownum) throws SQLException {
+        Member member = new Member();
+
+        return member;
     }
 }
