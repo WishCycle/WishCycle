@@ -1,10 +1,8 @@
 package com.example.wishcycle.repository;
-
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
 import com.example.wishcycle.repository.jdbc.WishListRepository;
 import com.example.wishcycle.repository.mapper.WishListMapper;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -56,6 +53,8 @@ public class WishListRepositoryTest {
         System.out.println("Number of wishlist: " + wishListCount);
 
         assertNotNull(wishListList);
+
+
     }
 
 

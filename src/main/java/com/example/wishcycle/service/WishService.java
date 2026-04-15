@@ -19,29 +19,29 @@ public class WishService {
         this.wishListRepository = wishListRepository;
     }
 
-    public List<WishList> getWishLists() {
-
-    }
-
-    public void createWishList(WishList wishList) {
-
-    }
-
-    public void updateWishList(WishList wishList, List<Item> list) {
-
-    }
-
-    public void deleteWishList(WishList wishList) {
-
-    }
-
-    public void createWish(Item wish) {
-
-    }
-
-    public void deleteWish(Item wish) {
-
-    }
+//    public List<WishList> getWishLists() {
+//
+//    }
+//
+//    public void createWishList(WishList wishList) {
+//
+//    }
+//
+//    public void updateWishList(WishList wishList, List<Item> list) {
+//
+//    }
+//
+//    public void deleteWishList(WishList wishList) {
+//
+//    }
+//
+//    public void createWish(Item wish) {
+//
+//    }
+//
+//    public void deleteWish(Item wish) {
+//
+//    }
 
 
 
