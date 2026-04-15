@@ -40,4 +40,5 @@ public class WishList {
     public void setWishListName(String wishListName) {
         this.wishListName = wishListName;
     }
+
 }
