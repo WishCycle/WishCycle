@@ -1,0 +1,106 @@
+/* 1. VARIABLE DEFINITIONS */
+:root {
+    --cream: #F5F5E9;       /* Light background color */
+    --forest-dark: #2D4326; /* Deep green for boxes and buttons */
+    --text-white: #FFFFFF;
+}
+
+/* 2. GENERAL RESET */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--cream);
+    color: var(--forest-dark);
+    line-height: 1.6;
+}
+
+/* 3. HEADER & NAVIGATION */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 50px;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--forest-dark);
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Rectangle Buttons */
+.btn-login, .btn-signup {
+    background-color: var(--forest-dark);
+    color: var(--text-white);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* User Circle Icon */
+.user-circle {
+    width: 45px;
+    height: 45px;
+    background-color: var(--forest-dark);
+    color: var(--text-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+/* 4. MAIN BOARDS SECTION (The two big green boxes) */
+.boards-container {
+    display: flex;
+    gap: 20px;
+    padding: 0 20px 20px 20px;
+    height: 450px; /* Adjust based on your content */
+}
+
+.board-box {
+    flex: 1;
+    background-color: var(--forest-dark);
+    color: var(--text-white);
+    padding: 40px;
+    /* Optional: border-radius: 4px; if you want slightly rounded corners */
+}
+
+.board-box h2 {
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+
+/* 5. INSPO SECTION (The bottom row) */
+.inspo-container {
+    background-color: var(--forest-dark);
+    display: flex;
+    gap: 25px;
+    padding: 30px;
+    margin-top: 10px;
+}
+
+.inspo-card {
+    background-color: var(--cream);
+    flex: 1;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--forest-dark);
+}
