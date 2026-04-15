@@ -4,7 +4,6 @@ import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.WishList;
 import com.example.wishcycle.repository.jdbc.MemberRepository;
 import com.example.wishcycle.repository.jdbc.WishListRepository;
-import com.example.wishcycle.repository.jdbc.WishRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +12,10 @@ import java.util.List;
 public class WishService {
     private final MemberRepository memberRepository;
     private final WishListRepository wishListRepository;
-    private final WishRepository wishRepository;
+    private final ItemRepository wishRepository;
 
 
-    public WishService(MemberRepository memberRepository, WishListRepository wishListRepository, WishRepository wishRepository) {
+    public WishService(MemberRepository memberRepository, WishListRepository wishListRepository, ItemRepository wishRepository) {
         this.memberRepository = memberRepository;
         this.wishListRepository = wishListRepository;
         this.wishRepository = wishRepository;
