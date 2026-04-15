@@ -20,6 +20,10 @@ public class Member {
         return memberId;
     }
 
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
+    }
+
     public String getName() {
         return name;
     }
