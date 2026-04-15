@@ -24,7 +24,24 @@ public class MemberService {
     }
 
     public void createMember(Member member) {
+        if (member == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Fill out all the fields");
+        }
+        if (memberRepository.getMemberByEmail(member.getEmail()) != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already in use");
+        }
+        if (memberRepository.getMemberByUsername(member.getName()) != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already in use");
+        }
+        memberRepository.createMember(member);
 
+    }
+
+    public void deleteMember(Member member) {
+        if (memberRepository.getMemberById(member.getMemberId()) == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Member not found");
+        }
+        memberRepository.deleteMember(member);
     }
 
 

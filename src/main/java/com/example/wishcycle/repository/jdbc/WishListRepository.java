@@ -30,11 +30,11 @@ public class WishListRepository {
         this.wishListMapper = wishListMapper;
     }
 
-    public List<WishList> findByUserId(Long userId) {
+    public List<WishList> findByUserId(int userId) {
         return jdbc.query(FIND_BY_USER_SQL, wishListMapper, userId);
     }
 
-    public void deleteWishList(Long wishListId) {
+    public void deleteWishList(int wishListId) {
         jdbc.update(DELETE_WISHLIST, wishListId);
     }
 
@@ -43,7 +43,7 @@ public class WishListRepository {
         return findByUserId(member.getMemberId());
     }
 
-    public List<WishList> updateWishList(WishList wishList, Long userId) {
+    public List<WishList> updateWishList(WishList wishList, int userId) {
         jdbc.update(UPDATE_WISHLIST, wishList.getWishListName(), wishList.getDescription(), wishList.getWishListId());
         return findByUserId(userId);
     }

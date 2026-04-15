@@ -37,8 +37,8 @@ public class MemberRepository {
         return jdbc.queryForObject(FIND_BY_USERNAME_SQL, memberMapper, username);
     }
 
-    public void deleteMember(int id) {
-        jdbc.update(DELETE_MEMBER_SQL, memberMapper, id);
+    public void deleteMember(Member member) {
+        jdbc.update(DELETE_MEMBER_SQL, memberMapper, member.getMemberId());
     }
 
     public void createMember(Member member) {
