@@ -1,20 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WishCycle | Home</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
 <header class="navbar">
-    <div class="logo">WishCycle</div>
+    <div class="logo">
+        <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WischCycle-Logo.png" alt="WishCycle Logo">
+    </div>
+    <div class="slogan">
+        <h3>Wish for a better future</h3>
+    </div>
     <nav class="auth-buttons">
-        <button class="btn-login">Login</button>
-        <button class="btn-signup">Sign Up</button>
-        <div class="user-circle">User</div>
-    </nav>i
+        <a th:href="@{/login-page}" href="login-page.html" class="btn-login">Login</a>
+        <a th:href="@{/signup-page}" href="signup-page.html" class="btn-signup">Sign Up</a>        <div class="user-circle">User</div>
+    </nav>
 </header>
 
 <main>

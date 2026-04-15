@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WishCycle | Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
 </head>
-<body>
+<body class="login-body">
+
+<div class="login-card">
+    <div class="login-logo-container">
+        <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WischCycle-Logo.png" alt="WishCycle Logo">
+    </div>
+
+    <h2>Welcome Back</h2>
+    <p>Enter your details to access your WishCycles</p>
+
+    <form>
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" class="btn-primary">Login</button>
+    </form>
+
+    <div class="login-footer">
+        Don't have an account? <a th:href="@{/signup-page}" href="signup-page.html">Sign up for free</a>
+    </div>
+</div>
 
 </body>
 </html>
