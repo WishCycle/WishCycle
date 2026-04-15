@@ -11,15 +11,15 @@ CREATE TABLE IF NOT EXISTS wish_user(
 
 CREATE TABLE IF NOT EXISTS item(
     item_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    item_name VARCHAR(60) NOT NULL,
-    item_url VARCHAR(500) NOT NULL,
+    item_name VARCHAR(200) NOT NULL,
+    item_url VARCHAR(999) NOT NULL,
     item_price BIGINT NOT NULL
     );
 
 CREATE TABLE IF NOT EXISTS wish_list(
-    wishlist_id BIGINT NOT NULL PRIMARY KEY,
-    wishlist_name VARCHAR(60) NOT NULL,
-    wishlist_desc VARCHAR(500),
+    wishlist_id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    wishlist_name VARCHAR(200) NOT NULL,
+    wishlist_desc VARCHAR(999),
     user_id BIGINT NOT NULL,
     CONSTRAINT fk_userid
     FOREIGN KEY (user_id)
