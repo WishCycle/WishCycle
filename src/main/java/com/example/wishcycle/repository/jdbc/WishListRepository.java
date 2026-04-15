@@ -4,7 +4,7 @@ package com.example.wishcycle.repository.jdbc;
 import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
-import com.example.wishcycle.member.mapper.WishListMapper;
+import com.example.wishcycle.repository.mapper.WishListMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +22,8 @@ public class WishListRepository {
     private static final String UPDATE_WISHLIST = "UPDATE wish_list SET wishlist_name = ?, wishlist_desc = ? WHERE wishlist_id = ?";
 
     private static final String CREATE_WISH = "INSERT INTO item (item_id, item_name, item_url, item_price) VALUES (?, ?, ?, ?)";
+    private static final String DELETE_WISH = "DELETE FROM item WHERE item_id = ?";
+    private static final String UPDATE_WISH = "UPDATE item SET item_name = ?, item_url = ?, item_price = ? WHERE item_id";
 
     public WishListRepository(JdbcTemplate jdbc, WishListMapper wishListMapper) {
         this.jdbc = jdbc;
@@ -46,13 +48,20 @@ public class WishListRepository {
         return findByUserId(userId);
     }
 
-//    public Item createWish(Long userId, Item item) {
-//        jdbc.query(CREATE_WISH, ,)
-//    }
+    public void createWish(Item item) {
+        jdbc.update(CREATE_WISH, item.getItemId(), item.getItemName(), item.getUrl(), item.getPrice());
+    }
 
-    // Create wish / item
-    // Delete wish / item
-    // Update wish / item
+    public void deleteWish(Item item) {
+        jdbc.update(DELETE_WISH, item.getItemId());
+    }
 
+    public Item updateWish(Item item) {
+        jdbc.update(UPDATE_WISH, item.getItemName(), item.getUrl(), item.getPrice());
+        return item;
+    }
 
+    // Create wish / item _/
+    // Delete wish / item _/
+    // Update wish / item _/
 }
