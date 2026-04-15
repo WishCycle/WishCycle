@@ -22,16 +22,6 @@ public class WishController {
         return "homepage";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "loginpage";
-    }
-
-    @PostMapping("/login/save")
-    public String saveUser(Member member) {
-
-        return "redirect:/wishcycle/homepage";
-    }
 
 
 
