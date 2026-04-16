@@ -1,29 +1,39 @@
 package com.example.wishcycle.controller;
 
 import com.example.wishcycle.model.Member;
+import com.example.wishcycle.service.MemberService;
 import com.example.wishcycle.service.WishService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/wishcycle")
 public class MemberController {
 
-    private final WishService service;
+    private final MemberService memberService;
 
-    public MemberController(WishService service) {
-        this.service = service;
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        Member member = new Member();
+        model.addAttribute("member", member);
         return "loginpage";
     }
 
-//    @PostMapping("/login/save")
-//    public String saveUser(Member member) {
-//
-//    }
+    @PostMapping("/login/save")
+    public String saveUser(@ModelAttribute Member member, HttpSession session) {
+        Member validMember = memberService.createMember(member);
+        if (validMember == null){
+            return "loginpage";
+        }
+
+        session.setAttribute("member", validMember);
+
+        return "redirect:/wishcycle/homepage";
+    }
 }
