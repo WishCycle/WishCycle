@@ -4,6 +4,7 @@ package com.example.wishcycle.repository.jdbc;
 import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
+import com.example.wishcycle.repository.mapper.MemberMapper;
 import com.example.wishcycle.repository.mapper.WishListMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,7 +17,7 @@ public class WishListRepository {
     private final JdbcTemplate jdbc;
     private final WishListMapper wishListMapper;
 
-    private static final String GET_ALL_WISHISLISTS = "SELECT * FROM wish_list";
+    private static final String GET_ALL_WISH_LISTS = "SELECT * FROM wish_list";
     private static final String FIND_BY_USER_SQL = "SELECT * FROM wish_list WHERE user_id = ?";
     private static final String DELETE_WISHLIST = "DELETE FROM wish_list WHERE wishlist_id = ?";
     private static final String CREATE_NEW_WISHLIST = "INSERT INTO wish_list (wishList_id, wishlist_name, wishlist_desc, user_id) VALUES (?, ?, ?, ?)";
@@ -40,14 +41,14 @@ public class WishListRepository {
     }
 
     public List<WishList> findAll() {
-        return jdbc.query(GET_ALL_WISHISLISTS, wishListMapper);
+        return jdbc.query(GET_ALL_WISH_LISTS, wishListMapper);
     }
 
-    public List<WishList> findByMemberId(int userId) {
+    public List<WishList> findByUserId(int userId) {
         return jdbc.query(FIND_BY_USER_SQL, wishListMapper, userId);
     }
 
-    public void deleteWishList(int wishListId) {
+    public void deleteWishList(Long wishListId) {
         jdbc.update(DELETE_WISHLIST, wishListId);
     }
 
@@ -55,24 +56,22 @@ public class WishListRepository {
         jdbc.update(CREATE_NEW_WISHLIST, wishList.getWishListId(), wishList.getWishListName(), wishList.getDescription(), member.getMemberId());
     }
 
-    public List<WishList> updateWishList(WishList wishList, Member member) {
+    public List<WishList> updateWishList(WishList wishList, int userId) {
         jdbc.update(UPDATE_WISHLIST, wishList.getWishListName(), wishList.getDescription(), wishList.getWishListId());
-        return findByMemberId(member.getMemberId());
+        return findByUserId(userId);
     }
 
-    public void createItem(WishList wishList, Item item) {
+    public void createItem(Item item) {
         jdbc.update(CREATE_ITEM, item.getItemId(), item.getItemName(), item.getUrl(), item.getPrice());
-        jdbc.update(ADD_ITEM_TO_WISHLIST, wishListMapper, wishList.getWishListId(), item.getItemId(), wishList.getDescription());
     }
 
     public void deleteItem(Item item) {
         jdbc.update(DELETE_ITEM, item.getItemId());
-        jdbc.update(DELETE_ITEM_FROM_WISHLIST, wishListMapper, item.getItemId());
     }
 
     public Item updateItem(Item item) {
         jdbc.update(UPDATE_ITEM, item.getItemName(), item.getUrl(), item.getPrice());
-        jdbc.update(UPDATE_ITEM_ON_WISHLIST, wishListMapper, item.getItemName(), item.getUrl(), item.getPrice());
         return item;
     }
+
 }
