@@ -19,9 +19,16 @@ public class WishController {
 
     @GetMapping("/homepage")
     public String homepage() {
+
         return "homepage";
     }
 
 
+//    BRUGES NÅR VI VIL TJEKKE OM DE ER LOGGET IND, REDIRECTER TIL LOGIN SIDEN HVIS DE IKKE ER
+//    HttpSession session = request.getSession(false);
+//
+//    if (session == null || session.getAttribute("member") == null) {
+//        return redirect:/wishcycle/login;
+//    }
 
 }

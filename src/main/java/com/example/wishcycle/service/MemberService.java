@@ -23,9 +23,9 @@ public class MemberService {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found");
     }
 
-    public void createMember(Member member) {
+    public Member createMember(Member member) {
         if (member == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Fill out all the fields");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Login Failed");
         }
         if (memberRepository.getMemberByEmail(member.getEmail()) != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already in use");
@@ -34,7 +34,7 @@ public class MemberService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already in use");
         }
         memberRepository.createMember(member);
-
+        return member;
     }
 
     public void deleteMember(Member member) {
