@@ -11,9 +11,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.net.URL;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -28,15 +31,8 @@ public class WishListRepositoryTest {
     @Autowired
     private WishListMapper wishListMapper;
 
-    @BeforeEach // Ikke nødvendig da der hives data fra h2 filen. Men giver et godt indblik på denne side af oprettelsen af vores data/objekter
-    void setUp() {
-        Member member = new Member(1, "simonBeCh", "112pizza", "sich0008@stud.ek.dk");
-        WishList wishList = new WishList(99L, "Fødselsdag", "Min fødselsdag i året 2026", member);
-        repository.createWishList(wishList, member);
-    }
-
     @Test
-    void contextLoad() {} // Tjekker Application context kan starte. Er beans konfigureret korrekt.
+    void contextLoad() {} // Checks Application context can start - Looks for correct bean configuration.
 
     @Test
     void checkH2schemaFile() {
@@ -45,25 +41,43 @@ public class WishListRepositoryTest {
     }
 
     @Test
-    void displayAllWishLists() {
-
-        List<WishList> wishListList = repository.findByUserId(1);
-
+    void wishListsInDatabaseCount() {
         Integer wishListCount = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM wish_list", Integer.class);
         System.out.println("Number of wishlist: " + wishListCount);
-
-        assertNotNull(wishListList);
-
-
     }
 
+    @Test
+    void checkWishListDataExists() {
+        List<WishList> wishLists = repository.findByUserId(1);
+        assertNotNull(wishLists);
+        assertThat(wishLists.size()).isEqualTo(1); // Simon has two wishlists
+        assertThat(wishLists.getFirst().getWishListName()).isEqualTo("Simons ønskeliste");
+        assertThat(wishLists.getFirst().getDescription()).isEqualTo("Simons ønskeliste for hans fødselsdag");
+        assertThat(wishLists.getFirst().getWishListId()).isEqualTo(null); // AUTO incremented
+    }
 
+    @Test
+    void updateWishListCheck() {
+        // OLD DATA = wish_list ('Jokkes mokke','Jokkes liste til alt han mangler', 2),
+        WishList updatedWishList = new WishList();
+        updatedWishList.setWishListId(2L);
+        updatedWishList.setWishListName("NewName");
+        updatedWishList.setDescription("NewDESC");
 
+        Member member = new Member();
+        member.setMemberId(2);
 
+        List<WishList> updatedList = repository.updateWishList(updatedWishList, member);
 
+        assertNotNull(updatedList);
+        boolean nameUpdated = false;
 
-
-
-
-
+        for (WishList wl : updatedList) {
+            if (wl.getWishListName().equals("NewName")) {
+                nameUpdated = true;
+                break;
+            }
+        }
+        assertTrue(nameUpdated, "The wishlist name should have been updated in the database");
+    }
 }

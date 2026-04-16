@@ -2,7 +2,6 @@ package com.example.wishcycle.controller;
 
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.service.MemberService;
-import com.example.wishcycle.service.WishService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
