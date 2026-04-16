@@ -30,7 +30,7 @@ public class WishListRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        Member member = new Member(1, "Jack", "password123", "Jack@gmail.com");
+        Member member = new Member(1, "simonBeCh", "112pizza", "sich0008@stud.ek.dk");
         WishList wishList = new WishList(1L, "Fødselsdag", "Min fødselsdag i året 2026", member);
         repository.createWishList(wishList, member);
     }

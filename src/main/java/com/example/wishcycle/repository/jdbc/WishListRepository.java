@@ -27,7 +27,8 @@ public class WishListRepository {
 
     private static final String ADD_ITEM_TO_WISHLIST = "INSERT INTO wish_list_item (wishlist_id, item_id, wish_description) VALUES (?, ?, ?)";
     private static final String DELETE_ITEM_FROM_WISHLIST = "DELETE FROM wish_list_item WHERE item(item_id) = ?";
-    private static final String UPDATE_ITEM_ON_WISHLIST = "UPDATE";
+    private static final String UPDATE_ITEM_ON_WISHLIST =
+            "SELECT item(item_id) FROM wish_list_item LEFT JOIN item ON wish_listItem.item(item_id) = item.item_id UPDATE item SET item_name = ?, item_url = ?, item_price = ?";
 
 
     public WishListRepository(JdbcTemplate jdbc, WishListMapper wishListMapper) {
@@ -35,6 +36,7 @@ public class WishListRepository {
         this.wishListMapper = wishListMapper;
     }
 
+    // CRUD Operations for wishlists
     public List<WishList> findByUserId(int userId) {
         return jdbc.query(FIND_BY_USER_SQL, wishListMapper, userId);
     }
@@ -53,16 +55,20 @@ public class WishListRepository {
         return findByUserId(userId);
     }
 
-    public void createWish(Item item) {
+    // CRUD Operations for ITEMS on wishlists
+    public void createWish(WishList wishList, Item item) {
         jdbc.update(CREATE_ITEM, item.getItemId(), item.getItemName(), item.getUrl(), item.getPrice());
+        jdbc.update(ADD_ITEM_TO_WISHLIST, wishListMapper, wishList.getWishListId(), item.getItemId(), wishList.getDescription());
     }
 
     public void deleteWish(Item item) {
         jdbc.update(DELETE_ITEM, item.getItemId());
+        jdbc.update(DELETE_ITEM_FROM_WISHLIST, wishListMapper, item.getItemId());
     }
 
     public Item updateWish(Item item) {
         jdbc.update(UPDATE_ITEM, item.getItemName(), item.getUrl(), item.getPrice());
+        jdbc.update(UPDATE_ITEM_ON_WISHLIST, wishListMapper, item.getItemName(), item.getUrl(), item.getPrice());
         return item;
     }
 }
