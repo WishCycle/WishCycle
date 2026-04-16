@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MemberRepository {
 
-
     private final JdbcTemplate jdbc;
     private final MemberMapper memberMapper;
 
@@ -44,5 +43,4 @@ public class MemberRepository {
     public void createMember(Member member) {
         jdbc.update(CREATE_MEMBER_SQL, memberMapper, member.toString(), member.getEmail(), member.getPassword());
     }
-
 }
