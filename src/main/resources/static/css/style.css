@@ -19,6 +19,9 @@ body {
     color: var(--forest-dark);
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Takes up full screen height */
 }
 
 h2 {
@@ -29,30 +32,42 @@ h2 {
 
 /* 3. HEADER & NAVIGATION */
 .navbar {
-    font-family: 'Inter', sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 50px;
+    padding: 20px 50px;
+    background-color: var(--cream);
+    border-bottom: 1px solid rgba(45, 67, 38, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 /* Target the logo container */
 .logo {
     display: flex;
     align-items: center;
+    gap: 15px;
 }
 
 /* Target the actual image inside that container */
 .logo img {
-    height: 160px;    /* This controls how tall your logo is */
-    width: auto;     /* This keeps the logo from looking 'squashed' */
+    height: 160px;
+    width: auto;
     display: block;
-    border: 1px solid rgba(45, 67, 38, 0.1);
+
 }
 
 .slogan {
     font-family: 'Inter', sans-serif;
-    display: flex;
+    font-size: 0.9rem;
+    color: var(--forest-dark);
+    opacity: 0.8;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    padding-top: 4px;
+
+
 
 }
 
@@ -91,16 +106,22 @@ h2 {
 .boards-container {
     display: flex;
     gap: 20px;
-    padding: 0 20px 20px 20px;
-    height: 450px; /* Adjust based on your content */
+    height: 450px;
+    margin-top: 40px; /* Creates a gap between the header line and your boxes */
+    padding: 0 50px;
 }
 
 .board-box {
     flex: 1;
     background-color: var(--forest-dark);
-    color: var(--text-white);
+    color: var(--cream);
     padding: 40px;
-    /* Optional: border-radius: 4px; if you want slightly rounded corners */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.board-box:hover {
+    transform: translateY(-5px); /* Moves it up slightly */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Adds depth */
 }
 
 .board-box h2 {
@@ -110,22 +131,31 @@ h2 {
 
 /* 5. INSPO SECTION (The bottom row) */
 .inspo-container {
-    background-color: var(--forest-dark);
+    background-color: transparent; /* This removes the border-to-border green bar */
     display: flex;
-    gap: 25px;
-    padding: 30px;
+    gap: 20px;                     /* Same gap as boards-container */
+    padding: 30px 50px;            /* 50px side padding matches your boards perfectly */
     margin-top: 10px;
 }
 
 .inspo-card {
-    background-color: var(--cream);
+    background-color: var(--forest-dark); /* Now the boxes themselves are green */
+    color: var(--cream);                  /* Text turns cream to be readable */
     flex: 1;
     height: 250px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
-    color: var(--forest-dark);
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.inspo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
 }
 
 
@@ -237,4 +267,60 @@ h2 {
     color: var(--forest-dark);
     font-weight: 600;
     text-decoration: none;
+}
+
+
+
+/* --- Global Footer Styles --- */
+.main-footer {
+    width: 100%;
+    background-color: var(--cream); /* Keeps it consistent with the page */
+    padding: 30px 0;               /* Vertical breathing room */
+    border-top: 1px solid rgba(45, 67, 38, 0.1); /* Very light forest green line */
+    margin-top: auto; /* This magic line pushes the footer to the bottom */
+}
+
+.footer-content {
+    max-width: 1100px;             /* Aligns with your main content width */
+    margin: 0 auto;                /* Centers the footer container */
+    padding: 0 20px;               /* Keeps text away from screen edges */
+    display: flex;
+    justify-content: space-between; /* Pushes tag to left, about to right */
+    align-items: center;
+    color: var(--forest-dark);
+    font-size: 0.85rem;            /* Slightly smaller than main text */
+}
+
+.footer-tag {
+    font-weight: 400;
+    opacity: 0.7;                  /* Makes it look subtle */
+}
+
+.footer-links .about-link {
+    text-decoration: none;
+    color: var(--forest-dark);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;                      /* Space between 'i' and 'About Us' */
+    transition: all 0.2s ease;
+    opacity: 0.7;
+}
+
+.footer-links .about-link:hover {
+    opacity: 0.7;
+}
+
+/* The 'i' icon circle */
+.info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--forest-dark);
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-family: serif;            /* Makes the 'i' look more like a standard info icon */
+    font-style: italic;
 }
