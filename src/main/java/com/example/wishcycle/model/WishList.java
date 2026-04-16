@@ -3,12 +3,12 @@ import java.util.HashMap;
 
 public class WishList {
 
-    private Long wishListId;
+    private int wishListId;
     private String wishListName;
     private String description;
     private Member member;
 
-    public WishList(Long wishListId, String wishListName, String description, Member member) {
+    public WishList(int wishListId, String wishListName, String description, Member member) {
         this.wishListId = wishListId;
         this.wishListName = wishListName;
         this.description = description;
@@ -17,11 +17,11 @@ public class WishList {
 
     public WishList() {}
 
-    public void setWishListId(Long wishListId) {
+    public void setWishListId(int wishListId) {
         this.wishListId = wishListId;
     }
 
-    public Long getWishListId() {
+    public int getWishListId() {
         return wishListId;
     }
 

@@ -16,6 +16,7 @@ public class WishListRepository {
     private final JdbcTemplate jdbc;
     private final WishListMapper wishListMapper;
 
+    private static final String GET_ALL_WISHISLISTS = "SELECT * FROM wish_list";
     private static final String FIND_BY_USER_SQL = "SELECT * FROM wish_list WHERE user_id = ?";
     private static final String DELETE_WISHLIST = "DELETE FROM wish_list WHERE wishlist_id = ?";
     private static final String CREATE_NEW_WISHLIST = "INSERT INTO wish_list (wishList_id, wishlist_name, wishlist_desc, user_id) VALUES (?, ?, ?, ?)";
@@ -36,23 +37,16 @@ public class WishListRepository {
         this.wishListMapper = wishListMapper;
     }
 
-    // CRUD Operations for wishlists
-    public List<WishList> findByUserId(int userId) {
+    public List<WishList> findAll() {
+        return jdbc.query(GET_ALL_WISHISLISTS, wishListMapper);
+    }
+
+    public List<WishList> findByMemberId(int userId) {
         return jdbc.query(FIND_BY_USER_SQL, wishListMapper, userId);
     }
 
     public void deleteWishList(int wishListId) {
         jdbc.update(DELETE_WISHLIST, wishListId);
-    }
-
-    public List<WishList> createWishList(WishList wishList, Member member) {
-        jdbc.update(CREATE_NEW_WISHLIST, wishList.getWishListId(), wishList.getWishListName(), wishList.getDescription(), member.getMemberId());
-        return findByUserId(member.getMemberId());
-    }
-
-    public List<WishList> updateWishList(WishList wishList, int userId) {
-        jdbc.update(UPDATE_WISHLIST, wishList.getWishListName(), wishList.getDescription(), wishList.getWishListId());
-        return findByUserId(userId);
     }
 
     // CRUD Operations for ITEMS on wishlists
@@ -61,12 +55,12 @@ public class WishListRepository {
         jdbc.update(ADD_ITEM_TO_WISHLIST, wishListMapper, wishList.getWishListId(), item.getItemId(), wishList.getDescription());
     }
 
-    public void deleteWish(Item item) {
+    public void deleteItem(Item item) {
         jdbc.update(DELETE_ITEM, item.getItemId());
         jdbc.update(DELETE_ITEM_FROM_WISHLIST, wishListMapper, item.getItemId());
     }
 
-    public Item updateWish(Item item) {
+    public Item updateItem(Item item) {
         jdbc.update(UPDATE_ITEM, item.getItemName(), item.getUrl(), item.getPrice());
         jdbc.update(UPDATE_ITEM_ON_WISHLIST, wishListMapper, item.getItemName(), item.getUrl(), item.getPrice());
         return item;
