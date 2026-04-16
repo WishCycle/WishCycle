@@ -57,7 +57,7 @@ public class WishListRepository {
 
     public List<WishList> updateWishList(WishList wishList, Member member) {
         jdbc.update(UPDATE_WISHLIST, wishList.getWishListName(), wishList.getDescription(), wishList.getWishListId());
-        return findByUserId(member.getMemberId());
+        return findByMemberId(member.getMemberId());
     }
 
     public void createItem(WishList wishList, Item item) {
