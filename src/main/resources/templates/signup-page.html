@@ -1,46 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WishCycle | Sign Up</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WishCycle | Sign Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
 </head>
 <body class="signup-body">
 
 <div class="signup-card">
-  <div class="signup-logo-container">
-    <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WischCycle-Logo.png" alt="WishCycle Logo">
-  </div>
-
-  <h2>Welcome to WishCycle</h2>
-  <p>Enter details to create your profile</p>
-
-  <form>
-    <div class="input-group">
-      <label for="username">Username</label>
-      <input type="text" id="username" placeholder="Enter your username" required>
+    <div class="signup-logo-container">
+        <a th:href="@{homepage}" href="homepage.html">
+            <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WischCycle-Logo.png" alt="WishCycle Logo">
+        </a>
     </div>
 
-    <div class="input-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="Enter your email" required>
+    <h2>Welcome to WishCycle</h2>
+    <p>Enter details to create your profile</p>
+
+    <form>
+        <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your username" required>
+        </div>
+
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="btn-primary">Sign Up</button>
+    </form>
+
+    <div class="signup-footer">
+        Already have an account? <a th:href="@{/login-page}" href="login-page.html">Login in here</a>
     </div>
-
-    <div class="input-group">
-      <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Enter your password" required>
-    </div>
-
-    <button type="submit" class="btn-primary">Sign Up</button>
-  </form>
-
-  <div class="signup-footer">
-    Already have an account? <a th:href="@{/login-page}" href="login-page.html">Login in here</a>
-  </div>
 </div>
 
 </body>
