@@ -18,7 +18,7 @@ public class WishListRepository {
 
     private static final String FIND_BY_USER_SQL = "SELECT * FROM wish_list WHERE user_id = ?";
     private static final String DELETE_WISHLIST = "DELETE FROM wish_list WHERE wishlist_id = ?";
-    private static final String CREATE_NEW_WISHLIST = "INSERT INTO wish_list (wishlist_id, wishlist_name, wishlist_desc) VALUES (?, ?, ?)";
+    private static final String CREATE_NEW_WISHLIST = "INSERT INTO wish_list (wishList_id, wishlist_name, wishlist_desc, user_id) VALUES (?, ?, ?, ?)";
     private static final String UPDATE_WISHLIST = "UPDATE wish_list SET wishlist_name = ?, wishlist_desc = ? WHERE wishlist_id = ?";
 
     private static final String CREATE_ITEM = "INSERT INTO item (item_id, item_name, item_url, item_price) VALUES (?, ?, ?, ?)";
@@ -46,7 +46,7 @@ public class WishListRepository {
     }
 
     public List<WishList> createWishList(WishList wishList, Member member) {
-        jdbc.update(CREATE_NEW_WISHLIST, wishList.getWishListId(), wishList.getWishListName(), wishList.getDescription());
+        jdbc.update(CREATE_NEW_WISHLIST, wishList.getWishListId(), wishList.getWishListName(), wishList.getDescription(), member.getMemberId());
         return findByUserId(member.getMemberId());
     }
 

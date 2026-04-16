@@ -28,10 +28,10 @@ public class WishListRepositoryTest {
     @Autowired
     private WishListMapper wishListMapper;
 
-    @BeforeEach
+    @BeforeEach // Ikke nødvendig da der hives data fra h2 filen. Men giver et godt indblik på denne side af oprettelsen af vores data/objekter
     void setUp() {
         Member member = new Member(1, "simonBeCh", "112pizza", "sich0008@stud.ek.dk");
-        WishList wishList = new WishList(1L, "Fødselsdag", "Min fødselsdag i året 2026", member);
+        WishList wishList = new WishList(99L, "Fødselsdag", "Min fødselsdag i året 2026", member);
         repository.createWishList(wishList, member);
     }
 

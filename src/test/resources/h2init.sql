@@ -18,13 +18,14 @@ CREATE TABLE IF NOT EXISTS item(
     );
 
 CREATE TABLE IF NOT EXISTS wish_list(
-    wishlist_id BIGINT NOT NULL PRIMARY KEY,
-    wishlist_name VARCHAR(60) NOT NULL,
-    wishlist_desc VARCHAR(500),
+    wishlist_id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    wishlist_name VARCHAR(200) NOT NULL,
+    wishlist_desc VARCHAR(999),
     user_id BIGINT NOT NULL,
     CONSTRAINT fk_userid
     FOREIGN KEY (user_id)
     REFERENCES wish_user(user_id)
+    ON DELETE CASCADE
     );
 
 CREATE TABLE IF NOT EXISTS wish_list_item(
@@ -33,11 +34,14 @@ CREATE TABLE IF NOT EXISTS wish_list_item(
     wish_description VARCHAR(500),
     CONSTRAINT fk_wishid
     FOREIGN KEY (item_id)
-    REFERENCES item(item_id),
+    REFERENCES item(item_id)
+    ON DELETE CASCADE,
     CONSTRAINT fk_wishlistid
     FOREIGN KEY (wishlist_id)
     REFERENCES wish_list(wishlist_id)
+    ON DELETE CASCADE
     );
+
 
 -- DATA
 INSERT INTO wish_user (username, user_password, user_email) VALUES
