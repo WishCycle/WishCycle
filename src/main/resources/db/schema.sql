@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS wish_list(
     CONSTRAINT fk_userid
     FOREIGN KEY (user_id)
     REFERENCES wish_user(user_id)
+    ON DELETE CASCADE
     );
 
 CREATE TABLE IF NOT EXISTS wish_list_item(
@@ -32,9 +33,11 @@ CREATE TABLE IF NOT EXISTS wish_list_item(
     wish_description VARCHAR(500),
     CONSTRAINT fk_wishid
     FOREIGN KEY (item_id)
-    REFERENCES item(item_id),
+    REFERENCES item(item_id)
+    ON DELETE CASCADE,
     CONSTRAINT fk_wishlistid
     FOREIGN KEY (wishlist_id)
     REFERENCES wish_list(wishlist_id)
+    ON DELETE CASCADE
     );
 
