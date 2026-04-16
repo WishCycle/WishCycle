@@ -48,12 +48,12 @@ public class WishListRepositoryTest {
 
     @Test
     void checkWishListDataExists() {
-        List<WishList> wishLists = repository.findByUserId(1);
+        List<WishList> wishLists = repository.findByUserId(1); // Simons wishlist
         assertNotNull(wishLists);
-        assertThat(wishLists.size()).isEqualTo(1); // Simon has two wishlists
+        assertThat(wishLists.size()).isEqualTo(1);
         assertThat(wishLists.getFirst().getWishListName()).isEqualTo("Simons ønskeliste");
         assertThat(wishLists.getFirst().getDescription()).isEqualTo("Simons ønskeliste for hans fødselsdag");
-        assertThat(wishLists.getFirst().getWishListId()).isEqualTo(null); // AUTO incremented
+        assertThat(wishLists.getFirst().getWishListId()).isEqualTo(1L); // AUTO incremented
     }
 
     @Test
@@ -67,7 +67,7 @@ public class WishListRepositoryTest {
         Member member = new Member();
         member.setMemberId(2);
 
-        List<WishList> updatedList = repository.updateWishList(updatedWishList, member);
+        List<WishList> updatedList = repository.updateWishList(updatedWishList, 2);
 
         assertNotNull(updatedList);
         boolean nameUpdated = false;

@@ -27,17 +27,17 @@ public class WishService {
     }
 
     public List<WishList> getWishListsByMemberId(int memberId) {
-        if (wishListRepository.findByMemberId(memberId) == null) {
+        if (wishListRepository.findByUserId(memberId) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No WishList found for member: " + memberRepository.getMemberById(memberId));
         }
-        return wishListRepository.findByMemberId(memberId);
+        return wishListRepository.findByUserId(memberId);
     }
 
     public void createWishList(WishList wishList, Member member) {
         if (wishList == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try Again! Create a valid WishList!");
         }
-        if (wishListRepository.findByMemberId(member.getMemberId()) == null) {
+        if (wishListRepository.findByUserId(member.getMemberId()) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The account you are trying to create the WishList with is not valid. Try logging in again!");
         }
         wishListRepository.createWishList(wishList, member);
@@ -47,7 +47,7 @@ public class WishService {
         if (wishList == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "You must create a WishList first!");
         }
-        if (wishListRepository.findByMemberId(member.getMemberId()) == null) {
+        if (wishListRepository.findByUserId(member.getMemberId()) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The account you are trying to update a WishList with is not valid. Try logging in again!");
         }
 
@@ -59,7 +59,7 @@ public class WishService {
         if (wishList == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The WishList you are trying to delete does not exist.");
         }
-        if (wishListRepository.findByMemberId(member.getMemberId()) == null) {
+        if (wishListRepository.findByUserId(member.getMemberId()) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The account you are trying to delete a WishList with is not valid. Try logging in again!");
         }
         wishListRepository.deleteWishList(wishList.getWishListId());
