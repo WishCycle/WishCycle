@@ -1,6 +1,6 @@
 /* 1. VARIABLE DEFINITIONS */
 :root {
-    --cream: #F5F5E9;       /* Light background color */
+    --cream: #F5F5E9; /* Light background color */
     --forest-dark: #2D4326; /* Deep green for boxes and buttons */
     --text-white: #FFFFFF;
 }
@@ -55,7 +55,14 @@ h2 {
     height: 160px;
     width: auto;
     display: block;
+    cursor: pointer;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    opacity: 0.8;
+}
 
+.logo img:hover {
+    opacity: 1;
+    transform: scale(1.02);
 }
 
 .slogan {
@@ -66,7 +73,6 @@ h2 {
     font-weight: 400;
     letter-spacing: 0.02em;
     padding-top: 4px;
-
 
 
 }
@@ -117,6 +123,7 @@ h2 {
     color: var(--cream);
     padding: 40px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
 }
 
 .board-box:hover {
@@ -133,14 +140,14 @@ h2 {
 .inspo-container {
     background-color: transparent; /* This removes the border-to-border green bar */
     display: flex;
-    gap: 20px;                     /* Same gap as boards-container */
-    padding: 30px 50px;            /* 50px side padding matches your boards perfectly */
+    gap: 20px; /* Same gap as boards-container */
+    padding: 30px 50px; /* 50px side padding matches your boards perfectly */
     margin-top: 10px;
 }
 
 .inspo-card {
     background-color: var(--forest-dark); /* Now the boxes themselves are green */
-    color: var(--cream);                  /* Text turns cream to be readable */
+    color: var(--cream); /* Text turns cream to be readable */
     flex: 1;
     height: 250px;
     display: flex;
@@ -155,13 +162,8 @@ h2 {
 
 .inspo-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
-
-
-
-
-
 
 
 /* --- Login Page and Sign Up Page Specific Styles --- */
@@ -203,8 +205,8 @@ h2 {
 }
 
 .login-logo-container, .signup-logo-container {
-    padding-bottom: 20px;   /* Space between logo and the line */
-    margin-bottom: 25px;    /* Space between the line and the text below */
+    padding-bottom: 20px; /* Space between logo and the line */
+    margin-bottom: 25px; /* Space between the line and the text below */
     border-bottom: 1px solid rgba(45, 67, 38, 0.15); /* Light forest-green line */
     display: flex;
     justify-content: center;
@@ -245,7 +247,6 @@ h2 {
     border-color: var(--forest-dark);
 }
 
-/* Reusing the Forest Green for the main button */
 .btn-primary {
     width: 100%;
     background-color: var(--forest-dark);
@@ -270,57 +271,46 @@ h2 {
 }
 
 
-
-/* --- Global Footer Styles --- */
+/* --- Footer Styling --- */
 .main-footer {
     width: 100%;
-    background-color: var(--cream); /* Keeps it consistent with the page */
-    padding: 30px 0;               /* Vertical breathing room */
-    border-top: 1px solid rgba(45, 67, 38, 0.1); /* Very light forest green line */
-    margin-top: auto; /* This magic line pushes the footer to the bottom */
+    padding: 60px 50px 40px 50px;
+    background-color: var(--cream);
+    margin-top: auto;
+    border-top: 1px solid rgba(45, 67, 38, 0.05);
 }
 
-.footer-content {
-    max-width: 1100px;             /* Aligns with your main content width */
-    margin: 0 auto;                /* Centers the footer container */
-    padding: 0 20px;               /* Keeps text away from screen edges */
+.footer-content-minimal {
     display: flex;
-    justify-content: space-between; /* Pushes tag to left, about to right */
-    align-items: center;
-    color: var(--forest-dark);
-    font-size: 0.85rem;            /* Slightly smaller than main text */
-}
-
-.footer-tag {
-    font-weight: 400;
-    opacity: 0.7;                  /* Makes it look subtle */
-}
-
-.footer-links .about-link {
-    text-decoration: none;
-    color: var(--forest-dark);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;                      /* Space between 'i' and 'About Us' */
-    transition: all 0.2s ease;
-    opacity: 0.7;
-}
-
-.footer-links .about-link:hover {
-    opacity: 0.7;
-}
-
-/* The 'i' icon circle */
-.info-icon {
-    display: inline-flex;
-    align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
-    border: 1.5px solid var(--forest-dark);
-    border-radius: 50%;
-    font-size: 0.7rem;
-    font-family: serif;            /* Makes the 'i' look more like a standard info icon */
-    font-style: italic;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    height: 40px;
+    width: auto;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.footer-logo:hover {
+    opacity: 1;
+}
+
+.footer-tag, .footer-link {
+    color: var(--forest-dark);
+    font-size: 0.8rem;
+    text-decoration: none;
+    opacity: 0.6;
+    font-weight: 400;
+    transition: opacity 0.2s ease;
+}
+
+.footer-link:hover {
+    opacity: 1;
+    color: var(--forest-dark);
 }

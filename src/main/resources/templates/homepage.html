@@ -14,13 +14,16 @@
 
 <header class="navbar">
     <div class="logo">
-        <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WischCycle-Logo.png" alt="WishCycle Logo">
+        <a th:href="@{homepage}" href="homepage.html">
+            <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WischCycle-Logo.png" alt="WishCycle Logo">
+        </a>
         <span class="slogan">Wish for a better future</span>
     </div>
 
     <nav class="auth-buttons">
         <a th:href="@{/login-page}" href="login-page.html" class="btn-login">Login</a>
-        <a th:href="@{/signup-page}" href="signup-page.html" class="btn-signup">Sign Up</a>        <div class="user-circle">User</div>
+        <a th:href="@{/signup-page}" href="signup-page.html" class="btn-signup">Sign Up</a>
+        <div class="user-circle">User</div>
     </nav>
 </header>
 
@@ -35,19 +38,24 @@
     </section>
 
     <section class="inspo-container">
-        <div class="inspo-card">Inspo</div>
-        <div class="inspo-card">Inspo</div>
-        <div class="inspo-card">Inspo</div>
-        <div class="inspo-card">Inspo</div>
+        <div class="inspo-card">Inspo Placeholder</div>
+        <div class="inspo-card">Inspo Placeholder</div>
+        <div class="inspo-card">Inspo Placeholder</div>
+        <div class="inspo-card">Inspo Placeholder</div>
     </section>
 </main>
 
 <footer class="main-footer">
-    <div class="footer-content">
+    <div class="footer-content-minimal">
+        <a th:href="@{homepage}" href="homepage.html">
+            <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WischCycle-Logo.png" alt="WishCycle Logo"
+                 class="footer-logo">
+        </a>
         <span class="footer-tag">@WishCycle 2026</span>
-        <nav class="footer-links">
-            <a th:href="@{/about-us}" href="about-us.html" class="about-link"> About Us</a>
-        </nav>
+        <a th:href="@{about-us}" href="about-us.html" class="footer-link">About Us</a>
+        <a href="#" class="footer-link">Terms</a>
+        <a href="#" class="footer-link">Privacy</a>
+        <a href="#" class="footer-link">Contact</a>
     </div>
 </footer>
 
