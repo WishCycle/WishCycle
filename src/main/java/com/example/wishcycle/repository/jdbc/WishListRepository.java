@@ -49,8 +49,15 @@ public class WishListRepository {
         jdbc.update(DELETE_WISHLIST, wishListId);
     }
 
-    // CRUD Operations for ITEMS on wishlists
-    public void createWish(WishList wishList, Item item) {
+    public void createWishList(WishList wishList, Member member) {
+        jdbc.update(CREATE_NEW_WISHLIST, wishList.getWishListId(), wishList.getWishListName(), wishList.getDescription(), member.getMemberId());
+    }
+
+    public void updateWishList(WishList wishList) {
+        jdbc.update(UPDATE_WISHLIST, wishList.getWishListName(), wishList.getDescription(), wishList.getWishListId());
+    }
+
+    public void createItem(WishList wishList, Item item) {
         jdbc.update(CREATE_ITEM, item.getItemId(), item.getItemName(), item.getUrl(), item.getPrice());
         jdbc.update(ADD_ITEM_TO_WISHLIST, wishListMapper, wishList.getWishListId(), item.getItemId(), wishList.getDescription());
     }
