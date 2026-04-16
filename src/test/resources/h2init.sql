@@ -57,8 +57,8 @@ INSERT INTO item (item_name, item_url, item_price) VALUES
                              ('Rolly Toys Trettraktor', 'https://www.amazon.de/dp/B08KRXS5JG', 2713),
                              ('DIRE STRAITS - LOVE OVER GOLD (Vinyl)', 'https://www.amazon.de/dp/B00KJN3KXC', 4028);
 INSERT INTO wish_list (wishlist_name, wishlist_desc, user_id) VALUES
-                              ('Simon''s ønskeliste', 'Simons ønskeliste for hans fødselsdag', 1),
-                              ('Jokke''s mokke',  'Jokke''s liste til alt han mangler', 2),
+                              ('Simons ønskeliste', 'Simons ønskeliste for hans fødselsdag', 1),
+                              ('Jokkes mokke',  'Jokkes liste til alt han mangler', 2),
                               ('Emils traktor liste', 'Seje traktorer', 3);
 
 INSERT INTO wish_list_item (wishlist_id, item_id, wish_description) VALUES

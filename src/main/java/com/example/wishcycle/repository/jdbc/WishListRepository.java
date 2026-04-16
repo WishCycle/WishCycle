@@ -28,7 +28,9 @@ public class WishListRepository {
     private static final String ADD_ITEM_TO_WISHLIST = "INSERT INTO wish_list_item (wishlist_id, item_id, wish_description) VALUES (?, ?, ?)";
     private static final String DELETE_ITEM_FROM_WISHLIST = "DELETE FROM wish_list_item WHERE item(item_id) = ?";
     private static final String UPDATE_ITEM_ON_WISHLIST =
-            "SELECT item(item_id) FROM wish_list_item LEFT JOIN item ON wish_listItem.item(item_id) = item.item_id UPDATE item SET item_name = ?, item_url = ?, item_price = ?";
+            "UPDATE item JOIN wish_list_item ON item.item_id = wish_list_item.item_id " +
+            "SET item.item_name = ?, item.item_url = ?, item.item_price = ? " +
+            "WHERE wish_list_item.wishlist_id = ?";
 
 
     public WishListRepository(JdbcTemplate jdbc, WishListMapper wishListMapper) {
@@ -50,9 +52,9 @@ public class WishListRepository {
         return findByUserId(member.getMemberId());
     }
 
-    public List<WishList> updateWishList(WishList wishList, int userId) {
+    public List<WishList> updateWishList(WishList wishList, Member member) {
         jdbc.update(UPDATE_WISHLIST, wishList.getWishListName(), wishList.getDescription(), wishList.getWishListId());
-        return findByUserId(userId);
+        return findByUserId(member.getMemberId());
     }
 
     // CRUD Operations for ITEMS on wishlists

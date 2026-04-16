@@ -1,13 +1,10 @@
 package com.example.wishcycle.controller;
 
-import ch.qos.logback.core.model.Model;
-import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
 import com.example.wishcycle.service.WishService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/wishcycle")
@@ -19,14 +16,12 @@ public class WishController {
         this.WishService = WishService;
     }
 
-//    @GetMapping("/homepage")
-//    public String homepage(Model model) {
-//        WishList wishList = new WishList();
-//        model.addAttribute("wishList", wishList);
-//        return "homepage";
-//    }
-
-
+    @GetMapping("/homepage")
+    public String homepage(Model model) {
+        WishList wishList = new WishList();
+        model.addAttribute("wishList", wishList);
+        return "homepage";
+    }
 
 
 
