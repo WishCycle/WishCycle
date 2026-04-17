@@ -14,7 +14,7 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    public Member getMemberById(int id) {
+    public Member getMemberById(Long id) {
         Member member = memberRepository.getMemberById(id);
 
         if (member != null & member.getMemberId() == id) {

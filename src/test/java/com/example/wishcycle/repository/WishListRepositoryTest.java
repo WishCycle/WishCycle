@@ -3,6 +3,7 @@ import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
 import com.example.wishcycle.repository.jdbc.WishListRepository;
 import com.example.wishcycle.repository.mapper.WishListMapper;
+import com.sun.source.tree.AssertTree;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +45,12 @@ public class WishListRepositoryTest {
     void wishListsInDatabaseCount() {
         Integer wishListCount = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM wish_list", Integer.class);
         System.out.println("Number of wishlist: " + wishListCount);
+//        assertEquals(3, wishListCount, "Count should match seeded database data");
     }
 
     @Test
     void checkWishListDataExists() {
-        List<WishList> wishLists = repository.findByUserId(1); // Simons wishlist
+        List<WishList> wishLists = repository.findByUserId(1L); // Simons wishlist
         assertNotNull(wishLists);
         assertThat(wishLists.size()).isEqualTo(1);
         assertThat(wishLists.getFirst().getWishListName()).isEqualTo("Simons ønskeliste");
@@ -65,19 +67,55 @@ public class WishListRepositoryTest {
         updatedWishList.setDescription("NewDESC");
 
         Member member = new Member();
-        member.setMemberId(2);
+        member.setMemberId(2L);
 
-        List<WishList> updatedList = repository.updateWishList(updatedWishList, 2);
+        List<WishList> updatedList = repository.updateWishList(updatedWishList, 2L);
 
         assertNotNull(updatedList);
         boolean nameUpdated = false;
 
         for (WishList wl : updatedList) {
-            if (wl.getWishListName().equals("NewName")) {
+            if (wl.getWishListName().equals("NewName") && wl.getDescription().equals("NewDESC")) {
                 nameUpdated = true;
                 break;
             }
         }
         assertTrue(nameUpdated, "The wishlist name should have been updated in the database");
+    }
+
+    @Test
+    void createNewWishList() {
+        // Current h2 file has 3 users
+        jdbcTemplate.update("INSERT INTO wish_user (username, user_password, user_email) VALUES (?, ?, ?)", "Jack", "testCode", "test.email@gmail.com");
+        Long userId = jdbcTemplate.queryForObject("SELECT user_id FROM wish_user WHERE username = 'Jack'", Long.class);
+
+        Member member = new Member();
+        member.setMemberId(userId);
+
+        WishList newTestWishList = new WishList(4L, "Create wishlist name", "This wishlist is for test only", member);
+        repository.createWishList(newTestWishList, member);
+
+        List<WishList> seededWishlists = repository.findAll();
+
+        wishListsInDatabaseCount(); // Calling wishListsInDatabase COUNT method (Should NOW return 4)
+        assertEquals("This wishlist is for test only", newTestWishList.getDescription());
+
+        // Deeper assertion than just the count. We now check for the exact wishlist names that exists in the database
+        List<String> namesFromWishLists = seededWishlists.stream().map(WishList::getWishListName).toList();
+        List<String> expectedNamesFromSeededWishlists = List.of("Simons ønskeliste", "Jokkes mokke", "Emils traktor liste", "Create wishlist name");
+        assertIterableEquals(expectedNamesFromSeededWishlists, namesFromWishLists);
+    }
+
+    @Test
+    void deleteWishList() {
+        repository.findByUserId(1L); // Checks if wishlist_id actually exists
+        repository.deleteWishList(1L);
+
+        List<WishList> seededDatabaseWishLists = repository.findAll();
+
+        List<Long> count = seededDatabaseWishLists.stream().map(WishList::getWishListId).toList();
+        List<Long> expectedCount = List.of(2L, 3L);
+
+        assertThat(count).isEqualTo(expectedCount); // Checking that database only contains to wishlists after deleting the first one
     }
 }

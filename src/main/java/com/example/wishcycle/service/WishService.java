@@ -26,7 +26,7 @@ public class WishService {
         return  wishListRepository.findAll();
     }
 
-    public List<WishList> getWishListsByMemberId(int memberId) {
+    public List<WishList> getWishListsByMemberId(Long memberId) {
         if (wishListRepository.findByUserId(memberId) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No WishList found for member: " + memberRepository.getMemberById(memberId));
         }
@@ -51,7 +51,7 @@ public class WishService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The account you are trying to update a WishList with is not valid. Try logging in again!");
         }
 
-        wishListRepository.updateWishList(wishList,member.getMemberId());
+        wishListRepository.updateWishList(wishList, member.getMemberId());
     }
 
 

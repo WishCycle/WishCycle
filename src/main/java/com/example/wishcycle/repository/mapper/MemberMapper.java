@@ -19,7 +19,7 @@ public class MemberMapper implements RowMapper<Member> {
         member.setName(rs.getString("username"));
         member.setEmail(rs.getString("user_email"));
         member.setPassword(rs.getString("user_password"));
-        member.setMemberId(Integer.parseInt(rs.getString("user_id")));
+        member.setMemberId(rs.getLong("user_id"));
 
         return member;
     }

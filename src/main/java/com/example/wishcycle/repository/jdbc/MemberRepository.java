@@ -23,7 +23,7 @@ public class MemberRepository {
         this.memberMapper = new MemberMapper();
     }
 
-    public Member getMemberById(int id) {
+    public Member getMemberById(Long id) {
         return jdbc.queryForObject(FIND_BY_ID_SQL, memberMapper, id);
     }
 

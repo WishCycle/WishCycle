@@ -1,10 +1,7 @@
 package com.example.wishcycle.repository.jdbc;
-
-
 import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
-import com.example.wishcycle.repository.mapper.MemberMapper;
 import com.example.wishcycle.repository.mapper.WishListMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -44,7 +41,7 @@ public class WishListRepository {
         return jdbc.query(GET_ALL_WISH_LISTS, wishListMapper);
     }
 
-    public List<WishList> findByUserId(int userId) {
+    public List<WishList> findByUserId(Long userId) {
         return jdbc.query(FIND_BY_USER_SQL, wishListMapper, userId);
     }
 
@@ -56,7 +53,7 @@ public class WishListRepository {
         jdbc.update(CREATE_NEW_WISHLIST, wishList.getWishListId(), wishList.getWishListName(), wishList.getDescription(), member.getMemberId());
     }
 
-    public List<WishList> updateWishList(WishList wishList, int userId) {
+    public List<WishList> updateWishList(WishList wishList, Long userId) {
         jdbc.update(UPDATE_WISHLIST, wishList.getWishListName(), wishList.getDescription(), wishList.getWishListId());
         return findByUserId(userId);
     }
