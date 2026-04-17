@@ -105,4 +105,17 @@ public class WishListRepositoryTest {
         List<String> expectedNamesFromSeededWishlists = List.of("Simons ønskeliste", "Jokkes mokke", "Emils traktor liste", "Create wishlist name");
         assertIterableEquals(expectedNamesFromSeededWishlists, namesFromWishLists);
     }
+
+    @Test
+    void deleteWishList() {
+        repository.findByUserId(1L); // Checks if wishlist_id actually exists
+        repository.deleteWishList(1L);
+
+        List<WishList> seededDatabaseWishLists = repository.findAll();
+
+        List<Long> count = seededDatabaseWishLists.stream().map(WishList::getWishListId).toList();
+        List<Long> expectedCount = List.of(2L, 3L);
+
+        assertThat(count).isEqualTo(expectedCount); // Checking that database only contains to wishlists after deleting the first one
+    }
 }
