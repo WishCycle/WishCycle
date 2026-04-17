@@ -48,7 +48,7 @@ public class WishListRepositoryTest {
 
     @Test
     void checkWishListDataExists() {
-        List<WishList> wishLists = repository.findByUserId(1); // Simons wishlist
+        List<WishList> wishLists = repository.findByUserId(1L); // Simons wishlist
         assertNotNull(wishLists);
         assertThat(wishLists.size()).isEqualTo(1);
         assertThat(wishLists.getFirst().getWishListName()).isEqualTo("Simons ønskeliste");
@@ -65,19 +65,37 @@ public class WishListRepositoryTest {
         updatedWishList.setDescription("NewDESC");
 
         Member member = new Member();
-        member.setMemberId(2);
+        member.setMemberId(2L);
 
-        List<WishList> updatedList = repository.updateWishList(updatedWishList, 2);
+        List<WishList> updatedList = repository.updateWishList(updatedWishList, 2L);
 
         assertNotNull(updatedList);
         boolean nameUpdated = false;
 
         for (WishList wl : updatedList) {
-            if (wl.getWishListName().equals("NewName")) {
+            if (wl.getWishListName().equals("NewName") && wl.getDescription().equals("NewDESC")) {
                 nameUpdated = true;
                 break;
             }
         }
         assertTrue(nameUpdated, "The wishlist name should have been updated in the database");
+    }
+
+    @Test
+    void createNewWishList() {
+        // Current h2 file has 3 users
+        jdbcTemplate.update("INSERT INTO wish_user (username, user_password, user_email) VALUES (?, ?, ?)", "Jack", "testCode", "test.email@gmail.com");
+        Long userId = jdbcTemplate.queryForObject("SELECT user_id FROM wish_user WHERE username = 'Jack'", Long.class);
+
+        Member member = new Member();
+        member.setMemberId(userId);
+
+        WishList newTestWishList = new WishList(4L, "Create wishlist name", "This wishlist is for test only", member);
+
+        repository.createWishList(newTestWishList, member);
+        wishListsInDatabaseCount(); // Calling wishListsInDatabase COUNT method (Should NOW return 4)
+        assertEquals("Create wishlist name", newTestWishList.getWishListName());
+        assertEquals("This wishlist is for test only", newTestWishList.getDescription());
+        assertEquals(4L, member.getMemberId());
     }
 }

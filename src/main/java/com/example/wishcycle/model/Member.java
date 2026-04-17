@@ -2,12 +2,12 @@ package com.example.wishcycle.model;
 
 public class Member {
 
-    private int memberId;
+    private Long memberId;
     private String name;
     private String password;
     private String email;
 
-    public Member(int memberId, String name, String password, String email) {
+    public Member(Long memberId, String name, String password, String email) {
         this.memberId = memberId;
         this.name = name;
         this.password = password;
@@ -16,11 +16,11 @@ public class Member {
 
     public Member() {}
 
-    public int getMemberId() {
+    public Long getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(int memberId) {
+    public void setMemberId(Long memberId) {
         this.memberId = memberId;
     }
 
