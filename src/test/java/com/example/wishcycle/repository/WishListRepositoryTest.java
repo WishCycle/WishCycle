@@ -1,4 +1,5 @@
 package com.example.wishcycle.repository;
+import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
 import com.example.wishcycle.repository.jdbc.WishListRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.net.URL;
 import java.util.HashSet;
@@ -20,6 +22,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Transactional // Rolls back after every test so they each live on their own
 @ActiveProfiles("test")
 public class WishListRepositoryTest {
 
@@ -117,5 +120,24 @@ public class WishListRepositoryTest {
         List<Long> expectedCount = List.of(2L, 3L);
 
         assertThat(count).isEqualTo(expectedCount); // Checking that database only contains to wishlists after deleting the first one
+    }
+
+    @Test
+    void createItem() {
+        Item newItem = new Item(7L, "Pants", "Something you wear", "Random//URL.com", 300L);
+        repository.createItem(newItem);
+
+        List<Item> seededItems = repository.getAllItems();
+
+        List<String> itemNames = seededItems.stream().map(Item::getItemName).toList();
+        List<String> expectedItemNames = List.of("Calvin Klein boxer shorts",
+                                                "Algebra (Graduate Texts in Mathematics)",
+                                                "Titleist Pro V1",
+                                                "Vibox Gaming PC - RTX 5090",
+                                                "Rolly Toys Trettraktor",
+                                                "DIRE STRAITS - LOVE OVER GOLD (Vinyl)",
+                                                "Pants");
+
+        assertIterableEquals(expectedItemNames, itemNames);
     }
 }
