@@ -3,6 +3,7 @@ import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
 import com.example.wishcycle.repository.jdbc.WishListRepository;
 import com.example.wishcycle.repository.mapper.WishListMapper;
+import com.sun.source.tree.AssertTree;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,7 @@ public class WishListRepositoryTest {
     void wishListsInDatabaseCount() {
         Integer wishListCount = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM wish_list", Integer.class);
         System.out.println("Number of wishlist: " + wishListCount);
+//        assertEquals(3, wishListCount, "Count should match seeded database data");
     }
 
     @Test
@@ -91,11 +93,16 @@ public class WishListRepositoryTest {
         member.setMemberId(userId);
 
         WishList newTestWishList = new WishList(4L, "Create wishlist name", "This wishlist is for test only", member);
-
         repository.createWishList(newTestWishList, member);
+
+        List<WishList> seededWishlists = repository.findAll();
+
         wishListsInDatabaseCount(); // Calling wishListsInDatabase COUNT method (Should NOW return 4)
-        assertEquals("Create wishlist name", newTestWishList.getWishListName());
         assertEquals("This wishlist is for test only", newTestWishList.getDescription());
-        assertEquals(4L, member.getMemberId());
+
+        // Deeper assertion than just the count. We now check for the exact wishlist names that exists in the database
+        List<String> namesFromWishLists = seededWishlists.stream().map(WishList::getWishListName).toList();
+        List<String> expectedNamesFromSeededWishlists = List.of("Simons ønskeliste", "Jokkes mokke", "Emils traktor liste", "Create wishlist name");
+        assertIterableEquals(expectedNamesFromSeededWishlists, namesFromWishLists);
     }
 }
