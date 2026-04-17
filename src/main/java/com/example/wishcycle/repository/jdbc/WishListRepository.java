@@ -2,6 +2,7 @@ package com.example.wishcycle.repository.jdbc;
 import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
+import com.example.wishcycle.repository.mapper.ItemMapper;
 import com.example.wishcycle.repository.mapper.WishListMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,7 @@ public class WishListRepository {
 
     private final JdbcTemplate jdbc;
     private final WishListMapper wishListMapper;
+    private final ItemMapper itemMapper;
 
     private static final String GET_ALL_WISH_LISTS = "SELECT * FROM wish_list";
     private static final String FIND_BY_USER_SQL = "SELECT * FROM wish_list WHERE user_id = ?";
@@ -20,6 +22,7 @@ public class WishListRepository {
     private static final String CREATE_NEW_WISHLIST = "INSERT INTO wish_list (wishList_id, wishlist_name, wishlist_desc, user_id) VALUES (?, ?, ?, ?)";
     private static final String UPDATE_WISHLIST = "UPDATE wish_list SET wishlist_name = ?, wishlist_desc = ? WHERE wishlist_id = ?";
 
+    private static final String GET_ALL_ITEMS = "SELECT * FROM item";
     private static final String CREATE_ITEM = "INSERT INTO item (item_id, item_name, item_url, item_price) VALUES (?, ?, ?, ?)";
     private static final String DELETE_ITEM = "DELETE FROM item WHERE item_id = ?";
     private static final String UPDATE_ITEM = "UPDATE item SET item_name = ?, item_url = ?, item_price = ? WHERE item_id";
@@ -32,9 +35,10 @@ public class WishListRepository {
             "WHERE wish_list_item.wishlist_id = ?";
 
 
-    public WishListRepository(JdbcTemplate jdbc, WishListMapper wishListMapper) {
+    public WishListRepository(JdbcTemplate jdbc, WishListMapper wishListMapper, ItemMapper itemMapper) {
         this.jdbc = jdbc;
         this.wishListMapper = wishListMapper;
+        this.itemMapper = itemMapper;
     }
 
     public List<WishList> findAll() {
@@ -58,6 +62,10 @@ public class WishListRepository {
         return findByUserId(userId);
     }
 
+    public List<Item> getAllItems() {
+        return jdbc.query(GET_ALL_ITEMS, itemMapper);
+    }
+
     public void createItem(Item item) {
         jdbc.update(CREATE_ITEM, item.getItemId(), item.getItemName(), item.getUrl(), item.getPrice());
     }
@@ -70,5 +78,11 @@ public class WishListRepository {
         jdbc.update(UPDATE_ITEM, item.getItemName(), item.getUrl(), item.getPrice());
         return item;
     }
+
+    public void addItemToWishList(WishList wishList, Item item) {
+        jdbc.update(ADD_ITEM_TO_WISHLIST, wishList.getWishListId(), item.getItemId(), item.getItemDescription());
+    }
+
+
 
 }
