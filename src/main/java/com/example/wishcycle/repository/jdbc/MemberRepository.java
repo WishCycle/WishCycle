@@ -13,9 +13,10 @@ public class MemberRepository {
 
     private static final String FIND_BY_USERNAME_SQL = "SELECT * FROM wish_user WHERE username = ?";
     private static final String FIND_BY_EMAIL_SQL = "SELECT * FROM wish_user WHERE user_email = ?";
-    private static final String FIND_BY_ID_SQL = "SELECT * FROM wish_user WHERE id = ?";
+    private static final String FIND_BY_ID_SQL = "SELECT * FROM wish_user WHERE user_id = ?";
     private static final String DELETE_MEMBER_SQL = "DELETE FROM wish_user WHERE user_id = ?";
     private static final String CREATE_MEMBER_SQL = "INSERT INTO wish_user (username, user_email, user_password) VALUES (?, ?, ?)";
+    private static final String UPDATE_MEMBER_SQL = "UPDATE wish_user SET username = ?, user_email = ?, user_password = ? WHERE user_id = ?";
 
 
     public MemberRepository(JdbcTemplate jdbc) {
@@ -37,10 +38,14 @@ public class MemberRepository {
     }
 
     public void deleteMember(Member member) {
-        jdbc.update(DELETE_MEMBER_SQL, memberMapper, member.getMemberId());
+        jdbc.update(DELETE_MEMBER_SQL, member.getMemberId());
     }
 
     public void createMember(Member member) {
-        jdbc.update(CREATE_MEMBER_SQL, memberMapper, member.toString(), member.getEmail(), member.getPassword());
+        jdbc.update(CREATE_MEMBER_SQL, member.getName(), member.getEmail(), member.getPassword());
+    }
+
+    public void updateMember(Member member) {
+        jdbc.update(UPDATE_MEMBER_SQL, member.getName(), member.getEmail(), member.getPassword(), member.getMemberId());
     }
 }
