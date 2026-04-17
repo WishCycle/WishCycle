@@ -1,5 +1,6 @@
 package com.example.wishcycle.repository;
 
+import com.example.wishcycle.model.Member;
 import com.example.wishcycle.repository.jdbc.MemberRepository;
 import com.example.wishcycle.repository.mapper.MemberMapper;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.test.util.AssertionErrors.assertNull;
 
 @SpringBootTest
 @Transactional
@@ -47,7 +50,57 @@ public class MemberRepositoryTest {
 
     @Test
     void checkCorrectMemberFound(){
+        Member member = memberRepo.getMemberById(1L);
+        assertNotNull(member);
+        assertEquals(member.getName(), "simonBeCh");
+        assertEquals(member.getMemberId(), 1L);
+        assertEquals(member.getEmail(), "sich0008@stud.ek.dk");
+        assertEquals(member.getPassword(), "112pizza");
+    }
 
+    @Test
+    void updateMemberCheck() {
+        Member updatedMember = new Member();
+        updatedMember.setMemberId(2L);
+        updatedMember.setName("unhackable");
+        updatedMember.setEmail("testemail@gmail.com");
+        updatedMember.setPassword("donthackmeplease");
+
+        memberRepo.updateMember(updatedMember);
+
+        assertNotNull(memberRepo.getMemberById(2L));
+
+        Member retrievedMember = memberRepo.getMemberById(2L);
+
+        assertEquals("unhackable", retrievedMember.getName());
+        assertEquals("donthackmeplease", retrievedMember.getPassword());
+        assertEquals(2L, retrievedMember.getMemberId());
+        assertEquals("testemail@gmail.com", retrievedMember.getEmail());
+    }
+
+    @Test
+    void createMemberTest() {
+        Member createdMember = new Member();
+        createdMember.setName("newMembahBabeh");
+        createdMember.setEmail("newuser@gmail.com");
+        createdMember.setPassword("ineededanewaccount");
+        memberRepo.createMember(createdMember);
+
+        Member retrievedMember = memberRepo.getMemberById(4L);
+        assertEquals("newMembahBabeh", retrievedMember.getName());
+        assertEquals("ineededanewaccount", retrievedMember.getPassword());
+        assertNotNull(retrievedMember.getMemberId());
+        assertEquals("newuser@gmail.com", retrievedMember.getEmail());
+    }
+
+    @Test
+    void deleteMember() {
+        Member memberToDelete = new Member(4L,"deletemeplease", "iwannabedeleted", "deletemenow@gmail.com");
+        memberRepo.createMember(memberToDelete);
+        memberRepo.deleteMember(memberToDelete);
+        Integer memberCount = jdbc.queryForObject("SELECT COUNT(*) FROM wish_user", Integer.class);
+        System.out.println("Number of members in DataBase: " + memberCount);
+        assertEquals(3, memberCount);
     }
 
 
