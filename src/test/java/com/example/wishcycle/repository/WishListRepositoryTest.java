@@ -140,4 +140,9 @@ public class WishListRepositoryTest {
 
         assertIterableEquals(expectedItemNames, itemNames);
     }
+
+    @Test
+    void deleteItem() {
+
+    }
 }

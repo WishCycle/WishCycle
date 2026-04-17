@@ -41,6 +41,7 @@ public class WishListRepository {
         this.itemMapper = itemMapper;
     }
 
+    // CRUD OPERATIONS for wishlist manipulation
     public List<WishList> findAll() {
         return jdbc.query(GET_ALL_WISH_LISTS, wishListMapper);
     }
@@ -62,6 +63,7 @@ public class WishListRepository {
         return findByUserId(userId);
     }
 
+    // CRUD OPERATIONS for item manipulation
     public List<Item> getAllItems() {
         return jdbc.query(GET_ALL_ITEMS, itemMapper);
     }
@@ -79,6 +81,7 @@ public class WishListRepository {
         return item;
     }
 
+    // CRUD OPERATIONS for wishlist and item manipulation
     public void addItemToWishList(WishList wishList, Item item) {
         jdbc.update(ADD_ITEM_TO_WISHLIST, wishList.getWishListId(), item.getItemId(), item.getItemDescription());
     }
