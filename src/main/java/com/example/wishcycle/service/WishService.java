@@ -73,9 +73,19 @@ public class WishService {
         wishListRepository.createItem(item);
     }
 
-//    public void deleteWish(Item wish) {
-//
-//    }
+    public void deleteItem(Item item) {
+        if (item == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The item you are trying to delete does not exist. Try again.");
+        }
+        wishListRepository.deleteItem(item);
+    }
+
+    public void updateItem(Item item) {
+        if (item == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The item you are trying to update could not be found. Try again.");
+        }
+        wishListRepository.updateItem(item);
+    }
 
 
 
