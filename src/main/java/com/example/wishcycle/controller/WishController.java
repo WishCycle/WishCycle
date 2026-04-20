@@ -25,6 +25,7 @@ public class WishController {
 
 
 
+
 //    BRUGES NÅR VI VIL TJEKKE OM DE ER LOGGET IND, REDIRECTER TIL LOGIN SIDEN HVIS DE IKKE ER
 //    HttpSession session = request.getSession(false);
 //

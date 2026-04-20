@@ -7,7 +7,9 @@ import com.example.wishcycle.repository.mapper.WishListMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class WishListRepository {
@@ -27,8 +29,9 @@ public class WishListRepository {
     private static final String DELETE_ITEM = "DELETE FROM item WHERE item_id = ?";
     private static final String UPDATE_ITEM = "UPDATE item SET item_name = ?, item_url = ?, item_price = ? WHERE item_id";
 
+    private static final String GET_ALL_ITEMS_IN_WISHLIST = "SELECT i.* FROM item i JOIN wish_list_item wli ON i.item_id = wli.item_id WHERE wli.wishlist_id = ?";
     private static final String ADD_ITEM_TO_WISHLIST = "INSERT INTO wish_list_item (wishlist_id, item_id, wish_description) VALUES (?, ?, ?)";
-    private static final String DELETE_ITEM_FROM_WISHLIST = "DELETE FROM wish_list_item WHERE item(item_id) = ?";
+    private static final String DELETE_ITEM_FROM_WISHLIST = "DELETE FROM wish_list_item WHERE wishlist_id = ? AND item_id = ?";
     private static final String UPDATE_ITEM_ON_WISHLIST =
             "UPDATE item JOIN wish_list_item ON item.item_id = wish_list_item.item_id " +
             "SET item.item_name = ?, item.item_url = ?, item.item_price = ? " +
@@ -82,10 +85,19 @@ public class WishListRepository {
     }
 
     // CRUD OPERATIONS for wishlist and item manipulation
+    public List<Item> itemsInWishList(Long wishListId) {
+        return jdbc.query(GET_ALL_ITEMS_IN_WISHLIST, itemMapper, wishListId);
+    }
+
     public void addItemToWishList(WishList wishList, Item item) {
         jdbc.update(ADD_ITEM_TO_WISHLIST, wishList.getWishListId(), item.getItemId(), item.getItemDescription());
     }
 
+    public void setDeleteItemFromWishlist(WishList wishlist, Item item) {
+        jdbc.update(DELETE_ITEM_FROM_WISHLIST, wishlist.getWishListId(), item.getItemId());
+    }
 
-
+//    public void setUpdateItemOnWishlist(WishList wishlist, Item item) {
+//
+//    }
 }
