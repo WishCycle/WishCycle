@@ -71,7 +71,7 @@ h2 {
 }
 
 .slogan {
-   font-size: 1rem;
+    font-size: 1rem;
     margin-left: 5px;
     opacity: 0.7;
 
@@ -164,13 +164,12 @@ h2 {
 }
 
 
-
 /* 4. MAIN BOARDS SECTION (The two big green boxes) */
 .boards-container {
     display: flex;
     gap: 20px;
     height: 450px;
-    margin-top: 40px; /* Creates a gap between the header line and your boxes */
+    margin-top: 40px;
     padding: 0 50px;
 }
 
@@ -192,14 +191,13 @@ h2 {
 
 .board-box:hover {
     text-decoration: none;
-    transform: translateY(-5px); /* Moves it up slightly */
-
+    transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     background-color: #36522e;
 }
 
 .board-box h2 {
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 400;
     color: var(--cream);
     margin-bottom: 10px;
