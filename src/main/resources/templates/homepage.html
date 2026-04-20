@@ -28,14 +28,17 @@
 </header>
 
 <main>
-    <section class="boards-container">
-        <div class="board-box">
-            <h2>Mine WishCycles</h2>
-        </div>
-        <div class="board-box">
-            <h2>Venner/Familie WishCycles</h2>
-        </div>
-    </section>
+    <div class="boards-container">
+        <a th:href="@{/personal-wishcycles}" href="personal-wishcycles.html" class="board-box">
+            <h2>My WishCycles</h2>
+            <p>View your wishes</p>
+        </a>
+
+        <a th:href="@{/social-wishcycles}" href="social-wishcycles.html" class="board-box">
+            <h2>Friends/Family WishCycles</h2>
+            <p>View friends/family wishes</p>
+        </a>
+    </div>
 
     <section class="inspo-container">
         <div class="inspo-card">Inspo Placeholder</div>

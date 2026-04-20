@@ -78,6 +78,7 @@ h2 {
 }
 
 .auth-buttons {
+    text-decoration: none;
     display: flex;
     gap: 15px;
     align-items: center;
@@ -85,6 +86,7 @@ h2 {
 
 /* Rectangle Buttons */
 .btn-login, .btn-signup {
+    text-decoration: none;
     background-color: var(--forest-dark);
     color: var(--cream);
     border: none;
@@ -96,6 +98,7 @@ h2 {
 
 /* User Circle Icon */
 .user-circle {
+    text-decoration: none;
     width: 45px;
     height: 45px;
     background-color: var(--forest-dark);
@@ -118,6 +121,9 @@ h2 {
 }
 
 .board-box {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
     flex: 1;
     background-color: var(--forest-dark);
     color: var(--cream);
@@ -127,6 +133,7 @@ h2 {
 }
 
 .board-box:hover {
+    text-decoration: none;
     transform: translateY(-5px); /* Moves it up slightly */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Adds depth */
 }
@@ -134,6 +141,17 @@ h2 {
 .board-box h2 {
     font-size: 2.2rem;
     font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.board-box p {
+    font-size: 1rem;
+    color: var(--cream);
+    opacity: 0.6;
+    font-weight: 300;
+    line-height: 1.4;
 }
 
 /* 5. INSPO SECTION (The bottom row) */
