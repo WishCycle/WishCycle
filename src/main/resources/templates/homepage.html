@@ -13,17 +13,23 @@
 <body>
 
 <header class="navbar">
-    <div class="logo">
-        <a th:href="@{homepage}" href="homepage.html">
-            <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WischCycle-Logo.png" alt="WishCycle Logo">
-        </a>
-        <span class="slogan">Wish for a better future</span>
-    </div>
+    <div class="header-left">
+        <div class="logo">
+            <a th:href="@{/homepage}" href="homepage.html">
+                <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WischCycle-Logo.png" alt="WishCycle Logo">
+            </a>
+            <span class="slogan">Wish for a better future</span>
+        </div>
+    </div> <nav class="main-nav">
+    <a th:href="@{/personal-wishcycles}" href="personal-wishcycles.html" class="nav-link">My WishCycles</a>
+    <a th:href="@{/social-wishcycles}" href="social-wishcycles.html" class="nav-link">Social WishCycles</a>
+    <a th:href="@{/about-us}" href="about-us.html" class="nav-link">About Us</a>
+</nav>
 
     <nav class="auth-buttons">
         <a th:href="@{/login-page}" href="login-page.html" class="btn-login">Login</a>
         <a th:href="@{/signup-page}" href="signup-page.html" class="btn-signup">Sign Up</a>
-        <div class="user-circle">User</div>
+        <a th:href="@{/user-profile}" href="user-profile.html" class="btn-profile">Profile</a>
     </nav>
 </header>
 
