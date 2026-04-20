@@ -143,6 +143,31 @@ public class WishListRepositoryTest {
 
     @Test
     void deleteItem() {
+        Item itemToDelete = new Item(7L, "ItemIWant", "This item will be deleted", "www.itemIWant.com", 200L);
+        repository.createItem(itemToDelete);
+        repository.deleteItem(itemToDelete);
 
+        Integer itemsInDatabaseCount = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM item", Integer.class);
+        System.out.println("After deletion: " + itemsInDatabaseCount);
+
+        int expectedCount = 6;
+
+        assertThat((itemsInDatabaseCount)).isEqualTo(expectedCount);
     }
+
+//    @Test
+//    void updateItem() {
+//    }
+//
+//    @Test
+//    void addItemToWishList() {
+//    }
+//
+//    @Test
+//    void deleteItemFromWishlist() {
+//    }
+//
+//    @Test
+//    void updateItemOnWishList() {
+//    }
 }
