@@ -151,9 +151,20 @@ public class WishListRepositoryTest {
         assertThat((itemsInDatabaseCount)).isEqualTo(expectedCount);
     }
 
-//    @Test
-//    void updateItem() {
-//    }
+    @Test
+    void updateItem() {
+
+        Item itemBeforeUpdate = new Item(7L, "ItemIWant", "This item will be deleted", "www.itemIWant.com", 200L);
+        repository.createItem(itemBeforeUpdate);
+
+        Item updatedItem = new Item(7L, "ItemIGot", "This item will be deleted", "www.itemIWant.com", 250L);
+        repository.updateItem(updatedItem);
+
+        List<Item> itemsInDatabase = repository.getAllItems();
+
+        assertThat(itemsInDatabase.get(6).getItemName()).isEqualTo("ItemIGot");
+        assertThat(itemsInDatabase.get(6).getPrice()).isEqualTo(250L);
+    }
 
     // CRUD TEST for wishlist and item manipulation
     @Test
@@ -216,5 +227,7 @@ public class WishListRepositoryTest {
 
 //    @Test
 //    void updateItemOnWishList() {
+//
+//
 //    }
 }
