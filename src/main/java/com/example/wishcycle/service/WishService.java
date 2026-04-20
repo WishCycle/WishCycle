@@ -1,13 +1,10 @@
 package com.example.wishcycle.service;
-
 import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
 import com.example.wishcycle.repository.jdbc.MemberRepository;
 import com.example.wishcycle.repository.jdbc.WishListRepository;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -68,6 +65,13 @@ public class WishService {
 
     }
 
+    public Long getItemById(Item item) {
+        if (item.getItemId() == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The item you are trying to create is invalid. Try again.");
+        }
+        return wishListRepository.getItemById(item);
+    }
+
     public void createItem(Item item) {
         if (item == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The item you are trying to create is invalid. Try again.");
@@ -109,12 +113,4 @@ public class WishService {
         }
         wishListRepository.setUpdateItemOnWishlist(wishlist, item);
     }
-
-
-
-
-
-
-
-
 }
