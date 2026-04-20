@@ -11,12 +11,13 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        HttpSession session = request.getSession();
+
+        HttpSession session = request.getSession(); // This line runs before request reaches our Controller
 
         if (session.getAttribute("member") == null) {
             response.sendRedirect("/login-page");
-            return false;
+            return false; // Blocks request
         }
-        return true;
+        return true; // Continues to controller
     }
 }

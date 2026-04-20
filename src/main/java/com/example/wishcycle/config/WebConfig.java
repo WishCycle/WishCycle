@@ -15,7 +15,7 @@ public class WebConfig  implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
-                .addPathPatterns("/wishlists/**", "user-profile/**", "/personal-wishcycles/**")
-                .excludePathPatterns("/login-page", "/signup-page", "/css/**", "/images/**");
+                .addPathPatterns("/wishlists/**", "user-profile/**", "/personal-wishcycles/**") // Tell Spring which URLs to watch
+                .excludePathPatterns("/login-page", "/signup-page", "/css/**", "/images/**");   // And these to be excluded
     }
 }
