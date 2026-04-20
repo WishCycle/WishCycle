@@ -4,20 +4,14 @@ import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
 import com.example.wishcycle.repository.jdbc.WishListRepository;
 import com.example.wishcycle.repository.mapper.WishListMapper;
-import com.sun.source.tree.AssertTree;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.net.URL;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -191,10 +185,35 @@ public class WishListRepositoryTest {
         String checkForDescription = jdbcTemplate.queryForObject("SELECT wish_description FROM wish_list_item WHERE wishlist_id = ? AND item_id = ?", String.class, wishListId, itemId);
         assertEquals("Something you wear", checkForDescription);
     }
-//    @Test
-//    void deleteItemFromWishlist() {
-//    }
-//
+    @Test
+    void deleteItemFromWishlist() {
+        jdbcTemplate.update("INSERT INTO wish_user (username, user_password, user_email) VALUES (?, ?, ?)", "Jack", "testCode", "test.email@gmail.com");
+        Long userId = jdbcTemplate.queryForObject("SELECT user_id FROM wish_user WHERE username = 'Jack'", Long.class);
+
+        Long wishListId = 100L;
+        jdbcTemplate.update("INSERT INTO wish_list (wishList_id, wishlist_name, wishlist_desc, user_id) VALUES (?, ?, ?, ?)", wishListId, "JackWishes", "This is the description", userId);
+
+        Long itemId = 7L;
+        jdbcTemplate.update("INSERT INTO item (item_id, item_name, item_url, item_price) VALUES (?, ?, ?, ?)", itemId, "Pants", "Random//URL.com", 300L);
+
+        Member member = new Member();
+        member.setMemberId(userId);
+
+        WishList wishList = new WishList();
+        wishList.setWishListId(wishListId);
+
+        Item item = new Item();
+        item.setItemId(itemId);
+        item.setItemDescription("Something you wear");
+
+        repository.addItemToWishList(wishList, item);
+        repository.setDeleteItemFromWishlist(wishList, item);
+
+        List<Item> seededItems = repository.itemsInWishList(100L);
+
+        assertThat(seededItems.size()).isEqualTo(0);
+    }
+
 //    @Test
 //    void updateItemOnWishList() {
 //    }
