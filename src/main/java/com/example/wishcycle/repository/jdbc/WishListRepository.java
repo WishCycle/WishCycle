@@ -6,10 +6,7 @@ import com.example.wishcycle.repository.mapper.ItemMapper;
 import com.example.wishcycle.repository.mapper.WishListMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class WishListRepository {
@@ -32,11 +29,8 @@ public class WishListRepository {
     private static final String GET_ALL_ITEMS_IN_WISHLIST = "SELECT i.* FROM item i JOIN wish_list_item wli ON i.item_id = wli.item_id WHERE wli.wishlist_id = ?";
     private static final String ADD_ITEM_TO_WISHLIST = "INSERT INTO wish_list_item (wishlist_id, item_id, wish_description) VALUES (?, ?, ?)";
     private static final String DELETE_ITEM_FROM_WISHLIST = "DELETE FROM wish_list_item WHERE wishlist_id = ? AND item_id = ?";
-    private static final String UPDATE_ITEM_ON_WISHLIST =
-            "UPDATE item JOIN wish_list_item ON item.item_id = wish_list_item.item_id " +
-            "SET item.item_name = ?, item.item_url = ?, item.item_price = ? " +
-            "WHERE wish_list_item.wishlist_id = ?";
-
+    private static final String UPDATE_ITEM_ON_WISHLIST = "UPDATE item SET item_name = ?, item_url = ?, item_price = ? WHERE item_id = ? AND item_id IN (SELECT item_id FROM wish_list_item WHERE wishlist_id = ?)";
+    private static final String UPDATE_WISH_DESCRIPTION= "UPDATE wish_list_item SET wish_description = ? WHERE wishlist_id = ? AND item_id = ?";
 
     public WishListRepository(JdbcTemplate jdbc, WishListMapper wishListMapper, ItemMapper itemMapper) {
         this.jdbc = jdbc;
@@ -97,7 +91,8 @@ public class WishListRepository {
         jdbc.update(DELETE_ITEM_FROM_WISHLIST, wishlist.getWishListId(), item.getItemId());
     }
 
-//    public void setUpdateItemOnWishlist(WishList wishlist, Item item) {
-//
-//    }
+    public void setUpdateItemOnWishlist(WishList wishlist, Item item) {
+        jdbc.update(UPDATE_ITEM_ON_WISHLIST, item.getItemName(), item.getUrl(), item.getPrice(), item.getItemId(), wishlist.getWishListId());
+        jdbc.update(UPDATE_WISH_DESCRIPTION, wishlist.getDescription(), wishlist.getWishListId(), item.getItemId());
+    }
 }
