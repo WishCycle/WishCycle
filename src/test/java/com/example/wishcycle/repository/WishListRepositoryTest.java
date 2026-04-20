@@ -7,6 +7,7 @@ import com.example.wishcycle.repository.mapper.WishListMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,7 +42,7 @@ public class WishListRepositoryTest {
     @Test
     void wishListsInDatabaseCount() {
         Integer wishListCount = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM wish_list", Integer.class);
-        System.out.println("Number of wishlist: " + wishListCount);
+        System.out.println("Number of wishlists: " + wishListCount);
 //        assertEquals(3, wishListCount, "Count should match seeded database data");
     }
 
@@ -144,7 +145,7 @@ public class WishListRepositoryTest {
         repository.deleteItem(itemToDelete);
 
         Integer itemsInDatabaseCount = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM item", Integer.class);
-        System.out.println("After deletion: " + itemsInDatabaseCount);
+        System.out.println("After deletion there should be 6 items: " + itemsInDatabaseCount);
 
         int expectedCount = 6;
 
@@ -196,6 +197,7 @@ public class WishListRepositoryTest {
         String checkForDescription = jdbcTemplate.queryForObject("SELECT wish_description FROM wish_list_item WHERE wishlist_id = ? AND item_id = ?", String.class, wishListId, itemId);
         assertEquals("Something you wear", checkForDescription);
     }
+
     @Test
     void deleteItemFromWishlist() {
         jdbcTemplate.update("INSERT INTO wish_user (username, user_password, user_email) VALUES (?, ?, ?)", "Jack", "testCode", "test.email@gmail.com");
@@ -225,9 +227,34 @@ public class WishListRepositoryTest {
         assertThat(seededItems.size()).isEqualTo(0);
     }
 
-//    @Test
-//    void updateItemOnWishList() {
-//
-//
-//    }
+    @Test
+    void updateItemOnWishList() {
+        WishList wishList = new WishList();
+        Long wishlistId = 2L;
+        wishList.setWishListId(wishlistId);
+        wishList.setWishListName("Jokkes mokke");
+        wishList.setDescription("Jokkes liste til alt han mangler");
+
+        String newDesc = "Golfbolde fra Titleist description";
+        wishList.setDescription(newDesc);
+
+        Item itemToUpdate = new Item();
+        Long itemId = 3L;
+        itemToUpdate.setItemId(itemId);
+        itemToUpdate.setItemName("Pro v1");
+        itemToUpdate.setUrl("https://www.amazon.de/dp/B0DPN7QZ9R");
+        Long expectedPrice = 999L;
+        itemToUpdate.setPrice(expectedPrice);
+
+        repository.setUpdateItemOnWishlist(wishList, itemToUpdate);
+
+        Item resultItem = jdbcTemplate.queryForObject("SELECT * FROM item WHERE item_id = ?", new BeanPropertyRowMapper<>(Item.class), itemId);
+
+        String wishDescription = jdbcTemplate.queryForObject("SELECT wish_description FROM wish_list_item WHERE wishlist_id = ? AND item_id = ?", String.class, wishlistId, itemId);
+
+        assertThat(resultItem).isNotNull();
+        assertThat(resultItem.getItemName()).isEqualTo("Pro v1");
+        assertEquals(expectedPrice, itemToUpdate.getPrice());
+        assertThat(wishDescription).isEqualTo("Golfbolde fra Titleist description");
+    }
 }
