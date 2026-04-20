@@ -44,7 +44,7 @@ public class MemberController {
         }
     }
 
-    @GetMapping("/logout")  // invalidate session and return landing page
+    @GetMapping("/logout")  // Invalidate session and return landing page
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/login-page";
@@ -60,5 +60,11 @@ public class MemberController {
         Member member = memberService.getMemberById(memberId);
         model.addAttribute("memberProfile", member);
         return "user-profile";
+    }
+
+    @PostMapping("/delete")
+    public String deleteProfilePage(@ModelAttribute Member member) {
+        memberService.deleteMember(member);
+        return "redirect:/login-page";
     }
 }

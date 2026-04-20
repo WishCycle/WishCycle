@@ -1,5 +1,6 @@
 package com.example.wishcycle.controller;
 
+import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
 import com.example.wishcycle.service.WishService;
@@ -18,13 +19,6 @@ public class WishController {
 
     public WishController(WishService wishService) {
         this.wishService = wishService;
-    }
-
-    @GetMapping("/homepage")
-    public String homepage(Model model) {
-        WishList wishList = new WishList();
-        model.addAttribute("wishList", wishList);
-        return "homepage";
     }
 
     @GetMapping("/wishlists")
@@ -53,6 +47,32 @@ public class WishController {
         wishService.createWishList(wishList, member);
         return "redirect:/personal-wishcycles " + member.getMemberId();
     }
+
+    @PostMapping("/wishlists/update")
+    public String updateWishlist(@ModelAttribute WishList wishList, @ModelAttribute Member member) {
+        wishService.updateWishList(wishList, member);
+        return "redirect:/wishlist";
+    }
+
+    @PostMapping("/wishlists/delete")
+    public String deleteWishlist(@ModelAttribute WishList wishlist, @ModelAttribute Member member) {
+        wishService.deleteWishList(wishlist, member);
+        return "redirect:/wishlist";
+    }
+
+    @GetMapping("/wishlist/add")
+    public String addItem(Model model) {
+        Item item = new Item();
+        model.addAttribute("item", item);
+        return "add-new-item";
+    }
+
+    @PostMapping("/wishlist/item")
+    public String createItem(@ModelAttribute Item item) {
+        wishService.createItem(item);
+        return "redirect:/wishlist";
+    }
+
 
 
 

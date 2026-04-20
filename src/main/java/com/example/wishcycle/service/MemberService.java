@@ -1,5 +1,4 @@
 package com.example.wishcycle.service;
-
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.repository.jdbc.MemberRepository;
 import org.springframework.http.HttpStatus;
@@ -43,5 +42,4 @@ public class MemberService {
         }
         memberRepository.deleteMember(member);
     }
-
 }

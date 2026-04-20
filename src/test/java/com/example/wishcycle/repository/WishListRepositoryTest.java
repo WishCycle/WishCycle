@@ -3,7 +3,6 @@ import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
 import com.example.wishcycle.repository.jdbc.WishListRepository;
-import com.example.wishcycle.repository.mapper.WishListMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,9 +25,6 @@ public class WishListRepositoryTest {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    private WishListMapper wishListMapper;
 
     @Test
     void contextLoad() {} // Checks Application context can start - Looks for correct bean configuration.
