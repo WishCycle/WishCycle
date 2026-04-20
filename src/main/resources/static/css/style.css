@@ -262,18 +262,22 @@ h2 {
 }
 
 .login-card, .signup-card {
-    background: white; /* Or var(--cream) if you want it to blend in */
+    background: white;
     padding: 40px;
     width: 100%;
     max-width: 400px;
-    border: 1px solid rgba(45, 67, 38, 0.1); /* Subtle forest-green border */
+    border: 1px solid rgba(45, 67, 38, 0.1);
     text-align: center;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .login-logo img, .signup-logo img {
     height: 60px;
     margin-bottom: 20px;
-    border: 1px solid rgba(45, 67, 38, 0.1)
+    border: 1px solid rgba(45, 67, 38, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .login-card h2, .signup-card h2 {
@@ -303,6 +307,8 @@ h2 {
 .login-logo-container img, .signup-logo-container img {
     height: 160px; /* Adjust based on your logo's look */
     width: auto;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 /* Input Styles */
@@ -325,6 +331,8 @@ h2 {
     border: 1px solid var(--forest-dark);
     font-family: inherit;
     font-size: 1rem;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .input-group input:focus {
@@ -342,6 +350,8 @@ h2 {
     font-weight: 600;
     cursor: pointer;
     margin-top: 10px;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .login-footer, .signup-footer {
