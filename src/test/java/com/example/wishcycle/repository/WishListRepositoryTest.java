@@ -61,6 +61,7 @@ public class WishListRepositoryTest {
         assertThat(wishLists.getFirst().getWishListId()).isEqualTo(1L); // AUTO incremented
     }
 
+    // CRUD TEST for wishlist manipulation
     @Test
     void updateWishListCheck() {
         // OLD DATA = wish_list ('Jokkes mokke','Jokkes liste til alt han mangler', 2),
@@ -122,6 +123,7 @@ public class WishListRepositoryTest {
         assertThat(count).isEqualTo(expectedCount); // Checking that database only contains to wishlists after deleting the first one
     }
 
+    // CRUD TEST for item manipulation
     @Test
     void createItem() {
         Item newItem = new Item(7L, "Pants", "Something you wear", "Random//URL.com", 300L);
@@ -158,11 +160,37 @@ public class WishListRepositoryTest {
 //    @Test
 //    void updateItem() {
 //    }
-//
-//    @Test
-//    void addItemToWishList() {
-//    }
-//
+
+    // CRUD TEST for wishlist and item manipulation
+    @Test
+    void addItemToWishList() {
+        jdbcTemplate.update("INSERT INTO wish_user (username, user_password, user_email) VALUES (?, ?, ?)", "Jack", "testCode", "test.email@gmail.com");
+        Long userId = jdbcTemplate.queryForObject("SELECT user_id FROM wish_user WHERE username = 'Jack'", Long.class);
+
+        Long wishListId = 100L;
+        jdbcTemplate.update("INSERT INTO wish_list (wishList_id, wishlist_name, wishlist_desc, user_id) VALUES (?, ?, ?, ?)", wishListId, "JackWishes", "This is the description", userId);
+
+        Long itemId = 7L;
+        jdbcTemplate.update("INSERT INTO item (item_id, item_name, item_url, item_price) VALUES (?, ?, ?, ?)", itemId, "Pants", "Random//URL.com", 300L);
+
+        Member member = new Member();
+        member.setMemberId(userId);
+
+        WishList wishList = new WishList();
+        wishList.setWishListId(wishListId);
+
+        Item item = new Item();
+        item.setItemId(itemId);
+        item.setItemDescription("Something you wear");
+
+        repository.addItemToWishList(wishList, item);
+
+        Integer wishListLineInDatabaseAdded = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM wish_list_item WHERE wishlist_id = ? AND item_id = ?", Integer.class, wishListId, itemId);
+        assertEquals(1, wishListLineInDatabaseAdded, "Should be exactly one new line");
+
+        String checkForDescription = jdbcTemplate.queryForObject("SELECT wish_description FROM wish_list_item WHERE wishlist_id = ? AND item_id = ?", String.class, wishListId, itemId);
+        assertEquals("Something you wear", checkForDescription);
+    }
 //    @Test
 //    void deleteItemFromWishlist() {
 //    }
