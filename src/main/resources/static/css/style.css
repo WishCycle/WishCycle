@@ -97,9 +97,9 @@ h2 {
 .nav-link {
     text-decoration: none;
     color: var(--forest-dark);
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     font-weight: 500;
-    opacity: 0.6;
+    opacity: 0.7;
     transition: opacity 0.2s ease;
     white-space: nowrap;
 }
@@ -193,7 +193,9 @@ h2 {
 .board-box:hover {
     text-decoration: none;
     transform: translateY(-5px); /* Moves it up slightly */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Adds depth */
+
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background-color: #36522e;
 }
 
 .board-box h2 {
@@ -245,7 +247,9 @@ h2 {
 
 .inspo-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background-color: #36522e;
+
 }
 
 
@@ -374,10 +378,15 @@ h2 {
 }
 
 .footer-logo {
-    height: 40px;
+    height: 60px;
     width: auto;
     opacity: 0.6;
-    transition: opacity 0.3s ease;
+    display: block;
+    cursor: pointer;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(45, 67, 38, 0.05);
+    transition: opacity 0.3s ease, transform 0.2s ease;
 }
 
 .footer-logo:hover {
