@@ -41,6 +41,8 @@ h2 {
     position: sticky;
     top: 0;
     z-index: 100;
+    height: auto;
+    min-height: 120px;
 }
 
 /* Target the logo container */
@@ -52,64 +54,116 @@ h2 {
 
 /* Target the actual image inside that container */
 .logo img {
-    height: 160px;
+    height: 140px;
     width: auto;
     display: block;
     cursor: pointer;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(45, 67, 38, 0.05);
     transition: opacity 0.3s ease, transform 0.2s ease;
-    opacity: 0.8;
 }
 
 .logo img:hover {
-    opacity: 1;
+    opacity: 0.7;
     transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1)
 }
 
 .slogan {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    color: var(--forest-dark);
-    opacity: 0.8;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-    padding-top: 4px;
+   font-size: 1rem;
+    margin-left: 5px;
+    opacity: 0.7;
 
 
 }
 
-.auth-buttons {
-    text-decoration: none;
+/* Grouping Logo and Nav Links */
+.header-left {
+    flex: 1;
     display: flex;
-    gap: 15px;
     align-items: center;
+}
+
+/* The Navigation Link row */
+.main-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+/* Individual Link Styling (Matching Footer Style) */
+.nav-link {
+    text-decoration: none;
+    color: var(--forest-dark);
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.nav-link:hover {
+    opacity: 1;
+}
+
+/* Active state (Optional: makes the current page link look darker) */
+.nav-link.active {
+    opacity: 1;
+    font-weight: 600;
+}
+
+.header-left, .auth-buttons {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.auth-buttons {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
 }
 
 /* Rectangle Buttons */
 .btn-login, .btn-signup {
-    text-decoration: none;
     background-color: var(--forest-dark);
     color: var(--cream);
     border: none;
-    padding: 10px 20px;
+    padding: 10px 22px;
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 /* User Circle Icon */
-.user-circle {
-    text-decoration: none;
-    width: 45px;
-    height: 45px;
+.btn-profile {
     background-color: var(--forest-dark);
     color: var(--cream);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
+    border: none;
+    padding: 10px 22px;
     cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    border-radius: 16px;
+    overflow: hidden;
 }
+
+.btn-login:hover, .btn-signup:hover, .btn-profile:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background-color: #36522e;
+}
+
+
 
 /* 4. MAIN BOARDS SECTION (The two big green boxes) */
 .boards-container {
@@ -130,6 +184,10 @@ h2 {
     padding: 40px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .board-box:hover {
@@ -154,6 +212,11 @@ h2 {
     line-height: 1.4;
 }
 
+.board-box:hover p {
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+
 /* 5. INSPO SECTION (The bottom row) */
 .inspo-container {
     background-color: transparent; /* This removes the border-to-border green bar */
@@ -176,6 +239,8 @@ h2 {
     font-weight: 500;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .inspo-card:hover {
