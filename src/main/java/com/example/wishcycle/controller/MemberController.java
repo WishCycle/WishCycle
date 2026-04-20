@@ -35,4 +35,16 @@ public class MemberController {
 
         return "redirect:/wishcycle/homepage";
     }
+
+    @GetMapping("/about-us")
+    public String getAboutUsPage() {
+        return "about-us";
+    }
+
+    @GetMapping("/login/profile")
+    public String getProfilePage(Model model, @PathVariable Long memberId) {
+        Member member = memberService.getMemberById(memberId);
+        model.addAttribute("memberProfile", member);
+        return "user-profile";
+    }
 }
