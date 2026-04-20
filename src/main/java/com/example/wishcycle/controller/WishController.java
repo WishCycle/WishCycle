@@ -67,14 +67,23 @@ public class WishController {
         return "add-new-item";
     }
 
-    @PostMapping("/wishlist/item")
+    @PostMapping("/wishlist/item/create")
     public String createItem(@ModelAttribute Item item) {
         wishService.createItem(item);
         return "redirect:/wishlist";
     }
 
+    @PostMapping("/wishlist/item/delete")
+    public String deleteItem(@ModelAttribute Item item) {
+        wishService.deleteItem(item);
+        return "redirect:/wishlist";
+    }
 
-
+    @PostMapping("/wishlist/item/update")
+    public String updateItem(@ModelAttribute Item item) {
+        wishService.updateItem(item);
+        return "redirect:/wishlist";
+    }
 
 
 //    BRUGES NÅR VI VIL TJEKKE OM DE ER LOGGET IND, REDIRECTER TIL LOGIN SIDEN HVIS DE IKKE ER
