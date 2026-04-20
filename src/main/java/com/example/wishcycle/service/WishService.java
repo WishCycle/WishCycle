@@ -3,9 +3,10 @@ package com.example.wishcycle.service;
 import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
-import com.example.wishcycle.repository.jdbc.MemberRepository;
 import com.example.wishcycle.repository.jdbc.WishListRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -14,11 +15,9 @@ import java.util.List;
 @Service
 public class WishService {
 
-    private final MemberRepository memberRepository;
     private final WishListRepository wishListRepository;
 
-    public WishService(MemberRepository memberRepository, WishListRepository wishListRepository) {
-        this.memberRepository = memberRepository;
+    public WishService(WishListRepository wishListRepository) {
         this.wishListRepository = wishListRepository;
     }
 
@@ -86,6 +85,29 @@ public class WishService {
         }
         wishListRepository.updateItem(item);
     }
+
+    public void addItemToWishList(WishList wishList, Item item) {
+        if (wishList == null || item == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        wishListRepository.addItemToWishList(wishList, item);
+    }
+
+    public void setDeleteItemFromWishList(WishList wishList, Item item) {
+        if (wishList == null || item == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        wishListRepository.setDeleteItemFromWishlist(wishList, item);
+    }
+
+    public void setUpdateItemFromWishList(WishList wishlist, Item item) {
+        if (wishlist == null || item == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        wishListRepository.setUpdateItemOnWishlist(wishlist, item);
+    }
+
+
 
 
 
