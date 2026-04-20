@@ -3,6 +3,7 @@ package com.example.wishcycle.service;
 import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
+import com.example.wishcycle.repository.jdbc.MemberRepository;
 import com.example.wishcycle.repository.jdbc.WishListRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
@@ -16,9 +17,11 @@ import java.util.List;
 public class WishService {
 
     private final WishListRepository wishListRepository;
+    private final MemberRepository memberRepository;
 
-    public WishService(WishListRepository wishListRepository) {
+    public WishService(WishListRepository wishListRepository, MemberRepository memberRepository) {
         this.wishListRepository = wishListRepository;
+        this.memberRepository = memberRepository;
     }
 
     public List<WishList> getWishLists() {
