@@ -222,14 +222,15 @@ h2 {
     background-color: transparent; /* This removes the border-to-border green bar */
     display: flex;
     gap: 20px; /* Same gap as boards-container */
-    padding: 30px 50px; /* 50px side padding matches your boards perfectly */
+    padding: 20px 50px; /* 50px side padding matches your boards perfectly */
     margin-top: 10px;
+    flex-wrap: wrap;
 }
 
 .inspo-card {
     background-color: var(--forest-dark); /* Now the boxes themselves are green */
     color: var(--cream); /* Text turns cream to be readable */
-    flex: 1;
+    flex: 1 1 calc(25% - 20px);
     height: 250px;
     display: flex;
     flex-direction: column;
@@ -241,6 +242,8 @@ h2 {
     cursor: pointer;
     border-radius: 16px;
     overflow: hidden;
+    min-width: 200px;
+
 }
 
 .inspo-card:hover {
@@ -413,4 +416,51 @@ h2 {
 .footer-link:hover {
     opacity: 1;
     color: var(--forest-dark);
+}
+
+/* --- Personal WishCycles Specifics --- */
+
+.content-wrapper {
+    padding-top: 5px; /* Space below the navbar */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between the two categories */
+}
+
+.wish-category {
+    display: flex;
+    flex-direction: column;
+}
+
+.category-title {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--forest-dark);
+    opacity: 0.9;
+    margin: 60px 0 30px 0;
+    width: 100%;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+}
+
+/* The Subtle Lines */
+.category-title::before,
+.category-title::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid rgba(45, 67, 38, 0.12); /* Very light forest line */
+    margin: 0 40px; /* Space between the text and the lines */
+    max-width: 200px; /* Adjust this to make the lines longer or shorter */
+}
+
+/* Ensure the inspo-container in this view doesn't have top margin
+   since the category title handles the spacing */
+.wish-category .inspo-container {
+    margin-top: 0;
 }
