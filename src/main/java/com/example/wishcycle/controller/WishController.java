@@ -42,6 +42,20 @@ public class WishController {
         return "add-new-wishlist";
     }
 
+    @GetMapping("/wishlist/add/item")
+    public String addItem(Model model) {
+        Item item = new Item();
+        model.addAttribute("item", item);
+        return "add-new-item";
+    }
+
+    @GetMapping("/wishlist/{itemId}/edit")
+    public String editWishlistItem(@PathVariable Item itemId, Model model) {
+            Long item = wishService.getItemById(itemId);
+            model.addAttribute("item", item);
+            return "update-item";
+    }
+
     @PostMapping("/wishlists/create")
     public String createNewWishList(@ModelAttribute WishList wishList, @ModelAttribute Member member) {
         wishService.createWishList(wishList, member);
@@ -60,31 +74,26 @@ public class WishController {
         return "redirect:/wishlist";
     }
 
-    @GetMapping("/wishlist/add")
-    public String addItem(Model model) {
-        Item item = new Item();
-        model.addAttribute("item", item);
-        return "add-new-item";
-    }
-
-    @PostMapping("/wishlist/item/create")
-    public String createItem(@ModelAttribute Item item) {
+    @PostMapping("/wishlist/create/item")
+    public String createItem(@ModelAttribute WishList wishList, @ModelAttribute Item item) {
         wishService.createItem(item);
+        wishService.addItemToWishList(wishList, item);
         return "redirect:/wishlist";
     }
 
-    @PostMapping("/wishlist/item/delete")
-    public String deleteItem(@ModelAttribute Item item) {
+    @PostMapping("/wishlist/delete/item")
+    public String deleteItem(@ModelAttribute WishList wishList, @ModelAttribute Item item) {
         wishService.deleteItem(item);
+        wishService.setDeleteItemFromWishList(wishList, item);
         return "redirect:/wishlist";
     }
 
-    @PostMapping("/wishlist/item/update")
-    public String updateItem(@ModelAttribute Item item) {
+    @PostMapping("/item/update/item")
+    public String updateItem(@ModelAttribute WishList wishList, @ModelAttribute Item item) {
         wishService.updateItem(item);
+        wishService.setUpdateItemFromWishList(wishList, item);
         return "redirect:/wishlist";
     }
-
 
 //    BRUGES NÅR VI VIL TJEKKE OM DE ER LOGGET IND, REDIRECTER TIL LOGIN SIDEN HVIS DE IKKE ER
 //    HttpSession session = request.getSession(false);
@@ -92,7 +101,6 @@ public class WishController {
 //    if (session == null || session.getAttribute("member") == null) {
 //        return redirect:/wishcycle/login;
 //    }
-
 }
 
 
