@@ -43,15 +43,21 @@
         <h2 class="category-title">Create a New Wishlist</h2>
         <p class="member-since">Give your collection a name (e.g. Living Room, Birthday)</p>
 
-        <form th:action="@{/add-wishlist}" method="post" class="form-layout">
+        <form action="#" th:action="@{/wishcycle/wishlist/update}" th:object="${wishlist}" method="post" class="form-layout">
+
             <div class="input-group">
                 <label for="listName">Wishlist Name</label>
-                <input type="text" id="listName" name="listName" placeholder="e.g., Summer Kitchen" required>
+                <input type="text" id="listName" name="listName" placeholder="e.g. Summer Kitchen" required th:field="*{wishListName}">
+            </div>
+
+            <div class="input-group">
+                <label for="listDesc">Wishlist Description</label>
+                <input type="text" id="listDesc" name="listDesc" placeholder="e.g. Text" required th:field="*{description}">
             </div>
 
             <div class="profile-actions">
                 <button type="submit" class="btn-primary">Create List</button>
-                <a th:href="@{/personal-wishcycles}" href="personal-wishcycles.html" class="btn-logout">Cancel</a>
+                <a th:href="@{/wishcycle/wishlist/update}" href="personal-wishcycles.html" class="btn-logout">Cancel</a>
             </div>
         </form>
     </section>

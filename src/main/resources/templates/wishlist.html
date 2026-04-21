@@ -1,10 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist View - WishCycle</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-cream">
+
+<header class="navbar">
+    <div class="header-left">
+        <div class="logo">
+            <a th:href="@{/homepage}" href="homepage.html">
+                <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png" alt="WishCycle Logo">
+            </a>
+            <span class="slogan">Wish for a better future</span>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <a th:href="@{/homepage}" href="homepage.html" class="nav-link">Home</a>
+        <a th:href="@{/personal-wishcycles}" href="personal-wishcycles.html" class="nav-link active">My WishCycles</a>
+        <a th:href="@{/social-wishcycles}" href="social-wishcycles.html" class="nav-link">Social WishCycles</a>
+        <a th:href="@{/about-us}" href="about-us.html" class="nav-link">About Us</a>
+    </nav>
+
+    <nav class="auth-buttons">
+        <a th:href="@{/user-profile}" href="user-profile.html" class="btn-profile">Profile</a>
+    </nav>
+</header>
+
+<main class="content-wrapper">
+
+    <div class="action-bar">
+        <a th:href="@{/personal-wishcycles}" href="personal-wishcycles.html" class="btn-action">
+            ← Back to WishCycles
+        </a>
+        <a th:href="@{/add-new-item}" href="add-new-item.html" class="btn-action">
+            <span class="icon">+</span> Add Wish
+        </a>
+    </div>
+
+    <section class="wish-category">
+        <h3 class="category-title">Home / Decor</h3>
+
+        <div class="inspo-container">
+            <a href="#" class="inspo-card">
+                <span>Ceramic Vase</span>
+            </a>
+            <a href="#" class="inspo-card">
+                <span>Wool Throw</span>
+            </a>
+            <a href="#" class="inspo-card">
+                <span>Oak Side Table</span>
+            </a>
+            <a href="#" class="inspo-card">
+                <span>Mirror Set</span>
+            </a>
+            <a href="#" class="inspo-card">
+                <span>Linen Napkins</span>
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<footer class="main-footer">
+    <div class="footer-content-minimal">
+        <span class="footer-tag">© 2026 WishCycle</span>
+    </div>
+</footer>
 
 </body>
 </html>
