@@ -1,5 +1,4 @@
 package com.example.wishcycle.model;
-
 public class Member {
 
     private Long memberId;
@@ -18,6 +17,11 @@ public class Member {
         this.name = name;
         this.password = password;
         this.email = email;
+    }
+
+    public Member(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
     public Member() {}

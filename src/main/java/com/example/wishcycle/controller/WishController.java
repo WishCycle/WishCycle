@@ -1,5 +1,4 @@
 package com.example.wishcycle.controller;
-
 import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
@@ -7,8 +6,6 @@ import com.example.wishcycle.service.WishService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -94,13 +91,6 @@ public class WishController {
         wishService.setUpdateItemFromWishList(wishList, item);
         return "redirect:/wishlist";
     }
-
-//    BRUGES NÅR VI VIL TJEKKE OM DE ER LOGGET IND, REDIRECTER TIL LOGIN SIDEN HVIS DE IKKE ER
-//    HttpSession session = request.getSession(false);
-//
-//    if (session == null || session.getAttribute("member") == null) {
-//        return redirect:/wishcycle/login;
-//    }
 }
 
 
