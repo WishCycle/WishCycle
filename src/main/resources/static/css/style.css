@@ -355,6 +355,7 @@ h2 {
     margin-top: 10px;
     border-radius: 16px;
     overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .login-footer, .signup-footer {
@@ -418,7 +419,7 @@ h2 {
     color: var(--forest-dark);
 }
 
-/* --- Personal WishCycles Specifics --- */
+/* --- Personal WishCycles Styling --- */
 
 .content-wrapper {
     padding-top: 5px; /* Space below the navbar */
@@ -447,6 +448,45 @@ h2 {
     letter-spacing: 0.05em;
     text-transform: uppercase;
 
+}
+
+/* Container for the buttons */
+.action-bar {
+    display: flex;
+    justify-content: flex-end; /* Aligns buttons to the right */
+    gap: 15px;
+    padding: 20px 50px 10px 50px;
+    margin-top: 10px;
+}
+
+/* Individual Action Button */
+.btn-action {
+    text-decoration: none;
+    background-color: transparent;
+    color: var(--forest-dark);
+    border: 1px solid rgba(45, 67, 38, 0.3);
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-action .icon {
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+/* Hover State */
+.btn-action:hover {
+    background-color: var(--forest-dark);
+    color: var(--cream);
+    border-color: var(--forest-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* The Subtle Lines */
@@ -619,8 +659,9 @@ h2 {
 .profile-actions {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
 }
 
 .btn-secondary {
@@ -634,6 +675,24 @@ h2 {
     transition: all 0.2s ease;
 }
 
+/* Ensure the primary button doesn't stretch too wide if you don't want it to */
+.profile-actions .btn-primary {
+    width: 100%;
+    max-width: 300px; /* Gives it a nice, contained look */
+    border-radius: 16px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02); /* Slight lift and grow */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Soft glow/shadow */
+    background-color: #36522e; /* Slightly lighter forest green */
+}
+
+.btn-primary:active {
+    transform: translateY(-1px) scale(1.0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .btn-secondary:hover {
     background: var(--forest-dark);
     color: var(--cream);
@@ -642,9 +701,44 @@ h2 {
 .btn-logout {
     background: transparent;
     border: none;
-    color: #a34b4b; /* Subtle red for logout */
+    color: #a34b4b;
+    text-decoration: none;
     padding: 10px;
     cursor: pointer;
     font-size: 0.9rem;
-    text-decoration: underline;
+    font-weight: 500;
+}
+
+.btn-logout:hover {
+    opacity: 1;
+    text-decoration: underline; /* Underline only appears on hover */
+}
+
+
+
+/* --- Forms for adding new Wishlist and Item --- */
+
+.form-layout {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.custom-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--forest-dark);
+    border-radius: 16px;
+    background-color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--forest-dark);
+    appearance: none; /* Removes default arrow */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232D4326' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+}
+
+.custom-select:focus {
+    outline: 2px solid var(--forest-dark);
 }
