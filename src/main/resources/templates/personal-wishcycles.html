@@ -39,26 +39,31 @@
         <a th:href="@{/add-new-wishlist}" href="add-new-wishlist.html" class="btn-action">
             <span class="icon">+</span> New Wishlist
         </a>
-        <a th:href="@{/add-new-item}" href="add-new-item.html" class="btn-action">
-            <span class="icon">+</span> Add Wish
-        </a>
     </div>
 
     <section class="wish-category">
-        <h3 class="category-title">Home / Decor</h3>
-        <div class="inspo-container">
-            <div class="inspo-card">Ceramic Vase</div>
-            <div class="inspo-card">Wool Throw</div>
-            <div class="inspo-card">Oak Side Table</div>
-        </div>
-    </section>
+        <h3 class="category-title">My WishCycles</h3>
 
-    <section class="wish-category">
-        <h3 class="category-title">Clothing / Selfcare</h3>
-        <div class="inspo-container">
-            <div class="inspo-card">Linen Shirt</div>
-            <div class="inspo-card">Leather Boots</div>
-            <div class="inspo-card">Silk Scarf</div>
+        <div class="boards-container">
+
+            <a th:href="@{/wishlist}" href="wishlist.html" class="board-box">
+                <h2>Home / Decor</h2>
+                <p>8 Items</p>
+                <span class="view-link">View Wishes →</span>
+            </a>
+
+            <a th:href="@{/wishlist}" href="wishlist.html" class="board-box">
+                <h2>Clothing / Selfcare</h2>
+                <p>4 Items</p>
+                <span class="view-link">View Wishes →</span>
+            </a>
+
+            <a th:href="@{/wishlist}" href="wishlist.html" class="board-box">
+                <h2>Outdoor / Garden</h2>
+                <p>2 Items</p>
+                <span class="view-link">View Wishes →</span>
+            </a>
+
         </div>
     </section>
 
