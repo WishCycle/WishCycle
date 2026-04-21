@@ -34,10 +34,11 @@
 <main class="content-wrapper">
 
     <div class="action-bar">
-        <a th:href="@{/personal-wishcycles}" href="personal-wishcycles.html" class="btn-action">
+        <a th:href="@{/wishcycle/wishlists/{id}(id=${session.member.memberId})}" class="btn-action">
             ← Back to WishCycles
         </a>
-        <a th:href="@{/add-new-item}" href="add-new-item.html" class="btn-action">
+
+        <a th:href="@{/wishcycle/wishlist/add/item}" href="add-new-item.html" class="btn-action">
             <span class="icon">+</span> Add Wish
         </a>
     </div>

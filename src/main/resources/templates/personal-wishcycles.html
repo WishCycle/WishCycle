@@ -45,22 +45,20 @@
         </a>
     </div>
 
-    <section class="wish-category">
-        <div class="boards-container">
-            <a th:each="wishlist : ${wishlists}"
-               th:href="@{/wishcycle/wishlists/{id}(id=${wishlist.wishListId})}"
-               class="board-box">
+    <div class="boards-container">
+        <a th:each="wishlist : ${wishlists}"
+           th:href="@{/wishcycle/wishlist/view/{id}(id=${wishlist.wishListId})}"
+           class="board-box">
 
-                <h2 th:text="${wishlist.wishListName}">Category Name</h2>
+            <h2 th:text="${wishlist.wishListName}">Category Name</h2>
 
-                <p th:text="${wishlist.items != null ? #lists.size(wishlist.items) : 0} + ' Items'">
-                    0 Items
-                </p>
+            <p th:text="${wishlist.items != null ? #lists.size(wishlist.items) : 0} + ' Items'">
+                0 Items
+            </p>
 
-                <span class="view-link">View Wishes →</span>
-            </a>
-        </div>
-    </section>
+            <span class="view-link">View Wishes →</span>
+        </a>
+    </div>
 
 </main>
 
