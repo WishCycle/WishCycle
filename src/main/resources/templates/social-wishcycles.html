@@ -13,7 +13,7 @@
 <header class="navbar">
     <div class="header-left">
         <div class="logo">
-            <a th:href="@{/homepage}" href="homepage.html">
+            <a th:href="@{/wishcycle/homepage}" href="homepage.html">
                 <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png"
                      alt="WishCycle Logo">
             </a>
@@ -22,14 +22,14 @@
     </div>
 
     <nav class="main-nav">
-        <a th:href="@{/homepage}" href="homepage.html" class="nav-link">Home</a>
-        <a th:href="@{/personal-wishcycles}" href="personal-wishcycles.html" class="nav-link">My WishCycles</a>
-        <a th:href="@{/social-wishcycles}" href="social-wishcycles.html" class="nav-link active">Social WishCycles</a>
-        <a th:href="@{/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
+        <a th:href="@{/wishcycle/homepage}" href="homepage.html" class="nav-link">Home</a>
+        <a th:href="@{/wishcycle/personal-wishcycles}" href="personal-wishcycles.html" class="nav-link">My WishCycles</a>
+        <a th:href="@{/wishcycle/social-wishcycles}" href="social-wishcycles.html" class="nav-link active">Social WishCycles</a>
+        <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
     </nav>
 
     <nav class="auth-buttons">
-        <a th:href="@{/user-profile}" href="user-profile.html" class="btn-profile">Profile</a>
+        <a th:href="@{/wishcycle/login/profile/{memberId}}" href="user-profile.html" class="btn-profile">Profile</a>
     </nav>
 </header>
 
@@ -57,7 +57,7 @@
 
 <footer class="main-footer">
     <div class="footer-content-minimal">
-        <a th:href="@{homepage}" href="homepage.html">
+        <a th:href="@{/wishcycle/homepage}" href="homepage.html">
             <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png" alt="WishCycle Logo"
                  class="footer-logo">
         </a>
