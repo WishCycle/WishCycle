@@ -20,14 +20,19 @@
     </div>
 
     <nav class="main-nav">
-        <a th:href="@{/wishcycle/homepage}" href="homepage.html" class="nav-link">Home</a>
-        <a th:href="@{/wishcycle/wishlists/{memberId}}" href="personal-wishcycles.html" class="nav-link">My WishCycles</a>
-        <a th:href="@{/wishcycle/social-wishlists/{memberId}}" href="social-wishcycles.html" class="nav-link">Social WishCycles</a>
-        <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="nav-link">About Us</a>
+        <a th:href="@{/wishcycle/homepage}" class="nav-link">Home</a>
+
+        <a th:href="@{/wishcycle/wishlists/{id}(id=${session.member.memberId})}"
+           class="nav-link active">My WishCycles</a>
+
+        <a th:href="@{/wishcycle/social-wishlists/{id}(id=${session.member.memberId})}"
+           class="nav-link">Social WishCycles</a>
+        <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
     </nav>
 
     <nav class="auth-buttons">
-        <a th:href="@{/wishcycle/login/profile/{memberId}}" href="user-profile.html" class="btn-profile active-profile">Profile</a>
+        <a th:href="@{/wishcycle/login/profile/{id}(id=${session.member.memberId})}"
+           class="btn-profile">Profile</a>
     </nav>
 </header>
 
@@ -36,16 +41,16 @@
     <section class="profile-card">
         <div class="profile-header">
             <div class="profile-avatar">
-                <span th:text="${#strings.substring(user.username,0,1)}">U</span>
+                <span th:text="${#strings.substring(member.name,0,1)}">U</span>
             </div>
-            <h2 th:text="${user.username}">Username</h2>
+            <h2 th:text="${member.name}">Username</h2>
             <p class="member-since">Member of WishCycle</p>
         </div>
 
         <div class="profile-details">
             <div class="detail-item">
                 <label>Email Address</label>
-                <p th:text="${user.user_email}">user@example.com</p>
+                <p th:text="${member.   email}">user@example.com</p>
             </div>
 
             <div class="detail-item">

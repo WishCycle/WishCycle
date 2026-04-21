@@ -20,15 +20,22 @@
     </div>
 
     <nav class="main-nav">
-        <a th:href="@{/homepage}" href="homepage.html" class="nav-link">Home</a>
-        <a th:href="@{/personal-wishcycles}" href="personal-wishcycles.html" class="nav-link active">My WishCycles</a>
-        <a th:href="@{/social-wishcycles}" href="social-wishcycles.html" class="nav-link">Social WishCycles</a>
-        <a th:href="@{/about-us}" href="about-us.html" class="nav-link">About Us</a>
+        <a th:href="@{/wishcycle/homepage}" class="nav-link">Home</a>
+
+        <a th:href="@{/wishcycle/wishlists/{id}(id=${session.member.memberId})}"
+           class="nav-link active">My WishCycles</a>
+
+        <a th:href="@{/wishcycle/social-wishlists/{id}(id=${session.member.memberId})}"
+           class="nav-link">Social WishCycles</a>
+        <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
     </nav>
 
     <nav class="auth-buttons">
-        <a th:href="@{/user-profile}" href="user-profile.html" class="btn-profile">Profile</a>
+        <a th:href="@{/wishcycle/login/profile/{id}(id=${session.member.memberId})}"
+           class="btn-profile">Profile</a>
     </nav>
+</header>
+
 </header>
 
 <main class="content-wrapper profile-centered">

@@ -2,9 +2,11 @@ package com.example.wishcycle.controller;
 import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
+import com.example.wishcycle.service.MemberService;
 import com.example.wishcycle.service.WishService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -13,14 +15,18 @@ import java.util.List;
 public class WishController {
 
     private final WishService wishService;
+    private final MemberService memberService;
 
-    public WishController(WishService wishService) {
+    public WishController(WishService wishService, MemberService memberService) {
         this.wishService = wishService;
+        this.memberService = memberService;
     }
 
     @GetMapping("/social-wishlists/{memberId}")
     public String getWishLists(Model model, @PathVariable Long memberId) {
         List<WishList> wishLists = wishService.getOtherWishLists(memberId);
+        Member member = memberService.getMemberById(memberId);
+        model.addAttribute("member",member);
         model.addAttribute("wishlists", wishLists);
         return "social-wishcycles";
     }
@@ -28,7 +34,9 @@ public class WishController {
     @GetMapping("/wishlists/{memberId}")
     public String getWishListsByMemberId(Model model, @PathVariable Long memberId) {
         List<WishList> wishLists = wishService.getWishListsByMemberId(memberId);
-        model.addAttribute("wishlistsById", wishLists);
+        Member member = memberService.getMemberById(memberId);
+        model.addAttribute("member",member);
+        model.addAttribute("wishlists", wishLists);
         return "personal-wishcycles";
     }
 
@@ -55,33 +63,37 @@ public class WishController {
     @PostMapping("/wishlists/update")
     public String updateWishlist(@ModelAttribute WishList wishList, @ModelAttribute Member member) {
         wishService.updateWishList(wishList, member);
-        return "redirect:/wishlist/wishlists/{memberId}";
+        return "redirect:/wishcycle/wishlists/" + member.getMemberId();
     }
 
     @PostMapping("/wishlists/delete")
-    public String deleteWishlist(@ModelAttribute WishList wishlist, @ModelAttribute Member member) {
+    public String deleteWishlist(@ModelAttribute WishList wishlist, HttpSession session) {
+        Member member = (Member) session.getAttribute("member");
         wishService.deleteWishList(wishlist, member);
-        return "redirect:/wishcycle/wishlists/{memberId}";
+        return "redirect:/wishcycle/wishlists/" + member.getMemberId();
     }
 
     @PostMapping("/wishlist/create/item")
-    public String createItem(@ModelAttribute WishList wishList, @ModelAttribute Item item) {
+    public String createItem(@ModelAttribute WishList wishList, @ModelAttribute Item item, HttpSession session) {
+        Member member = (Member) session.getAttribute("member");
         wishService.createItem(item);
         wishService.addItemToWishList(wishList, item);
-        return "redirect:/wishcycle/wishlists/{memberId}";
+        return "redirect:/wishcycle/wishlists/" + member.getMemberId();
     }
 
     @PostMapping("/wishlist/delete/item")
-    public String deleteItem(@ModelAttribute WishList wishList, @ModelAttribute Item item) {
+    public String deleteItem(@ModelAttribute WishList wishList, @ModelAttribute Item item, HttpSession session) {
+        Member member = (Member) session.getAttribute("member");
         wishService.setDeleteItemFromWishList(wishList, item);
-        return "redirect:/wishcycle/wishlists/{memberId}";
+        return "redirect:/wishcycle/wishlists/" + member.getMemberId();
     }
 
     @PostMapping("/item/update/item")
-    public String updateItem(@ModelAttribute WishList wishList, @ModelAttribute Item item) {
+    public String updateItem(@ModelAttribute WishList wishList, @ModelAttribute Item item, HttpSession session) {
+        Member member = (Member) session.getAttribute("member");
         wishService.updateItem(item);
         wishService.setUpdateItemFromWishList(wishList, item);
-        return "redirect:/wishcycle/wishlists/{memberId}";
+        return "redirect:/wishcycle/wishlists/" + member.getMemberId();
     }
 }
 

@@ -17,7 +17,9 @@ public class MemberController {
     }
 
     @GetMapping("/homepage")
-    public String getHomepage() {
+    public String getHomepage(HttpSession session, Model model) {
+        Member member = (Member) session.getAttribute("member");
+        model.addAttribute("member", member);
         return "homepage";
     }
 
@@ -65,20 +67,23 @@ public class MemberController {
     }
 
     @GetMapping("/about-us")
-    public String getAboutUsPage() {
+    public String getAboutUsPage(HttpSession session, Model model) {
+        Member member = (Member) session.getAttribute("member");
+        model.addAttribute("member", member);
         return "about-us";
     }
 
     @GetMapping("/login/profile/{memberId}")
-    public String getProfilePage(Model model, @PathVariable Long memberId) {
-        Member member = memberService.getMemberById(memberId);
-        model.addAttribute("memberProfile", member);
+    public String getProfilePage(Model model, HttpSession session) {
+        Member member = (Member) session.getAttribute("member");
+        model.addAttribute("member", member);
         return "user-profile";
     }
 
     @PostMapping("/login/profile/{memberId}/delete")
-    public String deleteProfilePage(@PathVariable Long memberId) {
-        Member member = memberService.getMemberById(memberId);
+    public String deleteProfilePage(Model model, HttpSession session, @PathVariable Long memberId) {
+        Member member = (Member) session.getAttribute("member");
+        model.addAttribute("member", member);
         memberService.deleteMember(member);
         return "redirect:/wishcycle/homepage";
     }
