@@ -51,9 +51,16 @@ public class WishController {
 
     @GetMapping("/wishlist/add/item")
     public String addItem(Model model) {
-        Item item = new Item();
-        model.addAttribute("item", item);
+        model.addAttribute("item", new Item());
+        model.addAttribute("wishlist", new WishList());
         return "add-new-item";
+    }
+
+    @GetMapping("/wishlist/view/{id}")
+    public String viewSingleWishlist(@PathVariable Long id, Model model) {
+        List<WishList> wishList = wishService.getWishListsByMemberId(id);
+        model.addAttribute("wishlist", wishList);
+        return "wishlist";
     }
 
     @PostMapping("/wishlist/create")
@@ -78,7 +85,7 @@ public class WishController {
     }
 
     @PostMapping("/wishlist/create/item")
-    public String createItem(@ModelAttribute WishList wishList, @ModelAttribute Item item, HttpSession session) {
+    public String createItem(@ModelAttribute WishList wishList, @ModelAttribute("Item") Item item, HttpSession session) {
         Member member = (Member) session.getAttribute("member");
         wishService.createItem(item);
         wishService.addItemToWishList(wishList, item);
