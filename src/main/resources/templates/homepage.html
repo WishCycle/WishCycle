@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WishCycle | Home</title>
+    <title>WishCycle | My Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,44 +15,54 @@
 <header class="navbar">
     <div class="header-left">
         <div class="logo">
-            <a th:href="@{/wishcycle/homepage}" href="homepage.html">
-                <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png" alt="WishCycle Logo">
+            <a th:href="@{/wishcycle/homepage(memberId=${memberId})}" href="homepage.html">
+                <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png"
+                     alt="WishCycle Logo">
             </a>
             <span class="slogan">Wish for a better future</span>
         </div>
     </div>
     <nav class="main-nav">
-        <a th:href="@{/wishcycle/homepage}" href="homepage.html" class="nav-link active">Home</a>
-        <a th:href="@{/wishcycle/wishlists/{memberId}}" href="personal-wishcycles.html" class="nav-link">My WishCycles</a>
-        <a th:href="@{/wishcycle//social-wishlists/{memberId}}" href="social-wishcycles.html" class="nav-link">Social WishCycles</a>
+        <a th:href="@{/wishcycle/homepage(memberId=${memberId})}" href="homepage.html" class="nav-link active">Home</a>
+        <a th:href="@{/wishcycle/wishlists/{id}(id=${memberId})}" href="personal-wishcycles.html" class="nav-link">My
+            WishCycles</a>
+        <a th:href="@{/wishcycle/social-wishlists/{id}(id=${memberId})}" href="social-wishcycles.html" class="nav-link">Social
+            WishCycles</a>
         <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
     </nav>
 
     <nav class="auth-buttons">
-        <a th:href="@{/wishcycle/login-page}" href="login-page.html" class="btn-login">Login</a>
-        <a th:href="@{/wishcycle/signup-page}" href="signup-page.html" class="btn-signup">Sign Up</a>
-        <a th:href="@{/wishcycle/login/profile/{memberId}}" href="user-profile.html" class="btn-profile">Profile</a>
+        <a th:href="@{/wishcycle/login/profile/{id}(id=${memberId})}" href="user-profile.html" class="btn-profile">Profile</a>
     </nav>
 </header>
 
-<main>
-    <div class="boards-container">
-        <a th:href="@{/wishcycle/wishlists/{memberId}}" href="personal-wishcycles.html" class="board-box">
+<main class="content-wrapper">
+
+    <div class="homepage-hero">
+        <a th:href="@{/wishcycle/wishlists/{id}(id=${memberId})}" href="personal-wishcycles.html"
+           class="board-box large-box">
             <h2>My WishCycles</h2>
-            <p>View your wishes</p>
+            <p>Organize your intentions and view your collections.</p>
+            <span class="view-link">Open My Lists →</span>
         </a>
 
-        <a th:href="@{/wishcycle/social-wishcycles}" href="social-wishcycles.html" class="board-box">
-            <h2>Friends & Family WishCycles</h2>
-            <p>View friends/family wishes</p>
+        <a th:href="@{/wishcycle/social-wishcycles}" href="social-wishcycles.html" class="board-box large-box">
+            <h2>Social WishCycles</h2>
+            <p>See what's trending in your circle and find inspiration.</p>
+            <span class="view-link">Explore Community →</span>
         </a>
     </div>
 
-    <section class="inspo-container">
-        <div class="inspo-card">Inspo Placeholder</div>
-        <div class="inspo-card">Inspo Placeholder</div>
-        <div class="inspo-card">Inspo Placeholder</div>
+    <section class="wish-category">
+        <h3 class="category-title">Daily Inspiration</h3>
+
+        <div class="inspo-container">
+            <div class="inspo-card"><span>Minimalist Living</span></div>
+            <div class="inspo-card"><span>Eco-friendly Finds</span></div>
+            <div class="inspo-card"><span>Second-hand Treasures</span></div>
+        </div>
     </section>
+
 </main>
 
 <footer class="main-footer">
@@ -62,10 +72,8 @@
                  class="footer-logo">
         </a>
         <span class="footer-tag">@WishCycle 2026</span>
-        <a th:href="@{about-us}" href="about-us.html" class="footer-link">About Us</a>
-        <a href="#" class="footer-link">Terms</a>
-        <a href="#" class="footer-link">Privacy</a>
-        <a href="#" class="footer-link">Contact</a>
+        <a th:href="@{/about-us}" href="about-us.html" class="footer-link">About WishCycle</a>
+        <a th:href="@{/login-page}" href="login-page.html" class="footer-link">Log Out</a>
     </div>
 </footer>
 
