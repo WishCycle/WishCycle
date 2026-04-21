@@ -49,7 +49,7 @@ public class MemberController {
         memberService.createMember(member);
         Member sessionMember = memberService.getMemberByEmail(member.getEmail());
         session.setAttribute("member", sessionMember);
-        return "redirect:/wishcycle/login/profile/" + sessionMember.getMemberId().toString();
+        return "redirect:/wishcycle/login/profile/" + sessionMember.getMemberId();
     }
 
     @PostMapping("/login/save")
