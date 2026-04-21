@@ -13,8 +13,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import javax.management.openmbean.OpenType;
 import javax.xml.transform.Result;
 import java.util.Optional;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,7 +30,6 @@ public class MemberServiceTest {
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         savedMember = new Member(1L, "Jack", "PASSWORD", "Jack@gmail.com");
     }
 
@@ -56,7 +56,10 @@ public class MemberServiceTest {
 
    @Test
     public void testDeleteMember() {
+        when(memberRepository.getMemberById(1L)).thenReturn(savedMember);
 
+        memberService.deleteMember(savedMember);
+
+        verify(memberRepository, times(1)).deleteMember(savedMember);
    }
-
 }
