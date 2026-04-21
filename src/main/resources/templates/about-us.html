@@ -2,9 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WishCycle | About Us</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<header class="navbar">
+    <div class="header-left">
+        <div class="logo">
+            <a th:href="@{/homepage}" href="homepage.html">
+                <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WischCycle-Logo.png"
+                     alt="WishCycle Logo">
+            </a>
+            <span class="slogan">Wish for a better future</span>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <a th:href="@{/homepage}" href="homepage.html">Home</a>
+        <a th:href="@{/personal-wishcycles}" href="personal-wishcycles.html" class="nav-link">My WishCycles</a>
+        <a th:href="@{/social-wishcycles}" href="social-wishcycles.html" class="nav-link">Social WishCycles</a>
+        <a th:href="@{/about-us}" href="about-us.html" class="nav-link active">About WishCycle</a>
+    </nav>
+
+    <nav class="auth-buttons">
+        <a th:href="@{/user-profile}" href="user-profile.html" class="btn-profile">Profile</a>
+    </nav>
+</header>
+
+<main class="content-wrapper">
+
+    <section class="wish-category">
+        <h3 class="category-title">Our Mission</h3>
+        <div class="boards-container">
+            <div class="board-box about-hero">
+                <h2>Intention over Consumption.</h2>
+                <p>
+                    At WishCycle, we believe the best gifts don't have to be "new" to be perfect.
+                    Our mission is to shift the way we think about giving by encouraging the
+                    exchange of reusable and recycled treasures.
+                </p>
+                <p>
+                    By curating wishlists with a conscience, we help you and your loved ones
+                    reduce waste and give products a second life. Join us as we change the cycle.
+                </p>
+                <div class="mission-slogan">Wish for a better future.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wish-category">
+        <h3 class="category-title">The Team</h3>
+        <div class="team-container">
+            <a href="https://github.com/Joakim700" class="inspo-card github-link">
+                <span>Joakim</span>
+                <small>View GitHub</small>
+            </a>
+
+            <a href="https://github.com/Mowgli-dk" class="inspo-card github-link">
+                <span>Emil</span>
+                <small>View GitHub</small>
+            </a>
+
+            <a href="https://github.com/SimonBeCh" class="inspo-card github-link">
+                <span>Simon</span>
+                <small>View GitHub</small>
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<footer class="main-footer">
+    <div class="footer-content-minimal">
+        <a th:href="@{homepage}" href="homepage.html">
+            <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WischCycle-Logo.png" alt="WishCycle Logo"
+                 class="footer-logo">
+        </a>
+        <span class="footer-tag">© 2026 WishCycle</span>
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <a href="#" class="footer-link">Terms of Service</a>
+    </div>
+</footer>
 
 </body>
 </html>

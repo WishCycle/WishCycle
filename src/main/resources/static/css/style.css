@@ -90,7 +90,7 @@ h2 {
     flex: 1;
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 40px;
 }
 
 /* Individual Link Styling (Matching Footer Style) */
@@ -230,7 +230,7 @@ h2 {
 .inspo-card {
     background-color: var(--forest-dark); /* Now the boxes themselves are green */
     color: var(--cream); /* Text turns cream to be readable */
-    flex: 1 1 calc(25% - 20px);
+    flex: 1 1 calc(33.333% - 20px);
     height: 250px;
     display: flex;
     flex-direction: column;
@@ -463,4 +463,69 @@ h2 {
    since the category title handles the spacing */
 .wish-category .inspo-container {
     margin-top: 0;
+}
+
+
+
+/* --- About Us Page Styling*/
+
+/* Styling for the GitHub links on the About page */
+.github-link {
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.github-link small {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.github-link:hover small {
+    opacity: 1;
+}
+
+.about-hero {
+    cursor: default;
+    height: auto;
+    min-height: 300px;
+    justify-content: center;
+}
+
+.about-hero p {
+    max-width: 800px;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.mission-slogan {
+    margin-top: 30px;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: var(--cream);
+    letter-spacing: 0.02em;
+    border-top: 1px solid rgba(245, 245, 233, 0.2); /* Subtle cream line */
+    padding-top: 20px;
+    display: inline-block;
+}
+
+.team-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px 50px;
+    justify-content: center; /* Centers the three boxes */
+}
+
+.team-container .inspo-card {
+    /* This overrides the 25% width and sets it to roughly 33% */
+    flex: 0 1 calc(33.333% - 20px);
+    min-width: 250px; /* Prevents them from getting too skinny */
 }
