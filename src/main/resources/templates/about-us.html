@@ -48,7 +48,7 @@
                     By curating wishlists with a conscience, we help you and your loved ones
                     reduce waste and give products a second life. Join us as we change the cycle.
                 </p>
-                <div class="mission-slogan">Wish for a better future.</div>
+                <div class="mission-slogan">Wish for a better future</div>
             </div>
         </div>
     </section>
@@ -77,13 +77,12 @@
 
 <footer class="main-footer">
     <div class="footer-content-minimal">
-        <a th:href="@{homepage}" href="homepage.html">
+        <a th:href="@{/wishcycle/homepage}" href="homepage.html">
             <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png" alt="WishCycle Logo"
                  class="footer-logo">
         </a>
-        <span class="footer-tag">© 2026 WishCycle</span>
-        <a href="#" class="footer-link">Privacy Policy</a>
-        <a href="#" class="footer-link">Terms of Service</a>
+        <span class="footer-tag">@WishCycle 2026</span>
+        <a th:href="@{/login-page}" href="login-page.html" class="footer-link">Log Out</a>
     </div>
 </footer>
 

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WishCycle | Welcome</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="header-left">
+        <div class="logo">
+            <a th:href="@{/wishcycle/index}" href="index.html">
+                <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png"
+                     alt="WishCycle Logo">
+            </a>
+            <span class="slogan">Wish for a better future</span>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
+    </nav>
+
+    <nav class="auth-buttons">
+        <a th:href="@{/wishcycle/login-page}" href="login-page.html" class="btn-login">Login</a>
+        <a th:href="@{/wishcycle/signup-page}" href="signup-page.html" class="btn-signup">Sign Up</a>
+    </nav>
+</header>
+
+<main>
+    <div class="homepage-hero">
+        <a th:href="@{/wishcycle/signup-page}" href="signup-page.html" class="board-box large-box">
+            <h2>Start Your Cycle</h2>
+            <p>Create your own intentional wishlist and reduce consumption.</p>
+            <span class="view-link">Join WishCycle →</span>
+        </a>
+
+        <a th:href="@{/wishcycle/login-page}" href="login-page.html" class="board-box large-box">
+            <h2>View the Community</h2>
+            <p>Sign in to see what your friends and family are wishing for.</p>
+            <span class="view-link">Sign In →</span>
+        </a>
+    </div>
+
+    <section class="inspo-container">
+        <div class="inspo-card">
+            <span>Intention over Consumption</span>
+        </div>
+        <div class="inspo-card">
+            <span>Reduce Waste</span>
+        </div>
+        <div class="inspo-card">
+            <span>Sustainable Gifting</span>
+        </div>
+    </section>
+</main>
+
+<footer class="main-footer">
+    <div class="footer-content-minimal">
+        <span class="footer-tag">© WishCycle 2026</span>
+        <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="footer-link">About WishCycle</a>
+    </div>
+</footer>
+
+</body>
+</html>

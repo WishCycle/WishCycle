@@ -198,6 +198,38 @@ h2 {
     overflow: hidden;
 }
 
+.homepage-hero {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 50px;
+    width: 100%;
+}
+
+/* The Featured/Large Boxes */
+.large-box {
+    /* flex-grow: 2 makes it twice the size of standard boxes */
+    flex: 2 1 calc(66.666% - 20px);
+    min-height: 250px; /* Keep your existing height */
+}
+
+.homepage-hero .large-box {
+    flex: 1; /* Both grow equally */
+    min-height: 350px; /* Gives them a nice 'hero' presence */
+    max-width: calc(50% - 10px); /* Strict limit to keep them side-by-side */
+}
+
+/* Ensure the boxes don't get too cramped on smaller screens */
+@media (max-width: 800px) {
+    .homepage-hero-row {
+        flex-direction: column;
+        padding: 20px;
+    }
+    .homepage-hero,.large-box {
+        width: 100%;
+    }
+}
+
 /* The "Pop and Highlight" Effect */
 .board-box:hover {
     transform: translateY(-8px) scale(1.01);
@@ -472,10 +504,10 @@ h2 {
 /* --- Personal WishCycles Styling --- */
 
 .content-wrapper {
-    padding-top: 5px; /* Space below the navbar */
+    padding-top: 0px; /* Space below the navbar */
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Space between the two categories */
+    gap: 0px; /* Space between the two categories */
 }
 
 .wish-category {
@@ -493,10 +525,11 @@ h2 {
     font-weight: 500;
     color: var(--forest-dark);
     opacity: 0.9;
-    margin: 60px 0 30px 0;
+    margin: 20px 0 20px 0;
     width: 100%;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    border-bottom: none;
 
 }
 
