@@ -21,54 +21,44 @@
         </div>
     </div>
 
-    <nav class="main-nav">
+    <nav class="main-nav" th:if="${session.member != null}">
         <a th:href="@{/wishcycle/homepage}" class="nav-link">Home</a>
 
         <a th:href="@{/wishcycle/wishlists/{id}(id=${session.member.memberId})}"
-           class="nav-link active">My WishCycles</a>
+           class="nav-link">My WishCycles</a>
 
         <a th:href="@{/wishcycle/social-wishlists/{id}(id=${session.member.memberId})}"
            class="nav-link">Social WishCycles</a>
-        <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
     </nav>
 
-    <nav class="auth-buttons">
-        <a th:href="@{/wishcycle/login/profile/{id}(id=${session.member.memberId})}"
-           class="btn-profile">Profile</a>
+    <nav class="auth-buttons" th:if="${session.member == null}">
+        <a th:href="@{/wishcycle/login-page}" class="btn-login">Login</a>
     </nav>
 </header>
 
 <main class="content-wrapper">
 
     <div class="action-bar">
-        <a th:href="@{/add-new-wishlist}" href="add-new-wishlist.html" class="btn-action">
+        <a th:href="@{/wishcycle/wishlists/new}" class="btn-action">
             <span class="icon">+</span> New Wishlist
+
         </a>
     </div>
 
     <section class="wish-category">
-        <h3 class="category-title">My WishCycles</h3>
-
         <div class="boards-container">
+            <a th:each="wishlist : ${wishlists}"
+               th:href="@{/wishcycle/wishlists/{id}(id=${wishlist.wishListId})}"
+               class="board-box">
 
-            <a th:href="@{/wishlist}" href="wishlist.html" class="board-box">
-                <h2>Home / Decor</h2>
-                <p>8 Items</p>
+                <h2 th:text="${wishlist.wishListName}">Category Name</h2>
+
+                <p th:text="${wishlist.items != null ? #lists.size(wishlist.items) : 0} + ' Items'">
+                    0 Items
+                </p>
+
                 <span class="view-link">View Wishes →</span>
             </a>
-
-            <a th:href="@{/wishlist}" href="wishlist.html" class="board-box">
-                <h2>Clothing / Selfcare</h2>
-                <p>4 Items</p>
-                <span class="view-link">View Wishes →</span>
-            </a>
-
-            <a th:href="@{/wishlist}" href="wishlist.html" class="board-box">
-                <h2>Outdoor / Garden</h2>
-                <p>2 Items</p>
-                <span class="view-link">View Wishes →</span>
-            </a>
-
         </div>
     </section>
 

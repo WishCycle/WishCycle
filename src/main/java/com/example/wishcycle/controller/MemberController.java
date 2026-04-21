@@ -43,7 +43,7 @@ public class MemberController {
         memberService.createMember(member);
         Member sessionMember = memberService.getMemberByEmail(member.getEmail());
         session.setAttribute("member", sessionMember);
-        return "redirect:/wishcycle/login/profile/" + sessionMember.getMemberId().toString();
+        return "redirect:/wishcycle/login/profile/" + sessionMember.getMemberId();
     }
 
     @PostMapping("/login/save")
@@ -53,7 +53,7 @@ public class MemberController {
         if (validMember != null) {
             session.setAttribute("member", validMember);
             // Session timeout CONTAINER DEFAULT (15 min)
-            return "redirect:/wishcycle/login/profile/" + validMember.getMemberId().toString();
+            return "redirect:/wishcycle/login/profile/" + validMember.getMemberId();
         } else {
             model.addAttribute("Error", "no member exists");
             return "signup-page";

@@ -29,7 +29,7 @@ public class WishServiceTest {
     public void setUp() {
         member = new Member(1L, "Joakim", "PASSWORD", "Joakim@gmail.com");
         wishlist = new WishList(1L, "Joakims Wishlist", "Test description", new Member());
-        wishService.createWishList(wishlist, member);
+        wishService.createWishList(wishlist, member.getMemberId());
     }
 
     @Test

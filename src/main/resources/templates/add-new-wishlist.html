@@ -19,20 +19,18 @@
         </div>
     </div>
 
-    <nav class="main-nav">
+    <nav class="main-nav" th:if="${session.member != null}">
         <a th:href="@{/wishcycle/homepage}" class="nav-link">Home</a>
 
         <a th:href="@{/wishcycle/wishlists/{id}(id=${session.member.memberId})}"
-           class="nav-link active">My WishCycles</a>
+           class="nav-link">My WishCycles</a>
 
         <a th:href="@{/wishcycle/social-wishlists/{id}(id=${session.member.memberId})}"
            class="nav-link">Social WishCycles</a>
-        <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
     </nav>
 
-    <nav class="auth-buttons">
-        <a th:href="@{/wishcycle/login/profile/{id}(id=${session.member.memberId})}"
-           class="btn-profile">Profile</a>
+    <nav class="auth-buttons" th:if="${session.member == null}">
+        <a th:href="@{/wishcycle/login-page}" class="btn-login">Login</a>
     </nav>
 </header>
 
@@ -43,7 +41,7 @@
         <h2 class="category-title">Create a New Wishlist</h2>
         <p class="member-since">Give your collection a name (e.g. Living Room, Birthday)</p>
 
-        <form action="#" th:action="@{/wishcycle/wishlist/update}" th:object="${wishlist}" method="post" class="form-layout">
+        <form action="#" th:action="@{/wishcycle/wishlist/create}" th:object="${wishlist}" method="post" class="form-layout">
 
             <div class="input-group">
                 <label for="listName">Wishlist Name</label>
@@ -57,7 +55,7 @@
 
             <div class="profile-actions">
                 <button type="submit" class="btn-primary">Create List</button>
-                <a th:href="@{/wishcycle/wishlist/update}" href="personal-wishcycles.html" class="btn-logout">Cancel</a>
+                <a th:href="@{/wishcycle/wishlists/{id}(id=${session.member.memberId})}" class="btn-logout">Cancel</a>
             </div>
         </form>
     </section>
