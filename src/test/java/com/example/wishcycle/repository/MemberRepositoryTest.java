@@ -86,7 +86,7 @@ public class MemberRepositoryTest {
         createdMember.setPassword("ineededanewaccount");
         memberRepo.createMember(createdMember);
 
-        Member retrievedMember = memberRepo.getMemberById(4L);
+        Member retrievedMember = memberRepo.getMemberByEmail("newuser@gmail.com");
         assertEquals("newMembahBabeh", retrievedMember.getName());
         assertEquals("ineededanewaccount", retrievedMember.getPassword());
         assertNotNull(retrievedMember.getMemberId());
