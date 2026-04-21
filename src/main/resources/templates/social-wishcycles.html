@@ -2,9 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WishCycle | Social</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+<header class="navbar">
+    <div class="header-left">
+        <div class="logo">
+            <a th:href="@{/homepage}" href="homepage.html">
+                <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WischCycle-Logo.png" alt="WishCycle Logo">
+            </a>
+            <span class="slogan">Wish for a better future</span>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <a th:href="@{/personal-wishcycles}" href="personal-wishcycles.html" class="nav-link">My WishCycles</a>
+
+        <a th:href="@{/social-wishcycles}" href="social-wishcycles.html" class="nav-link active">Social WishCycles</a>
+
+        <a th:href="@{/about-us}" href="about-us.html" class="nav-link">About Us</a>
+    </nav>
+
+    <nav class="auth-buttons">
+        <a th:href="@{/user-profile}" href="user-profile.html" class="btn-profile">Profile</a>
+    </nav>
+</header>
+
+<main class="content-wrapper">
+
+    <section class="wish-category">
+        <h3 class="category-title">Kate's</h3>
+        <div class="inspo-container">
+            <div class="inspo-card">Ceramic Vase</div>
+            <div class="inspo-card">Linen Throw</div>
+            <div class="inspo-card">Teapot</div>
+            <div class="inspo-card">Wool Socks</div>
+        </div>
+    </section>
+
+    <section class="wish-category">
+        <h3 class="category-title">Christian's</h3>
+        <div class="inspo-container">
+            <div class="inspo-card">Mechanical Keyboard</div>
+            <div class="inspo-card">Coffee Beans</div>
+            <div class="inspo-card">Desk Mat</div>
+            <div class="inspo-card">Espresso Cups</div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="main-footer">
+    <div class="footer-content-minimal">
+        <a th:href="@{homepage}" href="homepage.html">
+            <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WischCycle-Logo.png" alt="WishCycle Logo"
+                 class="footer-logo">
+        </a>
+        <span class="footer-tag">@WishCycle 2026</span>
+        <a th:href="@{about-us}" href="about-us.html" class="footer-link">About Us</a>
+        <a href="#" class="footer-link">Terms</a>
+        <a href="#" class="footer-link">Privacy</a>
+        <a href="#" class="footer-link">Contact</a>
+    </div>
+</footer>
 
 </body>
 </html>
