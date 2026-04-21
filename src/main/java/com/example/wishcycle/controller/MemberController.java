@@ -47,9 +47,9 @@ public class MemberController {
     @PostMapping("/signup/save")
     public String saveNewMember(@ModelAttribute Member member, HttpSession session) {
         memberService.createMember(member);
-        Member sessionMember = memberService.getMemberByEmail(member.getEmail());
-        session.setAttribute("member", sessionMember);
-        return "redirect:/wishcycle/login/profile/" + sessionMember.getMemberId();
+        Member savedMember = memberService.getMemberByEmail(member.getEmail());
+        session.setAttribute("member", savedMember);
+        return "redirect:/wishcycle/homepage";
     }
 
     @PostMapping("/login/save")
@@ -69,7 +69,7 @@ public class MemberController {
     @GetMapping("/logout")  // Invalidate session and return landing page
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/wishcycle/homepage";
+        return "redirect:/wishcycle/index";
     }
 
     @GetMapping("/about-us")
