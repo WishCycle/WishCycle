@@ -23,8 +23,8 @@
     </div>
     <nav class="main-nav">
         <a th:href="@{/wishcycle/homepage}" href="homepage.html" class="nav-link active">Home</a>
-        <a th:href="@{/wishcycle/personal-wishcycles}" href="personal-wishcycles.html" class="nav-link">My WishCycles</a>
-        <a th:href="@{/wishcycle/social-wishcycles}" href="social-wishcycles.html" class="nav-link">Social WishCycles</a>
+        <a th:href="@{/wishcycle/wishlists/{memberId}}" href="personal-wishcycles.html" class="nav-link">My WishCycles</a>
+        <a th:href="@{/wishcycle//social-wishlists/{memberId}}" href="social-wishcycles.html" class="nav-link">Social WishCycles</a>
         <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
     </nav>
 
@@ -37,7 +37,7 @@
 
 <main>
     <div class="boards-container">
-        <a th:href="@{/wishcycle/personal-wishcycles}" href="personal-wishcycles.html" class="board-box">
+        <a th:href="@{/wishcycle/wishlists/{memberId}}" href="personal-wishcycles.html" class="board-box">
             <h2>My WishCycles</h2>
             <p>View your wishes</p>
         </a>

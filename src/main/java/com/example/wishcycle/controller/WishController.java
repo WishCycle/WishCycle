@@ -18,11 +18,11 @@ public class WishController {
         this.wishService = wishService;
     }
 
-    @GetMapping("/wishlists")
-    public String getWishLists(Model model) {
-        List<WishList> wishLists = wishService.getWishLists();
+    @GetMapping("/social-wishlists/{memberId}")
+    public String getWishLists(Model model, @PathVariable Long memberId) {
+        List<WishList> wishLists = wishService.getOtherWishLists(memberId);
         model.addAttribute("wishlists", wishLists);
-        return "";
+        return "social-wishcycles";
     }
 
     @GetMapping("/wishlists/{memberId}")
@@ -46,50 +46,42 @@ public class WishController {
         return "add-new-item";
     }
 
-    @GetMapping("/wishlist/{itemId}/edit")
-    public String editWishlistItem(@PathVariable Item itemId, Model model) {
-            Long item = wishService.getItemById(itemId);
-            model.addAttribute("item", item);
-            return "update-item";
-    }
-
     @PostMapping("/wishlists/create")
     public String createNewWishList(@ModelAttribute WishList wishList, @ModelAttribute Member member) {
         wishService.createWishList(wishList, member);
-        return "redirect:/personal-wishcycles " + member.getMemberId();
+        return "add-new-wishlist";
     }
 
     @PostMapping("/wishlists/update")
     public String updateWishlist(@ModelAttribute WishList wishList, @ModelAttribute Member member) {
         wishService.updateWishList(wishList, member);
-        return "redirect:/wishlist";
+        return "redirect:/wishlist/wishlists/{memberId}";
     }
 
     @PostMapping("/wishlists/delete")
     public String deleteWishlist(@ModelAttribute WishList wishlist, @ModelAttribute Member member) {
         wishService.deleteWishList(wishlist, member);
-        return "redirect:/wishlist";
+        return "redirect:/wishcycle/wishlists/{memberId}";
     }
 
     @PostMapping("/wishlist/create/item")
     public String createItem(@ModelAttribute WishList wishList, @ModelAttribute Item item) {
         wishService.createItem(item);
         wishService.addItemToWishList(wishList, item);
-        return "redirect:/wishlist";
+        return "redirect:/wishcycle/wishlists/{memberId}";
     }
 
     @PostMapping("/wishlist/delete/item")
     public String deleteItem(@ModelAttribute WishList wishList, @ModelAttribute Item item) {
-        wishService.deleteItem(item);
         wishService.setDeleteItemFromWishList(wishList, item);
-        return "redirect:/wishlist";
+        return "redirect:/wishcycle/wishlists/{memberId}";
     }
 
     @PostMapping("/item/update/item")
     public String updateItem(@ModelAttribute WishList wishList, @ModelAttribute Item item) {
         wishService.updateItem(item);
         wishService.setUpdateItemFromWishList(wishList, item);
-        return "redirect:/wishlist";
+        return "redirect:/wishcycle/wishlists/{memberId}";
     }
 }
 
