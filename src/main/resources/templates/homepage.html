@@ -16,18 +16,18 @@
     <div class="header-left">
         <div class="logo">
             <a th:href="@{/wishcycle/homepage(memberId=${memberId})}" href="homepage.html">
-                <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png"
-                     alt="WishCycle Logo">
+                <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png" alt="WishCycle Logo">
             </a>
             <span class="slogan">Wish for a better future</span>
         </div>
     </div>
     <nav class="main-nav">
         <a th:href="@{/wishcycle/homepage(memberId=${memberId})}" href="homepage.html" class="nav-link active">Home</a>
-        <a th:href="@{/wishcycle/wishlists/{id}(id=${memberId})}" href="personal-wishcycles.html" class="nav-link">My
-            WishCycles</a>
-        <a th:href="@{/wishcycle/social-wishlists/{id}(id=${memberId})}" href="social-wishcycles.html" class="nav-link">Social
-            WishCycles</a>
+
+        <a th:href="@{/wishcycle/wishlists/{id}(id=${memberId})}" href="personal-wishcycles.html" class="nav-link">My WishCycles</a>
+
+        <a th:href="@{/wishcycle/social-wishlists/{id}(id=${memberId})}" href="social-wishcycles.html" class="nav-link">Social WishCycles</a>
+
         <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
     </nav>
 
@@ -39,8 +39,7 @@
 <main class="content-wrapper">
 
     <div class="homepage-hero">
-        <a th:href="@{/wishcycle/wishlists/{id}(id=${memberId})}" href="personal-wishcycles.html"
-           class="board-box large-box">
+        <a th:href="@{/wishcycle/wishlists/{id}(id=${memberId})}" href="personal-wishcycles.html" class="board-box large-box">
             <h2>My WishCycles</h2>
             <p>Organize your intentions and view your collections.</p>
             <span class="view-link">Open My Lists →</span>
@@ -67,13 +66,13 @@
 
 <footer class="main-footer">
     <div class="footer-content-minimal">
-        <a th:href="@{/wishcycle/homepage}" href="homepage.html">
-            <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png" alt="WishCycle Logo"
-                 class="footer-logo">
+        <a th:href="@{/wishcycle/homepage(memberId=${memberId})}" href="homepage.html">
+            <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png" alt="WishCycle Logo" class="footer-logo">
         </a>
         <span class="footer-tag">@WishCycle 2026</span>
-        <a th:href="@{/about-us}" href="about-us.html" class="footer-link">About WishCycle</a>
-        <a th:href="@{/login-page}" href="login-page.html" class="footer-link">Log Out</a>
+        <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="footer-link">About WishCycle</a>
+
+        <a th:href="@{/wishcycle/logout}" href="login-page.html" class="footer-link">Log Out</a>
     </div>
 </footer>
 

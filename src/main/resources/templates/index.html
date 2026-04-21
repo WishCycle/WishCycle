@@ -16,14 +16,14 @@
     <div class="header-left">
         <div class="logo">
             <a th:href="@{/wishcycle/index}" href="index.html">
-                <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png"
-                     alt="WishCycle Logo">
+                <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png" alt="WishCycle Logo">
             </a>
             <span class="slogan">Wish for a better future</span>
         </div>
     </div>
 
     <nav class="main-nav">
+        <a th:href="@{/wishcycle/index}" href="index.html" class="nav-link active">Home</a>
         <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
     </nav>
 
@@ -33,38 +33,43 @@
     </nav>
 </header>
 
-<main>
+<main class="content-wrapper">
+
     <div class="homepage-hero">
         <a th:href="@{/wishcycle/signup-page}" href="signup-page.html" class="board-box large-box">
-            <h2>Start Your Cycle</h2>
-            <p>Create your own intentional wishlist and reduce consumption.</p>
+            <h2>My WishCycles</h2>
+            <p>Start your journey toward intentional gifting. Create your first list today.</p>
             <span class="view-link">Join WishCycle →</span>
         </a>
 
         <a th:href="@{/wishcycle/login-page}" href="login-page.html" class="board-box large-box">
-            <h2>View the Community</h2>
-            <p>Sign in to see what your friends and family are wishing for.</p>
-            <span class="view-link">Sign In →</span>
+            <h2>Social WishCycles</h2>
+            <p>Connect with friends and family to see their sustainable wishes.</p>
+            <span class="view-link">Log In to Explore →</span>
         </a>
     </div>
 
-    <section class="inspo-container">
-        <div class="inspo-card">
-            <span>Intention over Consumption</span>
-        </div>
-        <div class="inspo-card">
-            <span>Reduce Waste</span>
-        </div>
-        <div class="inspo-card">
-            <span>Sustainable Gifting</span>
+    <section class="wish-category">
+        <h3 class="category-title">Daily Inspiration</h3>
+        <div class="inspo-container">
+            <div class="inspo-card"><span>Minimalist Living</span></div>
+            <div class="inspo-card"><span>Eco-friendly Finds</span></div>
+            <div class="inspo-card"><span>Second-hand Treasures</span></div>
         </div>
     </section>
 </main>
 
 <footer class="main-footer">
     <div class="footer-content-minimal">
-        <span class="footer-tag">© WishCycle 2026</span>
-        <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="footer-link">About WishCycle</a>
+        <a th:href="@{/wishcycle/index}" href="index.html">
+            <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png" alt="WishCycle Logo"
+                 class="footer-logo">
+        </a>
+        <span class="footer-tag">@WishCycle 2026</span>
+        <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="footer-link">About Us</a>
+        <a href="#" class="footer-link">Terms</a>
+        <a href="#" class="footer-link">Privacy</a>
+        <a href="#" class="footer-link">Contact</a>
     </div>
 </footer>
 
