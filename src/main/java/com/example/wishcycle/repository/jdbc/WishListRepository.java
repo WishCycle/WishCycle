@@ -20,6 +20,7 @@ public class WishListRepository {
     private static final String DELETE_WISHLIST = "DELETE FROM wish_list WHERE wishlist_id = ?";
     private static final String CREATE_NEW_WISHLIST = "INSERT INTO wish_list (wishList_id, wishlist_name, wishlist_desc, user_id) VALUES (?, ?, ?, ?)";
     private static final String UPDATE_WISHLIST = "UPDATE wish_list SET wishlist_name = ?, wishlist_desc = ? WHERE wishlist_id = ?";
+    private static final String GET_OTHER_WIST_LISTS = "SELECT * FROM  wish_user WHERE user_id <> ?";
 
     private static final String GET_ALL_ITEMS = "SELECT * FROM item";
     private static final String CREATE_ITEM = "INSERT INTO item (item_id, item_name, item_url, item_price) VALUES (?, ?, ?, ?)";
@@ -42,6 +43,10 @@ public class WishListRepository {
     // CRUD OPERATIONS for wishlist manipulation
     public List<WishList> findAll() {
         return jdbc.query(GET_ALL_WISH_LISTS, wishListMapper);
+    }
+
+    public List<WishList> findAllOthers(Long memberId) {
+        return jdbc.query(GET_OTHER_WIST_LISTS, wishListMapper, memberId);
     }
 
     public List<WishList> findByUserId(Long userId) {

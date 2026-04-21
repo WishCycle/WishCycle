@@ -41,7 +41,7 @@ public class MemberController {
         memberService.createMember(member);
         Member sessionMember = memberService.getMemberByEmail(member.getEmail());
         session.setAttribute("member", sessionMember);
-        return "redirect:/wishcycle/login/profile";
+        return "redirect:/wishcycle/login/profile/" + sessionMember.getMemberId().toString();
     }
 
     @PostMapping("/login/save")
@@ -51,7 +51,7 @@ public class MemberController {
         if (validMember != null) {
             session.setAttribute("member", validMember);
             // Session timeout CONTAINER DEFAULT (15 min)
-            return "redirect:/wishcycle/login/profile";
+            return "redirect:/wishcycle/login/profile/" + validMember.getMemberId().toString();
         } else {
             model.addAttribute("Error", "no member exists");
             return "signup-page";
@@ -61,7 +61,7 @@ public class MemberController {
     @GetMapping("/logout")  // Invalidate session and return landing page
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/login-page";
+        return "redirect:/wishcycle/homepage";
     }
 
     @GetMapping("/about-us")
@@ -76,10 +76,11 @@ public class MemberController {
         return "user-profile";
     }
 
-    @PostMapping("/delete")
-    public String deleteProfilePage(@ModelAttribute Member member) {
+    @PostMapping("/login/profile/{memberId}/delete")
+    public String deleteProfilePage(@PathVariable Long memberId) {
+        Member member = memberService.getMemberById(memberId);
         memberService.deleteMember(member);
-        return "redirect:/login-page";
+        return "redirect:/wishcycle/homepage";
     }
 
 

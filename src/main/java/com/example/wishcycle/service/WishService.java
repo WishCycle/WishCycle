@@ -32,6 +32,10 @@ public class WishService {
         return wishListRepository.findByUserId(memberId);
     }
 
+    public List<WishList> getOtherWishLists(Long memberId) {
+        return wishListRepository.findAllOthers(memberId);
+    }
+
     public void createWishList(WishList wishList, Member member) {
         if (wishList == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try Again! Create a valid WishList!");
