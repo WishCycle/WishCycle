@@ -15,7 +15,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession(); // This line runs before request reaches our Controller
 
         if (session.getAttribute("member") == null) {
-            response.sendRedirect("/login-page");
+            response.sendRedirect("/wishcycle/login-page");
             return false; // Blocks request
         }
         return true; // Continues to controller
