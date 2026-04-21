@@ -21,7 +21,7 @@ public class MemberController {
         return "homepage";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/login-page")
     public String login(Model model) {
         Member member = new Member();
         model.addAttribute("member", member);
@@ -29,17 +29,34 @@ public class MemberController {
         return "login-page";
     }
 
+    @GetMapping("/signup-page")
+    public String signup(Model model) {
+        Member member = new Member();
+        model.addAttribute("member", member);
+        return "signup-page";
+    }
+
+    @PostMapping("/signup/save")
+    public String saveNewMember(@ModelAttribute Member member, HttpSession session, Model model) {
+        memberService.createMember(member);
+        session.setAttribute("member", member);
+        return "redirect:/wishcycle/login/profile";
+    }
+
     @PostMapping("/login/save")
-    public String saveUser(@ModelAttribute Member member, HttpSession session, Model model) {
-        Member validMember = memberService.createMember(member);
+    public String saveMember(@ModelAttribute Member member, HttpSession session, Model model) {
+        System.out.println(member.getEmail());
+        System.out.println(member.getPassword());
+        Member validMember = memberService.validMemberCheck(member);
+
 
         if (validMember != null) {
-            session.setAttribute("member", member);
+            session.setAttribute("member", validMember);
             // Session timeout CONTAINER DEFAULT (15 min)
-            return "redirect:/user-profile";
+            return "redirect:/wishcycle/login/profile";
         } else {
-            model.addAttribute("Error - no member exists");
-            return "login-page";
+            model.addAttribute("Error", "no member exists");
+            return "signup-page";
         }
     }
 
