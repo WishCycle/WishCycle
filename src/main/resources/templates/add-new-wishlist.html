@@ -1,10 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WishCycle | New Wishlist</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-cream">
+
+<header class="navbar">
+    <div class="header-left">
+        <div class="logo">
+            <a th:href="@{/homepage}" href="homepage.html">
+                <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png" alt="WishCycle Logo">
+            </a>
+            <span class="slogan">Wish for a better future</span>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <a th:href="@{/homepage}" href="homepage.html" class="nav-link">Home</a>
+        <a th:href="@{/personal-wishcycles}" href="personal-wishcycles.html" class="nav-link active">My WishCycles</a>
+        <a th:href="@{/social-wishcycles}" href="social-wishcycles.html" class="nav-link">Social WishCycles</a>
+        <a th:href="@{/about-us}" href="about-us.html" class="nav-link">About Us</a>
+    </nav>
+
+    <nav class="auth-buttons">
+        <a th:href="@{/user-profile}" href="user-profile.html" class="btn-profile">Profile</a>
+    </nav>
+</header>
+
+<main class="content-wrapper profile-centered">
+    <section class="profile-card">
+        <h2 class="category-title">Create a New Wishlist</h2>
+        <p class="member-since">Give your collection a name (e.g. Living Room, Birthday)</p>
+
+        <form th:action="@{/add-wishlist}" method="post" class="form-layout">
+            <div class="input-group">
+                <label for="listName">Wishlist Name</label>
+                <input type="text" id="listName" name="listName" placeholder="e.g., Summer Kitchen" required>
+            </div>
+
+            <div class="profile-actions">
+                <button type="submit" class="btn-primary">Create List</button>
+                <a th:href="@{/personal-wishcycles}" href="personal-wishcycles.html" class="btn-logout">Cancel</a>
+            </div>
+        </form>
+    </section>
+</main>
+
+<footer class="main-footer">
+    <div class="footer-content-minimal">
+        <span class="footer-tag">© 2026 WishCycle</span>
+    </div>
+</footer>
 
 </body>
 </html>

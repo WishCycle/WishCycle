@@ -1,20 +1,12 @@
 package com.example.wishcycle.service;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.repository.jdbc.MemberRepository;
-import org.h2.value.Value;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import javax.management.openmbean.OpenType;
-import javax.xml.transform.Result;
-import java.util.Optional;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
