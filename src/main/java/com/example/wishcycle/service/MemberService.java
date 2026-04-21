@@ -36,6 +36,20 @@ public class MemberService {
         return member;
     }
 
+    public Member validMemberCheck(Member member) {
+        if (memberRepository.getMemberByEmail(member.getEmail()) == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Member not found");
+        }
+        Member checkMember = memberRepository.validateMember(member);
+        if (checkMember.getEmail() != member.getEmail()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email does not match user found in database.");
+        }
+        if (checkMember.getPassword() != member.getPassword()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password does not match user found in database.");
+        }
+        return memberRepository.getMemberByEmail(member.getEmail());
+    }
+
     public void deleteMember(Member member) {
         if (memberRepository.getMemberById(member.getMemberId()) == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Member not found");
