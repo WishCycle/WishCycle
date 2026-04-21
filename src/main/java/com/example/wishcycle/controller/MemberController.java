@@ -16,9 +16,15 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+    @GetMapping({"", "/", "/index"})
+    public String getIndexPage() {
+        return "index";
+    }
+
     @GetMapping("/homepage")
     public String getHomepage(HttpSession session, Model model) {
         Member member = (Member) session.getAttribute("member");
+        model.addAttribute("memberId", member.getMemberId());
         model.addAttribute("member", member);
         return "homepage";
     }
@@ -48,15 +54,15 @@ public class MemberController {
 
     @PostMapping("/login/save")
     public String saveMember(@ModelAttribute Member member, HttpSession session, Model model) {
-        Member validMember = memberService.validMemberCheck(member);
-
-        if (validMember != null) {
+        try {
+            Member validMember = memberService.validMemberCheck(member);
             session.setAttribute("member", validMember);
-            // Session timeout CONTAINER DEFAULT (15 min)
-            return "redirect:/wishcycle/login/profile/" + validMember.getMemberId();
-        } else {
-            model.addAttribute("Error", "no member exists");
-            return "signup-page";
+
+            return "redirect:/wishcycle/homepage";
+        } catch (Exception e) {
+            // If password/email is wrong, send them back to login with an error message
+            model.addAttribute("error", "Invalid credentials. Please try again.");
+            return "login-page";
         }
     }
 
@@ -69,14 +75,22 @@ public class MemberController {
     @GetMapping("/about-us")
     public String getAboutUsPage(HttpSession session, Model model) {
         Member member = (Member) session.getAttribute("member");
-        model.addAttribute("member", member);
+        if (member != null) {
+            model.addAttribute("memberId", member.getMemberId());
+        }
         return "about-us";
     }
 
     @GetMapping("/login/profile/{memberId}")
-    public String getProfilePage(Model model, HttpSession session) {
+    public String getProfilePage(@PathVariable Long memberId, Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("member");
+
+        if (member == null || !member.getMemberId().equals(memberId)) {
+            return "redirect:/wishcycle/login-page";
+        }
+
         model.addAttribute("member", member);
+        model.addAttribute("memberId", member.getMemberId());
         return "user-profile";
     }
 
