@@ -14,16 +14,18 @@
     <div class="header-left">
         <div class="logo">
             <a th:href="@{/homepage}" href="homepage.html">
-                <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WischCycle-Logo.png" alt="WishCycle Logo">
+                <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WischCycle-Logo.png"
+                     alt="WishCycle Logo">
             </a>
             <span class="slogan">Wish for a better future</span>
         </div>
     </div>
 
     <nav class="main-nav">
+        <a th:href="@{/homepage}" href="homepage.html">Home</a>
         <a th:href="@{/personal-wishcycles}" href="personal-wishcycles.html" class="nav-link active">My WishCycles</a>
         <a th:href="@{/social-wishcycles}" href="social-wishcycles.html" class="nav-link">Social WishCycles</a>
-        <a th:href="@{/about-us}" href="about-us.html" class="nav-link">About Us</a>
+        <a th:href="@{/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
     </nav>
 
     <nav class="auth-buttons">
@@ -39,7 +41,6 @@
             <div class="inspo-card">Ceramic Vase</div>
             <div class="inspo-card">Wool Throw</div>
             <div class="inspo-card">Oak Side Table</div>
-            <div class="inspo-card">Mirror Set</div>
         </div>
     </section>
 
@@ -49,7 +50,6 @@
             <div class="inspo-card">Linen Shirt</div>
             <div class="inspo-card">Leather Boots</div>
             <div class="inspo-card">Silk Scarf</div>
-            <div class="inspo-card">Scented Candle</div>
         </div>
     </section>
 
