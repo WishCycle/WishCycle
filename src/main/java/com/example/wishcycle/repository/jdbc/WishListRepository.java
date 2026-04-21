@@ -57,8 +57,8 @@ public class WishListRepository {
         jdbc.update(DELETE_WISHLIST, wishListId);
     }
 
-    public void createWishList(WishList wishList, Member member) {
-        jdbc.update(CREATE_NEW_WISHLIST, wishList.getWishListId(), wishList.getWishListName(), wishList.getDescription(), member.getMemberId());
+    public void createWishList(WishList wishList, Long memberId) {
+        jdbc.update(CREATE_NEW_WISHLIST, wishList.getWishListId(), wishList.getWishListName(), wishList.getDescription(), memberId);
     }
 
     public List<WishList> updateWishList(WishList wishList, Long userId) {

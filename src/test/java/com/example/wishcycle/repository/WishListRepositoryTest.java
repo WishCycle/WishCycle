@@ -88,7 +88,7 @@ public class WishListRepositoryTest {
         member.setMemberId(userId);
 
         WishList newTestWishList = new WishList(4L, "Create wishlist name", "This wishlist is for test only", member);
-        repository.createWishList(newTestWishList, member);
+        repository.createWishList(newTestWishList, member.getMemberId());
 
         List<WishList> seededWishlists = repository.findAll();
 

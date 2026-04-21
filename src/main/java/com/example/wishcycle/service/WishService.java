@@ -36,14 +36,14 @@ public class WishService {
         return wishListRepository.findAllOthers(memberId);
     }
 
-    public void createWishList(WishList wishList, Member member) {
+    public void createWishList(WishList wishList, Long memberId) {
         if (wishList == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try Again! Create a valid WishList!");
         }
-        if (wishListRepository.findByUserId(member.getMemberId()) == null) {
+        if (wishListRepository.findByUserId(memberId) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The account you are trying to create the WishList with is not valid. Try logging in again!");
         }
-        wishListRepository.createWishList(wishList, member);
+        wishListRepository.createWishList(wishList, memberId);
     }
 
     public void updateWishList(WishList wishList, Member member) {
