@@ -37,18 +37,16 @@ public class MemberController {
     }
 
     @PostMapping("/signup/save")
-    public String saveNewMember(@ModelAttribute Member member, HttpSession session, Model model) {
+    public String saveNewMember(@ModelAttribute Member member, HttpSession session) {
         memberService.createMember(member);
-        session.setAttribute("member", member);
+        Member sessionMember = memberService.getMemberByEmail(member.getEmail());
+        session.setAttribute("member", sessionMember);
         return "redirect:/wishcycle/login/profile";
     }
 
     @PostMapping("/login/save")
     public String saveMember(@ModelAttribute Member member, HttpSession session, Model model) {
-        System.out.println(member.getEmail());
-        System.out.println(member.getPassword());
         Member validMember = memberService.validMemberCheck(member);
-
 
         if (validMember != null) {
             session.setAttribute("member", validMember);
@@ -71,7 +69,7 @@ public class MemberController {
         return "about-us";
     }
 
-    @GetMapping("/login/profile")
+    @GetMapping("/login/profile/{memberId}")
     public String getProfilePage(Model model, @PathVariable Long memberId) {
         Member member = memberService.getMemberById(memberId);
         model.addAttribute("memberProfile", member);

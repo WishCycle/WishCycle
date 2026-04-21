@@ -5,6 +5,8 @@ import com.example.wishcycle.repository.mapper.MemberMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class MemberRepository {
 
@@ -16,7 +18,6 @@ public class MemberRepository {
     private static final String DELETE_MEMBER_SQL = "DELETE FROM wish_user WHERE user_id = ?";
     private static final String CREATE_MEMBER_SQL = "INSERT INTO wish_user (username, user_email, user_password) VALUES (?, ?, ?)";
     private static final String UPDATE_MEMBER_SQL = "UPDATE wish_user SET username = ?, user_email = ?, user_password = ? WHERE user_id = ?";
-    private static final String GET_SENSITIVE_INFO_SQL = "SELECT user_email, user_password FROM wish_user WHERE user_email = ?";
 
     public MemberRepository(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
@@ -28,11 +29,13 @@ public class MemberRepository {
     }
 
     public Member getMemberByEmail(String email) {
-        return jdbc.queryForObject(FIND_BY_EMAIL_SQL, memberMapper, email);
+        List<Member> results = jdbc.query(FIND_BY_EMAIL_SQL, memberMapper, email);
+        return results.isEmpty() ? null : results.get(0);
     }
 
     public Member getMemberByUsername(String username) {
-        return jdbc.queryForObject(FIND_BY_USERNAME_SQL, memberMapper, username);
+        List<Member> results = jdbc.query(FIND_BY_USERNAME_SQL, memberMapper, username);
+        return results.isEmpty() ? null : results.get(0);
     }
 
     public void deleteMember(Member member) {
@@ -47,7 +50,4 @@ public class MemberRepository {
         jdbc.update(UPDATE_MEMBER_SQL, member.getName(), member.getEmail(), member.getPassword(), member.getMemberId());
     }
 
-    public Member validateMember(Member member) {
-        return jdbc.queryForObject(GET_SENSITIVE_INFO_SQL, memberMapper, member.getMemberId());
-    }
 }
