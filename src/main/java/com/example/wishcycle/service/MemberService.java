@@ -22,6 +22,14 @@ public class MemberService {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found");
     }
 
+    public Member getMemberByEmail(String email) {
+        Member member = memberRepository.getMemberByEmail(email);
+        if (member == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Member not found");
+        }
+        return member;
+    }
+
     public Member createMember(Member member) {
         if (member == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Login Failed");
@@ -40,11 +48,8 @@ public class MemberService {
         if (memberRepository.getMemberByEmail(member.getEmail()) == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Member not found");
         }
-        Member checkMember = memberRepository.validateMember(member);
-        if (checkMember.getEmail() != member.getEmail()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email does not match user found in database.");
-        }
-        if (checkMember.getPassword() != member.getPassword()) {
+        Member checkMember = memberRepository.getMemberByEmail(member.getEmail());
+                if (!checkMember.getPassword().trim().equals(member.getPassword().trim())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password does not match user found in database.");
         }
         return memberRepository.getMemberByEmail(member.getEmail());
