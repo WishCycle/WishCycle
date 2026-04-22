@@ -101,6 +101,4 @@ public class MemberController {
         memberService.deleteMember(member);
         return "redirect:/wishcycle/homepage";
     }
-
-
 }

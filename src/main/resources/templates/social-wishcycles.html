@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,10 +25,11 @@
         <a th:href="@{/wishcycle/homepage}" class="nav-link">Home</a>
 
         <a th:href="@{/wishcycle/wishlists/{id}(id=${session.member.memberId})}"
-           class="nav-link active">My WishCycles</a>
+           class="nav-link">My WishCycles</a>
 
         <a th:href="@{/wishcycle/social-wishlists/{id}(id=${session.member.memberId})}"
-           class="nav-link">Social WishCycles</a>
+           class="nav-link active">Social WishCycles</a>
+
         <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
     </nav>
 

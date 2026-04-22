@@ -15,14 +15,14 @@
 <header class="navbar">
     <div class="header-left">
         <div class="logo">
-            <a th:href="@{/wishcycle/homepage(memberId=${memberId})}" href="homepage.html">
+            <a th:href="@{/wishcycle/homepage}" href="homepage.html">
                 <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png" alt="WishCycle Logo">
             </a>
             <span class="slogan">Wish for a better future</span>
         </div>
     </div>
     <nav class="main-nav">
-        <a th:href="@{/wishcycle/homepage(memberId=${memberId})}" href="homepage.html" class="nav-link active">Home</a>
+        <a th:href="@{/wishcycle/homepage}" href="homepage.html" class="nav-link active">Home</a>
 
         <a th:href="@{/wishcycle/wishlists/{id}(id=${memberId})}" href="personal-wishcycles.html" class="nav-link">My WishCycles</a>
 
@@ -45,7 +45,7 @@
             <span class="view-link">Open My Lists →</span>
         </a>
 
-        <a th:href="@{/wishcycle/social-wishcycles}" href="social-wishcycles.html" class="board-box large-box">
+        <a th:href="@{/wishcycle/social-wishlists/{id}(id=${memberId})}" href="social-wishcycles.html" class="board-box large-box">
             <h2>Social WishCycles</h2>
             <p>See what's trending in your circle and find inspiration.</p>
             <span class="view-link">Explore Community →</span>
