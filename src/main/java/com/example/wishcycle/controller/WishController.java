@@ -106,8 +106,20 @@ public class WishController {
     public String updateItem(@ModelAttribute WishList wishList, @ModelAttribute Item item, HttpSession session) {
         Member member = (Member) session.getAttribute("member");
         wishService.updateItem(item);
-
         return "redirect:/wishcycle/wishlists/" + member.getMemberId();
+    }
+
+    @PostMapping("/personal-wishcycles/wishlist/view/{id}")
+    public String deleteWishlist(@ModelAttribute WishList wishlist, @ModelAttribute Member member) {
+        wishService.deleteWishList(wishlist, member);
+        return "redirect:/personal-wishcycles";
+    }
+
+    @PostMapping("/personal-wishcycles/wishlist/view/{id}")
+    public String updateItemOnWishlist(@ModelAttribute WishList wishlist, @ModelAttribute Item item, HttpSession session) {
+        Member member = (Member) session.getAttribute("member");
+        wishService.setUpdateItemFromWishList(wishlist, item);
+        return "redirect:/wishcycle/wishlist/view/" + member.getMemberId();
     }
 }
 
