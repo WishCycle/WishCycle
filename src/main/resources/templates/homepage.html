@@ -39,13 +39,13 @@
 <main class="content-wrapper">
 
     <div class="homepage-hero">
-        <a th:href="@{/wishcycle/wishlists/{id}(id=${memberId})}" href="personal-wishcycles.html" class="board-box large-box">
+        <a th:href="@{/wishcycle/wishlists/{id}(id=${session.member.memberId})}" href="personal-wishcycles.html" class="board-box large-box">
             <h2>My WishCycles</h2>
             <p>Organize your intentions and view your collections.</p>
             <span class="view-link">Open My Lists →</span>
         </a>
 
-        <a th:href="@{/wishcycle/social-wishlists/{id}(id=${memberId})}" href="social-wishcycles.html" class="board-box large-box">
+        <a th:href="@{/wishcycle/social-wishlists/{id}(id=${session.member.memberId})}" href="social-wishcycles.html" class="board-box large-box">
             <h2>Social WishCycles</h2>
             <p>See what's trending in your circle and find inspiration.</p>
             <span class="view-link">Explore Community →</span>

@@ -54,9 +54,12 @@ public class WishList {
     public Member getMember() {
         return member;
     }
-
+    
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+    public List<Item> getItems() {
+        return items;
     }
 
     public void setMember(Member member) {

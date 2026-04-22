@@ -29,6 +29,9 @@ public class WishController {
     @GetMapping("/social-wishlists/{memberId}")
     public String getWishLists(Model model, @PathVariable Long memberId) {
         List<WishList> wishLists = wishService.getOtherWishLists(memberId);
+        for(WishList w : wishLists){
+            wishService.getItemsByWishlistId(w, w.getWishListId());
+        }
         Member member = memberService.getMemberById(memberId);
         model.addAttribute("member",member);
         model.addAttribute("wishlists", wishLists);

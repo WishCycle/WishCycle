@@ -50,13 +50,13 @@
 
     <div class="boards-container">
         <a th:each="wishlist : ${wishlists}"
-           th:href="@{/wishcycle/social-wishlists/{id}(id=${session.member.memberId})}"
+           th:href="@{/wishcycle/wishlist/view/{wId}(wId=${wishlist.getWishListId()})}"
            class="board-box">
 
             <h2 th:text="${wishlist.wishListName}">Category Name</h2>
 
-            <p th:text="${wishlist.getItems().size()} + ' Items'">
-                0 Items
+            <p th:text="${wishlist.getItems().size() ?: 0} + ' Items'">
+            0 Items
             </p>
 
             <span class="view-link">View Wishes →</span>
