@@ -39,6 +39,9 @@ public class WishController {
     @GetMapping("/wishlists/{memberId}")
     public String getWishListsByMemberId(Model model, @PathVariable Long memberId) {
         List<WishList> wishLists = wishService.getWishListsByMemberId(memberId);
+        for(WishList w : wishLists){
+            wishService.getItemsByWishlistId(w, w.getWishListId());
+        }
         Member member = memberService.getMemberById(memberId);
         model.addAttribute("member",member);
         model.addAttribute("wishlists", wishLists);
@@ -53,16 +56,21 @@ public class WishController {
     }
 
     @GetMapping("/wishlist/add/item")
-    public String addItem(Model model) {
+    public String addItem(Model model, HttpSession session) {
+        Member member = (Member) session.getAttribute("member");
+        List<WishList> wishLists = wishService.getWishListsByMemberId(member.getMemberId());
+        model.addAttribute("wishlists", wishLists);
         model.addAttribute("item", new Item());
-        model.addAttribute("wishlist", new WishList());
+        model.addAttribute("newWishlist", new WishList());
         return "add-new-item";
     }
 
-    @GetMapping("/wishlist/view/{id}")
-    public String viewSingleWishlist(@PathVariable Long id, Model model) {
-        List<WishList> wishList = wishService.getWishListsByMemberId(id);
+    @GetMapping("/wishlist/view/{wId}")
+    public String viewSingleWishlist(@PathVariable Long wId, Model model) {
+        WishList wishList = wishService.getWishListById(wId);
+        List<Item> items = wishService.getItemsByWishlistId(wishList, wId);
         model.addAttribute("wishlist", wishList);
+        model.addAttribute("items", items);
         return "wishlist";
     }
 

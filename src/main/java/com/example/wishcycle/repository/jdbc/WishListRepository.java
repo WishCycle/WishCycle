@@ -19,6 +19,7 @@ public class WishListRepository {
 
     private static final String GET_ALL_WISH_LISTS = "SELECT * FROM wish_list";
     private static final String FIND_BY_USER_SQL = "SELECT * FROM wish_list WHERE user_id = ?";
+    private static final String FIND_BY_WISHLIST_ID = "SELECT * FROM wish_list where wishlist_id = ?";
     private static final String DELETE_WISHLIST = "DELETE FROM wish_list WHERE wishlist_id = ?";
     private static final String CREATE_NEW_WISHLIST = "INSERT INTO wish_list (wishList_id, wishlist_name, wishlist_desc, user_id) VALUES (?, ?, ?, ?)";
     private static final String UPDATE_WISHLIST = "UPDATE wish_list SET wishlist_name = ?, wishlist_desc = ? WHERE wishlist_id = ?";
@@ -53,6 +54,10 @@ public class WishListRepository {
 
     public List<WishList> findByUserId(Long userId) {
         return jdbc.query(FIND_BY_USER_SQL, wishListMapper, userId);
+    }
+
+    public WishList findByWishlistId(Long wishlistId) {
+        return jdbc.queryForObject(FIND_BY_WISHLIST_ID, wishListMapper, wishlistId);
     }
 
     public void deleteWishList(Long wishListId) {

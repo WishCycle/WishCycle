@@ -49,8 +49,10 @@
                 <label for="wishlistId">Select Wishlist</label>
                 <select id="wishlistId" name="wishListId" class="custom-select" required>
                     <option value="" disabled selected>Which list does this belong to?</option>
-                    <option value="1">Home / Decor</option>
-                    <option value="2">Clothing / Selfcare</option>
+                    <option th:each="wishList : ${wishlists}"
+                            th:value="${wishList.getWishListId()}"
+                            th:text="${wishList.wishListName}">
+                    </option>
                 </select>
             </div>
 
@@ -72,7 +74,7 @@
 
             <div class="profile-actions">
                 <button type="submit" class="btn-primary">Add to List</button>
-                <a th:href="@{/personal-wishcycles}" class="btn-logout">Cancel</a>
+                <a th:href="@{/wishcycle/wishlists/{id}(id=${session.member.memberId})}" class="btn-logout">Cancel</a>
             </div>
         </form>
     </section>
