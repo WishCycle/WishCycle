@@ -32,6 +32,10 @@ public class WishService {
         return wishListRepository.findByUserId(memberId);
     }
 
+    public WishList getWishListById(Long id) {
+        return wishListRepository.findByWishlistId(id);
+    }
+
     public List<WishList> getOtherWishLists(Long memberId) {
         return wishListRepository.findAllOthers(memberId);
     }
@@ -118,9 +122,9 @@ public class WishService {
         wishListRepository.setUpdateItemOnWishlist(wishlist, item);
     }
 
-    public WishList getItemsByWishlistId(WishList wishList, Long id) {
+    public List<Item> getItemsByWishlistId(WishList wishList, Long id) {
         List<Item> items = wishListRepository.itemsInWishList(id);
         wishList.setItems(items);
-        return wishList;
+        return items;
     }
 }

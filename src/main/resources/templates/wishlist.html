@@ -20,14 +20,17 @@
     </div>
 
     <nav class="main-nav">
-        <a th:href="@{/homepage}" href="homepage.html" class="nav-link">Home</a>
-        <a th:href="@{/personal-wishcycles}" href="personal-wishcycles.html" class="nav-link active">My WishCycles</a>
-        <a th:href="@{/social-wishcycles}" href="social-wishcycles.html" class="nav-link">Social WishCycles</a>
-        <a th:href="@{/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
+        <a th:href="@{/wishcycle/homepage}" href="homepage.html" class="nav-link">Home</a>
+
+        <a th:href="@{/wishcycle/wishlists/{id}(id=${session.member.memberId})}" href="personal-wishcycles.html" class="nav-link active">My WishCycles</a>
+
+        <a th:href="@{/wishcycle/social-wishlists/{id}(id=${session.member.memberId})}" href="social-wishcycles.html" class="nav-link">Social WishCycles</a>
+
+        <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
     </nav>
 
     <nav class="auth-buttons">
-        <a th:href="@{/user-profile}" href="user-profile.html" class="btn-profile">Profile</a>
+        <a th:href="@{/wishcycle/login/profile/{id}(id=${session.member.memberId})}" href="user-profile.html" class="btn-profile">Profile</a>
     </nav>
 </header>
 
@@ -43,25 +46,25 @@
         </a>
     </div>
 
-    <div th:each="wl : ${wishlist}">
+    <div>
 
-        <section class="wish-category" th:if="${wl.items != null && !wl.items.isEmpty()}">
+        <section class="wish-category" th:if="${items != null && !items.isEmpty()}">
 
-            <h3 class="category-title" th:text="${wl.wishListName}">Category Name</h3>
+            <h3 class="category-title" th:text="${wishlist.getWishListName()}">Category Name</h3>
 
             <div class="inspo-container">
-                <div th:each="item : ${wl.items}" th:remove="tag">
+                <div th:each="item : ${items}" th:remove="tag">
 
-                    <a th:if="${item.itemUrl != null && !item.itemUrl.isEmpty()}"
-                       th:href="${item.itemUrl}"
+                    <a th:if="${item.getUrl() != null && !item.getUrl().isEmpty()}"
+                       th:href="${item.getUrl()}"
                        target="_blank"
                        class="inspo-card">
-                        <span th:text="${item.itemName}">Item Name</span>
+                        <span th:text="${item.getItemName()}">Item Name</span>
                     </a>
 
-                    <div th:unless="${item.itemUrl != null && !item.itemUrl.isEmpty()}"
+                    <div th:unless="${item.getUrl() != null && !item.getUrl().isEmpty()}"
                          class="inspo-card">
-                        <span th:text="${item.itemName}">Item Name</span>
+                        <span th:text="${item.getItemName()}">Item Name</span>
                     </div>
                 </div>
             </div>
