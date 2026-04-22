@@ -22,10 +22,6 @@ public class WishService {
         this.memberRepository = memberRepository;
     }
 
-    public List<WishList> getWishLists() {
-        return  wishListRepository.findAll();
-    }
-
     public List<WishList> getWishListsByMemberId(Long memberId) {
         if (wishListRepository.findByUserId(memberId) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No WishList found for member: " + memberRepository.getMemberById(memberId));
@@ -74,33 +70,7 @@ public class WishService {
 
     }
 
-    public Long getItemById(Item item) {
-        if (item.getItemId() == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The item you are trying to create is invalid. Try again.");
-        }
-        return wishListRepository.getItemById(item);
-    }
 
-    public void createItem(Item item) {
-        if (item == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The item you are trying to create is invalid. Try again.");
-        }
-        wishListRepository.createItem(item);
-    }
-
-    public void deleteItem(Item item) {
-        if (item == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The item you are trying to delete does not exist. Try again.");
-        }
-        wishListRepository.deleteItem(item);
-    }
-
-    public void updateItem(Item item) {
-        if (item == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The item you are trying to update could not be found. Try again.");
-        }
-        wishListRepository.updateItem(item);
-    }
 
     public void addItemToWishList(WishList wishList, Item item) {
         if (wishList == null || item == null) {

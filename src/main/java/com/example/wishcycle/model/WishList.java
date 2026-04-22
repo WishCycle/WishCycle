@@ -1,5 +1,4 @@
 package com.example.wishcycle.model;
-import java.util.HashMap;
 import java.util.List;
 
 public class WishList {
@@ -25,7 +24,8 @@ public class WishList {
         this.items = items;
     }
 
-    public WishList() {}
+    public WishList() {
+    }
 
     public void setWishListId(Long wishListId) {
         this.wishListId = wishListId;
@@ -54,15 +54,12 @@ public class WishList {
     public Member getMember() {
         return member;
     }
-    public void setMember(Member member) {
-        this.member = member;
-    }
 
-    public List<Item> getItems() {
-        return items;
-    }
     public void setItems(List<Item> items) {
         this.items = items;
     }
 
+    public void setMember(Member member) {
+        this.member = member;
+    }
 }

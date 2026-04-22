@@ -1,6 +1,5 @@
 package com.example.wishcycle.repository.jdbc;
 import com.example.wishcycle.model.Item;
-import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
 import com.example.wishcycle.repository.mapper.ItemMapper;
 import com.example.wishcycle.repository.mapper.WishListMapper;
@@ -28,7 +27,6 @@ public class WishListRepository {
     private static final String GET_ALL_ITEMS = "SELECT * FROM item";
     private static final String CREATE_ITEM = "INSERT INTO item (item_id, item_name, item_url, item_price) VALUES (?, ?, ?, ?)";
     private static final String DELETE_ITEM = "DELETE FROM item WHERE item_id = ?";
-    private static final String UPDATE_ITEM = "UPDATE item SET item_name = ?, item_url = ?, item_price = ? WHERE item_id = ?";
 
     private static final String GET_ITEM_BY_ID = "SELECT * FROM item WHERE item_id = ?";
     private static final String GET_ALL_ITEMS_IN_WISHLIST = "SELECT i.* FROM item i JOIN wish_list_item wli ON i.item_id = wli.item_id WHERE wli.wishlist_id = ?";
@@ -86,10 +84,6 @@ public class WishListRepository {
         jdbc.update(DELETE_ITEM, item.getItemId());
     }
 
-    public Item updateItem(Item item) {
-        jdbc.update(UPDATE_ITEM, item.getItemName(), item.getUrl(), item.getPrice(), item.getItemId());
-        return item;
-    }
 
     // CRUD OPERATIONS for wishlist and item manipulation
     public Long getItemById(Item item) {

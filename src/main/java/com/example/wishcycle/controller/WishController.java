@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.List;
 
@@ -81,12 +80,6 @@ public class WishController {
         return "redirect:/wishcycle/wishlists/" + sessionMember.getMemberId();
     }
 
-    @PostMapping("/wishlist/update")
-    public String updateWishlist(@ModelAttribute WishList wishList, HttpSession session) {
-        Member sessionMember = (Member) session.getAttribute("member");
-        wishService.updateWishList(wishList, sessionMember);
-        return "redirect:/wishcycle/wishlists/" + sessionMember.getMemberId();
-    }
 
     @PostMapping("/wishlists/delete")
     public String deleteWishlist(@ModelAttribute WishList wishlist, HttpSession session) {
@@ -110,18 +103,6 @@ public class WishController {
         return "redirect:/wishcycle/wishlists/" + member.getMemberId();
     }
 
-    @PostMapping("/item/update/item")
-    public String updateItem(@ModelAttribute WishList wishList, @ModelAttribute Item item, HttpSession session) {
-        Member member = (Member) session.getAttribute("member");
-        wishService.updateItem(item);
-        return "redirect:/wishcycle/wishlists/" + member.getMemberId();
-    }
-
-//    @PostMapping("/personal-wishcycles/wishlist/view/{id}")
-//    public String deleteWishlist(@ModelAttribute WishList wishlist, @ModelAttribute Member member) {
-//        wishService.deleteWishList(wishlist, member);
-//        return "redirect:/personal-wishcycles";
-//    }
 
     @PostMapping("/personal-wishcycles/wishlist/view/{id}")
     public String updateItemOnWishlist(@ModelAttribute WishList wishlist, @ModelAttribute Item item, HttpSession session) {
