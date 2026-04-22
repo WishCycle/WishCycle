@@ -41,41 +41,27 @@
 
 <main class="content-wrapper">
 
-    <section class="wish-category">
-        <h3 class="category-title">Sarah's Collections</h3>
+    <div class="action-bar">
+        <a th:href="@{/wishcycle/wishlists/new}" class="btn-action">
+            <span class="icon">+</span> New Wishlist
 
-        <div class="boards-container">
-            <a th:href="@{/wishcycle/social/view/1}" class="board-box">
-                <h2>Home Decor</h2>
-                <p>8 Items</p>
-                <span class="view-link">View Sarah's Wishes →</span>
-            </a>
+        </a>
+    </div>
 
-            <a th:href="@{/wishcycle/social/view/2}" class="board-box">
-                <h2>Garden & Outdoor</h2>
-                <p>3 Items</p>
-                <span class="view-link">View Sarah's Wishes →</span>
-            </a>
-        </div>
-    </section>
+    <div class="boards-container">
+        <a th:each="wishlist : ${wishlists}"
+           th:href="@{/wishcycle/social-wishlists/{id}(id=${session.member.memberId})}"
+           class="board-box">
 
-    <section class="wish-category">
-        <h3 class="category-title">Mike's Collections</h3>
+            <h2 th:text="${wishlist.wishListName}">Category Name</h2>
 
-        <div class="boards-container">
-            <a th:href="@{/wishcycle/social/view/3}" class="board-box">
-                <h2>Reading List</h2>
-                <p>12 Items</p>
-                <span class="view-link">View Mike's Wishes →</span>
-            </a>
+            <p th:text="${wishlist.getItems().size()} + ' Items'">
+                0 Items
+            </p>
 
-            <a th:href="@{/wishcycle/social/view/4}" class="board-box">
-                <h2>Kitchen Gadgets</h2>
-                <p>5 Items</p>
-                <span class="view-link">View Mike's Wishes →</span>
-            </a>
-        </div>
-    </section>
+            <span class="view-link">View Wishes →</span>
+        </a>
+    </div>
 
 </main>
 

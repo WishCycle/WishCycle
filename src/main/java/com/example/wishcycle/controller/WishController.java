@@ -117,11 +117,11 @@ public class WishController {
         return "redirect:/wishcycle/wishlists/" + member.getMemberId();
     }
 
-    @PostMapping("/personal-wishcycles/wishlist/view/{id}")
-    public String deleteWishlist(@ModelAttribute WishList wishlist, @ModelAttribute Member member) {
-        wishService.deleteWishList(wishlist, member);
-        return "redirect:/personal-wishcycles";
-    }
+//    @PostMapping("/personal-wishcycles/wishlist/view/{id}")
+//    public String deleteWishlist(@ModelAttribute WishList wishlist, @ModelAttribute Member member) {
+//        wishService.deleteWishList(wishlist, member);
+//        return "redirect:/personal-wishcycles";
+//    }
 
     @PostMapping("/personal-wishcycles/wishlist/view/{id}")
     public String updateItemOnWishlist(@ModelAttribute WishList wishlist, @ModelAttribute Item item, HttpSession session) {

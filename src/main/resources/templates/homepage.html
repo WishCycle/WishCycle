@@ -24,15 +24,15 @@
     <nav class="main-nav">
         <a th:href="@{/wishcycle/homepage}" href="homepage.html" class="nav-link active">Home</a>
 
-        <a th:href="@{/wishcycle/wishlists/{id}(id=${memberId})}" href="personal-wishcycles.html" class="nav-link">My WishCycles</a>
+        <a th:href="@{/wishcycle/wishlists/{id}(id=${session.member.memberId})}" href="personal-wishcycles.html" class="nav-link">My WishCycles</a>
 
-        <a th:href="@{/wishcycle/social-wishlists/{id}(id=${memberId})}" href="social-wishcycles.html" class="nav-link">Social WishCycles</a>
+        <a th:href="@{/wishcycle/social-wishlists/{id}(id=${session.member.memberId})}" href="social-wishcycles.html" class="nav-link">Social WishCycles</a>
 
         <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
     </nav>
 
     <nav class="auth-buttons">
-        <a th:href="@{/wishcycle/login/profile/{id}(id=${memberId})}" href="user-profile.html" class="btn-profile">Profile</a>
+        <a th:href="@{/wishcycle/login/profile/{id}(id=${session.member.memberId})}" href="user-profile.html" class="btn-profile">Profile</a>
     </nav>
 </header>
 
@@ -66,7 +66,7 @@
 
 <footer class="main-footer">
     <div class="footer-content-minimal">
-        <a th:href="@{/wishcycle/homepage(memberId=${memberId})}" href="homepage.html">
+        <a th:href="@{/wishcycle/homepage}" href="homepage.html">
             <img th:src="@{/images/WishCycle-Logo.png}" src="../static/images/WishCycle-Logo.png" alt="WishCycle Logo" class="footer-logo">
         </a>
         <span class="footer-tag">@WishCycle 2026</span>
