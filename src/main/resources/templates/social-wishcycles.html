@@ -22,19 +22,19 @@
     </div>
 
     <nav class="main-nav">
-        <a th:href="@{/wishcycle/homepage}" class="nav-link">Home</a>
+        <a th:href="@{/wishcycle/homepage}" href="homepage.html" class="nav-link">Home</a>
 
-        <a th:href="@{/wishcycle/wishlists/{id}(id=${session.member.memberId})}"
+        <a th:href="@{/wishcycle/wishlists/{id}(id=${session.member.memberId})}" href="personal-wishcycles.html"
            class="nav-link">My WishCycles</a>
 
-        <a th:href="@{/wishcycle/social-wishlists/{id}(id=${session.member.memberId})}"
+        <a th:href="@{/wishcycle/social-wishlists/{id}(id=${session.member.memberId})}" href="social-wishcycles.html"
            class="nav-link active">Social WishCycles</a>
 
         <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="nav-link">About WishCycle</a>
     </nav>
 
     <nav class="auth-buttons">
-        <a th:href="@{/wishcycle/login/profile/{id}(id=${session.member.memberId})}"
+        <a th:href="@{/wishcycle/login/profile/{id}(id=${session.member.memberId})}" href="user-profile.html"
            class="btn-profile">Profile</a>
     </nav>
 </header>
