@@ -45,10 +45,9 @@
             <span class="icon">+</span> Add Wish
         </a>
 
-        <form th:action="@{/wishcycle/wishlist/delete/list}" method="post" class="btn-action" th:object="${wishlist}">
-            <button type="submit" style="all: unset; cursor: pointer;">
-                <span class="icon">+</span> Delete Wishlist
-            </button>
+        <form th:action="@{/wishcycle/wishlist/delete/list}" method="post">
+            <input type="hidden" name="wishListId" th:value="${wishlist.wishListId}" />
+            <button type="submit"  class="btn-action">Delete List</button>
         </form>
     </div>
 
