@@ -117,4 +117,10 @@ public class WishService {
         }
         wishListRepository.setUpdateItemOnWishlist(wishlist, item);
     }
+
+    public WishList getItemsByWishlistId(WishList wishList, Long id) {
+        List<Item> items = wishListRepository.itemsInWishList(id);
+        wishList.setItems(items);
+        return wishList;
+    }
 }

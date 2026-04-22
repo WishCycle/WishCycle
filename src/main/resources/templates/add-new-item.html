@@ -43,10 +43,11 @@
     <section class="profile-card">
         <h2 class="category-title">Add a New Wish</h2>
 
-        <form th:action="@{/add-item}" method="post" class="form-layout">
+        <form th:action="@{/wishcycle/wishlist/create/item}" th:object="${item}" method="post" class="form-layout">
+
             <div class="input-group">
                 <label for="wishlistId">Select Wishlist</label>
-                <select id="wishlistId" name="wishlistId" class="custom-select" required>
+                <select id="wishlistId" name="wishListId" class="custom-select" required>
                     <option value="" disabled selected>Which list does this belong to?</option>
                     <option value="1">Home / Decor</option>
                     <option value="2">Clothing / Selfcare</option>
@@ -55,18 +56,23 @@
 
             <div class="input-group">
                 <label for="itemName">What are you wishing for?</label>
-                <input type="text" id="itemName" name="itemName" placeholder="e.g., Vintage Coffee Table" required>
+                <input type="text" th:field="*{itemName}" id="itemName" placeholder="e.g., Vintage Coffee Table" required>
             </div>
 
             <div class="input-group">
                 <label for="itemUrl">Link to Product (Optional)</label>
-                <input type="url" id="itemUrl" name="itemUrl" placeholder="https://recycled-shop.com/item">
+                <input type="url" th:field="*{url}" id="itemUrl" placeholder="https://recycled-shop.com/item">
                 <small class="hint">Linking to pre-loved or reusable items is encouraged!</small>
+            </div>
+
+            <div class="input-group">
+                <label for="itemPrice">Estimated Price</label>
+                <input type="number" step="0.01" th:field="*{price}" id="itemPrice" placeholder="0.00" required>
             </div>
 
             <div class="profile-actions">
                 <button type="submit" class="btn-primary">Add to List</button>
-                <a th:href="@{/personal-wishcycles}" href="personal-wishcycles.html" class="btn-logout">Cancel</a>
+                <a th:href="@{/personal-wishcycles}" class="btn-logout">Cancel</a>
             </div>
         </form>
     </section>
