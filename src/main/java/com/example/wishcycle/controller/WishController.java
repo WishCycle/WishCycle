@@ -2,6 +2,7 @@ package com.example.wishcycle.controller;
 import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
+import com.example.wishcycle.repository.mapper.WishListMapper;
 import com.example.wishcycle.service.MemberService;
 import com.example.wishcycle.service.WishService;
 import org.springframework.stereotype.Controller;
@@ -18,10 +19,12 @@ public class WishController {
 
     private final WishService wishService;
     private final MemberService memberService;
+    private final WishListMapper wishListMapper;
 
-    public WishController(WishService wishService, MemberService memberService) {
+    public WishController(WishService wishService, MemberService memberService, WishListMapper wishListMapper) {
         this.wishService = wishService;
         this.memberService = memberService;
+        this.wishListMapper = wishListMapper;
     }
 
     @GetMapping("/social-wishlists/{memberId}")
@@ -85,11 +88,11 @@ public class WishController {
     }
 
     @PostMapping("/wishlist/create/item")
-    public String createItem(@ModelAttribute WishList wishList, @ModelAttribute("Item") Item item, HttpSession session) {
+    public String createItem(@ModelAttribute WishList wishList, @ModelAttribute Item item, HttpSession session) {
         Member member = (Member) session.getAttribute("member");
-        wishService.createItem(item);
         wishService.addItemToWishList(wishList, item);
-        return "redirect:/wishcycle/wishlists/" + member.getMemberId();
+        wishService.getWishListsByMemberId(member.getMemberId());
+        return "redirect:/wishcycle/wishlist/view/" + member.getMemberId();
     }
 
     @PostMapping("/wishlist/delete/item")
@@ -103,7 +106,7 @@ public class WishController {
     public String updateItem(@ModelAttribute WishList wishList, @ModelAttribute Item item, HttpSession session) {
         Member member = (Member) session.getAttribute("member");
         wishService.updateItem(item);
-        wishService.setUpdateItemFromWishList(wishList, item);
+
         return "redirect:/wishcycle/wishlists/" + member.getMemberId();
     }
 }

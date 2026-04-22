@@ -43,30 +43,30 @@
         </a>
     </div>
 
-    <section class="wish-category">
-        <h3 class="category-title">Home / Decor</h3>
+    <div th:each="wl : ${wishlist}">
 
-        <div class="inspo-container">
-            <a href="#" class="inspo-card">
-                <span>Ceramic Vase</span>
-            </a>
-            <a href="#" class="inspo-card">
-                <span>Wool Throw</span>
-            </a>
-            <a href="#" class="inspo-card">
-                <span>Oak Side Table</span>
-            </a>
-            <a href="#" class="inspo-card">
-                <span>Mirror Set</span>
-            </a>
-            <a href="#" class="inspo-card">
-                <span>Linen Napkins</span>
-            </a>
-            <a href="#" class="inspo-card">
-                <span>Wool Socks</span>
-            </a>
-        </div>
-    </section>
+        <section class="wish-category" th:if="${wl.items != null && !wl.items.isEmpty()}">
+
+            <h3 class="category-title" th:text="${wl.wishListName}">Category Name</h3>
+
+            <div class="inspo-container">
+                <div th:each="item : ${wl.items}" th:remove="tag">
+
+                    <a th:if="${item.itemUrl != null && !item.itemUrl.isEmpty()}"
+                       th:href="${item.itemUrl}"
+                       target="_blank"
+                       class="inspo-card">
+                        <span th:text="${item.itemName}">Item Name</span>
+                    </a>
+
+                    <div th:unless="${item.itemUrl != null && !item.itemUrl.isEmpty()}"
+                         class="inspo-card">
+                        <span th:text="${item.itemName}">Item Name</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
 </main>
 

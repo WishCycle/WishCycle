@@ -6,6 +6,8 @@ import com.example.wishcycle.repository.mapper.ItemMapper;
 import com.example.wishcycle.repository.mapper.WishListMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.sql.PreparedStatement;
 import java.util.List;
 
 @Repository
@@ -95,6 +97,9 @@ public class WishListRepository {
     }
 
     public void addItemToWishList(WishList wishList, Item item) {
+        jdbc.update(CREATE_ITEM, item.getItemId(), item.getItemName(), item.getUrl(), item.getPrice());
+        Long latestId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Long.class);
+        item.setItemId(latestId);
         jdbc.update(ADD_ITEM_TO_WISHLIST, wishList.getWishListId(), item.getItemId(), item.getItemDescription());
     }
 
