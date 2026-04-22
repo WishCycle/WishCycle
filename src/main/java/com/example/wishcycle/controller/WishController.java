@@ -84,7 +84,7 @@ public class WishController {
     }
 
 
-    @PostMapping("/wishlists/delete")
+    @PostMapping("/wishlist/delete/list")
     public String deleteWishlist(@ModelAttribute WishList wishlist, HttpSession session) {
         Member member = (Member) session.getAttribute("member");
         wishService.deleteWishList(wishlist, member);
