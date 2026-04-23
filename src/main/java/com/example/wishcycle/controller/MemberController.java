@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 @RequestMapping("/wishcycle")
@@ -45,11 +46,19 @@ public class MemberController {
     }
 
     @PostMapping("/signup/save")
-    public String saveNewMember(@ModelAttribute Member member, HttpSession session) {
-        memberService.createMember(member);
-        Member savedMember = memberService.getMemberByEmail(member.getEmail());
-        session.setAttribute("member", savedMember);
-        return "redirect:/wishcycle/homepage";
+    public String saveNewMember(@ModelAttribute Member member, Model model, HttpSession session) {
+        try {
+            memberService.createMember(member);
+            Member savedMember = memberService.getMemberByEmail(member.getEmail());
+            session.setAttribute("member", savedMember);
+
+            return "redirect:/wishcycle/homepage";
+        } catch (ResponseStatusException ex) {
+
+            model.addAttribute("errorMessage", ex.getReason());
+            return"signup-page";
+        }
+
     }
 
     @PostMapping("/login/save")

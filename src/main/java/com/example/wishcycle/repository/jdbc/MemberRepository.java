@@ -2,8 +2,11 @@ package com.example.wishcycle.repository.jdbc;
 
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.repository.mapper.MemberMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
