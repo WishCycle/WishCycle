@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WishCycle | Edit Profile</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-cream">
+
+<header class="navbar">
+  <div class="header-left">
+    <div class="logo">
+      <a th:href="@{/wishcycle/homepage}">
+        <img th:src="@{/images/WishCycle-Logo.png}" alt="WishCycle Logo">
+      </a>
+      <span class="slogan">Wish for a better future</span>
+    </div>
+  </div>
+
+  <nav class="main-nav">
+    <a th:href="@{/wishcycle/homepage}" class="nav-link">Home</a>
+    <a th:href="@{/wishcycle/wishlists/{id}(id=${session.member.memberId})}" class="nav-link">My WishCycles</a>
+    <a th:href="@{/wishcycle/social-wishlists/{id}(id=${session.member.memberId})}" class="nav-link">Social WishCycles</a>
+    <a th:href="@{/wishcycle/about-us}" class="nav-link">About WishCycle</a>
+  </nav>
+
+  <nav class="auth-buttons">
+    <a th:href="@{/wishcycle/login/profile/{id}(id=${session.member.memberId})}" class="btn-profile">Profile</a>
+  </nav>
+</header>
+
+<main class="content-wrapper profile-centered">
+
+  <section class="profile-card">
+    <div class="profile-header">
+      <div class="profile-avatar">
+        <span th:text="${#strings.substring(member.name,0,1)}">U</span>
+      </div>
+      <h2>Edit Profile</h2>
+    </div>
+
+    <form th:action="@{/wishcycle/update-member}" th:object="${member}" method="post" class="profile-details">
+
+      <input type="hidden" th:field="*{memberId}">
+
+      <div class="detail-item">
+        <label>Username</label>
+        <input type="text" th:field="*{name}" class="form-input">
+      </div>
+
+      <div class="detail-item">
+        <label>Email Address</label>
+        <input type="email" th:field="*{email}" class="form-input">
+      </div>
+
+      <div class="detail-item">
+        <label>New Password</label>
+        <input type="password" th:field="*{password}" class="form-input" placeholder="Update password...">
+      </div>
+
+      <div class="profile-actions">
+        <button type="submit" class="btn-action">Save Changes</button>
+        <a th:href="@{/wishcycle/login/profile/{id}(id=${session.member.memberId})}" class="btn-secondary">Cancel</a>
+      </div>
+    </form>
+  </section>
+
+</main>
+
+<footer class="main-footer">
+  <div class="footer-content-minimal">
+    <a th:href="@{/wishcycle/homepage}">
+      <img th:src="@{/images/WishCycle-Logo.png}" alt="WishCycle Logo" class="footer-logo">
+    </a>
+    <span class="footer-tag">@WishCycle 2026</span>
+    <a th:href="@{/wishcycle/about-us}" class="footer-link">About Us</a>
+    <a href="#" class="footer-link">Terms</a>
+    <a th:href="@{/wishcycle/logout}" class="footer-link">Log Out</a>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -58,7 +58,6 @@ public class MemberController {
             model.addAttribute("errorMessage", ex.getReason());
             return"signup-page";
         }
-
     }
 
     @PostMapping("/login/save")
@@ -109,5 +108,20 @@ public class MemberController {
         model.addAttribute("member", member);
         memberService.deleteMember(member);
         return "redirect:/wishcycle/homepage";
+    }
+
+    @GetMapping("/edit-member/{id}")
+    public String showEditForm(@PathVariable("id") Long id, Model model) {
+        Member member = memberService.getMemberById(id);
+        model.addAttribute("member", member);
+        return "edit-member";
+    }
+
+    @PostMapping("/update-member")
+    public String updateMember(@ModelAttribute("member") Member member, HttpSession session) {
+        memberService.updateMember(member);
+        Member updatedMember = memberService.getMemberById(member.getMemberId());
+        session.setAttribute("member", updatedMember);
+        return "redirect:/wishcycle/login/profile/" + updatedMember.getMemberId();
     }
 }

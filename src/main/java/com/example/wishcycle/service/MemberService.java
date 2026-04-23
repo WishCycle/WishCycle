@@ -61,4 +61,8 @@ public class MemberService {
         }
         memberRepository.deleteMember(member);
     }
+
+    public void updateMember(Member member) {
+        memberRepository.updateMember(member);
+    }
 }
