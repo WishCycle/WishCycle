@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest
 @Transactional
 @ActiveProfiles("test")
-
 public class MemberRepositoryTest {
 
     @Autowired
