@@ -33,7 +33,8 @@ public class WebConfig  implements WebMvcConfigurer {
                         "/**/about-us",        // Usually public
                         "/**/css/**",          // Static files must be public
                         "/**/images/**",
-                        "/**/js/**"
+                        "/**/js/**",
+                        "/**/register"
                 );
     }
 }
