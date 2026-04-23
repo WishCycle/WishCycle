@@ -64,9 +64,11 @@
             <button class="btn-secondary">Edit Profile</button>
         </div>
 
-        <div class="profile-actions">
-            <a th:href="@{/wishcycle/logout}" class="btn-logout">Logout</a>
-        </div>
+        <form th:action="@{/wishcycle/logout}" method="post">
+            <button type="submit" class="btn-logout" style="background:none; border:none; color:blue; cursor:pointer; text-decoration:underline;">
+                Logout
+            </button>
+        </form>
     </section>
 
 </main>
