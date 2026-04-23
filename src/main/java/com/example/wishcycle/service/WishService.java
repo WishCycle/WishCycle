@@ -22,10 +22,13 @@ public class WishService {
     }
 
     public List<WishList> getWishListsByMemberId(Long memberId) {
-        if (wishListRepository.findByUserId(memberId) == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No WishList found for member: " + memberRepository.getMemberById(memberId));
+        List<WishList> wishLists = wishListRepository.findByUserId(memberId);
+
+        if (wishLists == null || wishLists.isEmpty()) {
+            Member member = memberRepository.getMemberById(memberId);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No wishlists for member " + member);
         }
-        return wishListRepository.findByUserId(memberId);
+        return wishLists;
     }
 
     public WishList getWishListById(Long id) {
