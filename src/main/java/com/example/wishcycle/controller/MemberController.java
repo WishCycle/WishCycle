@@ -75,7 +75,7 @@ public class MemberController {
         }
     }
 
-    @GetMapping("/logout")  // Invalidate session and return landing page
+    @PostMapping("/logout")  // Invalidate session and return landing page
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/wishcycle/index";
