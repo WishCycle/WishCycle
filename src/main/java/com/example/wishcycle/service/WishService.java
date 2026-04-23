@@ -4,11 +4,8 @@ import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
 import com.example.wishcycle.repository.jdbc.MemberRepository;
 import com.example.wishcycle.repository.jdbc.WishListRepository;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -16,7 +13,6 @@ import java.util.List;
 @Service
 public class WishService {
 
-    @Autowired
     private final WishListRepository wishListRepository;
     private final MemberRepository memberRepository;
 

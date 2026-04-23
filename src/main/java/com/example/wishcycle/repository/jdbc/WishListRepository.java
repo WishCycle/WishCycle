@@ -5,8 +5,6 @@ import com.example.wishcycle.repository.mapper.ItemMapper;
 import com.example.wishcycle.repository.mapper.WishListMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import java.sql.PreparedStatement;
 import java.util.List;
 
 @Repository
@@ -83,7 +81,6 @@ public class WishListRepository {
     public void deleteItem(Item item) {
         jdbc.update(DELETE_ITEM, item.getItemId());
     }
-
 
     // CRUD OPERATIONS for wishlist and item manipulation
     public Long getItemById(Item item) {
