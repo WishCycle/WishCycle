@@ -22,10 +22,6 @@
     <p>Enter your details to access your WishCycles</p>
 
     <form action='#' th:action="@{/wishcycle/login/save}" th:object="${member}" method="post">
-        <div class="input-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Enter your username" required th:field="*{name}">
-        </div>
 
         <div class="input-group">
             <label for="email">Email</label>
