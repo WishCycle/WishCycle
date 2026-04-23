@@ -30,18 +30,17 @@ public class MemberService {
         return member;
     }
 
-    public Member createMember(Member member) {
-//        if (member == null) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Login Failed");
-//        }
-//        if (memberRepository.getMemberByEmail(member.getEmail()) != null) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already in use");
-//        }
-//        if (memberRepository.getMemberByUsername(member.getName()) != null) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already in use");
-//        }
+    public void createMember(Member member) {
+        if (member == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Login Failed");
+        }
+        if (memberRepository.getMemberByEmail(member.getEmail()) != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already in use");
+        }
+        if (memberRepository.getMemberByUsername(member.getName()) != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already in use");
+        }
         memberRepository.createMember(member);
-        return member;
     }
 
     public Member validMemberCheck(Member member) {
