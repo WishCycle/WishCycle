@@ -57,7 +57,6 @@ public class WishService {
         if (wishListRepository.findByUserId(member.getMemberId()) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The account you are trying to update a WishList with is not valid. Try logging in again!");
         }
-
         wishListRepository.updateWishList(wishList, member.getMemberId());
     }
 
@@ -69,7 +68,6 @@ public class WishService {
         if (!wishList.getMember().getMemberId().equals(member.getMemberId())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You do not have permission to dele others wishlists");
         }
-
         wishListRepository.deleteWishList(wishList.getWishListId());
     }
 
