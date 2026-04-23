@@ -4,6 +4,8 @@ import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
 import com.example.wishcycle.repository.jdbc.MemberRepository;
 import com.example.wishcycle.repository.jdbc.WishListRepository;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ import java.util.List;
 @Service
 public class WishService {
 
+    @Autowired
     private final WishListRepository wishListRepository;
     private final MemberRepository memberRepository;
 
@@ -54,23 +57,19 @@ public class WishService {
         if (wishListRepository.findByUserId(member.getMemberId()) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The account you are trying to update a WishList with is not valid. Try logging in again!");
         }
-
         wishListRepository.updateWishList(wishList, member.getMemberId());
     }
 
-    @Transactional
     public void deleteWishList(WishList wishList, Member member) {
         if (wishList == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The WishList you are trying to delete does not exist.");
         }
-        if (wishListRepository.findByUserId(member.getMemberId()) == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The account you are trying to delete a WishList with is not valid. Try logging in again!");
+
+        if (!wishList.getMember().getMemberId().equals(member.getMemberId())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You do not have permission to dele others wishlists");
         }
         wishListRepository.deleteWishList(wishList.getWishListId());
-
     }
-
-
 
     public void addItemToWishList(WishList wishList, Item item) {
         if (wishList == null || item == null) {
