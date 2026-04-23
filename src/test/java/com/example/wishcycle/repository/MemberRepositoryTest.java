@@ -52,10 +52,10 @@ public class MemberRepositoryTest {
     void checkCorrectMemberFound(){
         Member member = memberRepo.getMemberById(1L);
         assertNotNull(member);
-        assertEquals(member.getName(), "simonBeCh");
-        assertEquals(member.getMemberId(), 1L);
-        assertEquals(member.getEmail(), "sich0008@stud.ek.dk");
-        assertEquals(member.getPassword(), "112pizza");
+        assertEquals("simonBeCh", member.getName());
+        assertEquals(1L, member.getMemberId());
+        assertEquals("sich0008@stud.ek.dk", member.getEmail());
+        assertEquals("112pizza", member.getPassword());
     }
 
     @Test
