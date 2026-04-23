@@ -1,5 +1,4 @@
 package com.example.wishcycle.config;
-
 import com.example.wishcycle.interceptor.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

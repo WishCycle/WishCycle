@@ -16,6 +16,7 @@ public class MemberService {
     public Member getMemberById(Long id) {
         Member member = memberRepository.getMemberById(id);
 
+        assert member != null;
         if (member != null & member.getMemberId() == id) {
             return member;
         }

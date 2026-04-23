@@ -1,5 +1,4 @@
 package com.example.wishcycle.repository;
-
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.repository.jdbc.MemberRepository;
 import com.example.wishcycle.repository.mapper.MemberMapper;
@@ -9,12 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.net.URL;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.springframework.test.util.AssertionErrors.assertNull;
 
 @SpringBootTest
 @Transactional

@@ -69,7 +69,7 @@ public class MemberController {
 
             return "redirect:/wishcycle/homepage";
         } catch (Exception e) {
-            // If password/email is wrong, send them back to login with an error message
+            // If password/email is wrong, send them back to log in with an error message
             model.addAttribute("error", "Invalid credentials. Please try again.");
             return "login-page";
         }
