@@ -85,7 +85,7 @@ public class WishController {
     public String deleteWishlist(@ModelAttribute WishList wishlist, HttpSession session) {
         Member member = (Member) session.getAttribute("member");
         wishService.deleteWishList(wishlist, member);
-        return "redirect:/wishcycle/wishlists/" + member.getMemberId();
+        return "redirect:/wishcycle/wishlists/" + session.getAttribute("memberId");
     }
 
     @PostMapping("/wishlist/create/item")
@@ -93,14 +93,14 @@ public class WishController {
         Member member = (Member) session.getAttribute("member");
         wishService.addItemToWishList(wishList, item);
         wishService.getWishListsByMemberId(member.getMemberId());
-        return "redirect:/wishcycle/wishlists/view/" + wishList.getWishListId();
+        return "redirect:/wishcycle/wishlists/" + session.getAttribute("memberId");
     }
 
     @PostMapping("/wishlist/delete/item")
     public String deleteItem(@ModelAttribute WishList wishList, @ModelAttribute Item item, HttpSession session) {
         Member member = (Member) session.getAttribute("member");
         wishService.setDeleteItemFromWishList(wishList, item);
-        return "redirect:/wishcycle/wishlists/" + member.getMemberId();
+        return "redirect:/wishcycle/wishlists/" + session.getAttribute("memberId");
     }
 
     @PostMapping("/personal-wishcycles/wishlist/view/{id}")
