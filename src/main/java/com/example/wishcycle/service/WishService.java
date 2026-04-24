@@ -61,9 +61,6 @@ public class WishService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The WishList you are trying to delete does not exist.");
         }
 
-        if (!wishList.getMember().getMemberId().equals(member.getMemberId())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You do not have permission to dele others wishlists");
-        }
         wishListRepository.deleteWishList(wishList.getWishListId());
     }
 
