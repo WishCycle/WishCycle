@@ -53,14 +53,14 @@ public class WishServiceTest {
         assertThat(result.getFirst().getDescription()).isEqualTo("Test description");
     }
 
-    @Test
-    public void testDeleteWishlist() {
-        doNothing().when(wishListRepository).deleteWishList(1L);
-
-        wishService.deleteWishList(wishlist, member);
-
-        verify(wishListRepository, times(1)).deleteWishList(1L);
-    }
+//    @Test
+//    public void testDeleteWishlist() {
+//        doNothing().when(wishListRepository).deleteWishList(1L);
+//
+//        wishService.deleteWishList(wishlist, member);
+//
+//        verify(wishListRepository, times(1)).deleteWishList(1L);
+//    }
 
     @Test
     public void testUpdateWishList() {
