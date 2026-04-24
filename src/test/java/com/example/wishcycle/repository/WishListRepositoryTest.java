@@ -148,6 +148,7 @@ public class WishListRepositoryTest {
         assertThat((itemsInDatabaseCount)).isEqualTo(expectedCount);
     }
 
+
     // CRUD TEST for wishlist and item manipulation
     @Test
     void addItemToWishList() {
