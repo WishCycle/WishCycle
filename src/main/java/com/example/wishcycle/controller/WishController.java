@@ -93,7 +93,7 @@ public class WishController {
         Member member = (Member) session.getAttribute("member");
         wishService.addItemToWishList(wishList, item);
         wishService.getWishListsByMemberId(member.getMemberId());
-        return "redirect:/wishcycle/wishlist/view/" + member.getMemberId();
+        return "redirect:/wishcycle/wishlists/view/" + member.getMemberId();
     }
 
     @PostMapping("/wishlist/delete/item")
