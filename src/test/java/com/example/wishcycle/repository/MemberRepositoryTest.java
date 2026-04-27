@@ -1,5 +1,4 @@
 package com.example.wishcycle.repository;
-
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.repository.jdbc.MemberRepository;
 import com.example.wishcycle.repository.mapper.MemberMapper;
@@ -9,17 +8,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.net.URL;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.springframework.test.util.AssertionErrors.assertNull;
 
 @SpringBootTest
 @Transactional
 @ActiveProfiles("test")
-
 public class MemberRepositoryTest {
 
     @Autowired
@@ -52,10 +47,10 @@ public class MemberRepositoryTest {
     void checkCorrectMemberFound(){
         Member member = memberRepo.getMemberById(1L);
         assertNotNull(member);
-        assertEquals(member.getName(), "simonBeCh");
-        assertEquals(member.getMemberId(), 1L);
-        assertEquals(member.getEmail(), "sich0008@stud.ek.dk");
-        assertEquals(member.getPassword(), "112pizza");
+        assertEquals("simonBeCh", member.getName());
+        assertEquals(1L, member.getMemberId());
+        assertEquals("sich0008@stud.ek.dk", member.getEmail());
+        assertEquals("112pizza", member.getPassword());
     }
 
     @Test

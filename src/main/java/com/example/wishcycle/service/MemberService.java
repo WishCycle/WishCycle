@@ -16,6 +16,7 @@ public class MemberService {
     public Member getMemberById(Long id) {
         Member member = memberRepository.getMemberById(id);
 
+        assert member != null;
         if (member != null & member.getMemberId() == id) {
             return member;
         }
@@ -30,7 +31,7 @@ public class MemberService {
         return member;
     }
 
-    public Member createMember(Member member) {
+    public void createMember(Member member) {
         if (member == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Login Failed");
         }
@@ -41,7 +42,6 @@ public class MemberService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already in use");
         }
         memberRepository.createMember(member);
-        return member;
     }
 
     public Member validMemberCheck(Member member) {
@@ -60,5 +60,9 @@ public class MemberService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Member not found");
         }
         memberRepository.deleteMember(member);
+    }
+
+    public void updateMember(Member member) {
+        memberRepository.updateMember(member);
     }
 }

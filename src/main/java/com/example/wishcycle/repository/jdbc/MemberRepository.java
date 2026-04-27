@@ -1,10 +1,8 @@
 package com.example.wishcycle.repository.jdbc;
-
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.repository.mapper.MemberMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository

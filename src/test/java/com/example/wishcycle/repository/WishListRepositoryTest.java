@@ -158,8 +158,13 @@ public class WishListRepositoryTest {
         Long wishListId = 100L;
         jdbcTemplate.update("INSERT INTO wish_list (wishList_id, wishlist_name, wishlist_desc, user_id) VALUES (?, ?, ?, ?)", wishListId, "JackWishes", "This is the description", userId);
 
-        Long itemId = 7L;
-        jdbcTemplate.update("INSERT INTO item (item_id, item_name, item_url, item_price) VALUES (?, ?, ?, ?)", itemId, "Pants", "Random//URL.com", 300L);
+        Item item = new Item();
+        item.setItemName("Shoes");
+        item.setItemDescription("Something you wear");
+        item.setUrl("Random//URL.com");
+        item.setPrice(300L);
+
+        repository.createItem(item);
 
         Member member = new Member();
         member.setMemberId(userId);
@@ -167,16 +172,12 @@ public class WishListRepositoryTest {
         WishList wishList = new WishList();
         wishList.setWishListId(wishListId);
 
-        Item item = new Item();
-        item.setItemId(itemId);
-        item.setItemDescription("Something you wear");
-
         repository.addItemToWishList(wishList, item);
 
-        Integer wishListLineInDatabaseAdded = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM wish_list_item WHERE wishlist_id = ? AND item_id = ?", Integer.class, wishListId, itemId);
+        Integer wishListLineInDatabaseAdded = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM wish_list_item WHERE wishlist_id = ? AND item_id = ?", Integer.class, wishListId, item.getItemId());
         assertEquals(1, wishListLineInDatabaseAdded, "Should be exactly one new line");
 
-        String checkForDescription = jdbcTemplate.queryForObject("SELECT wish_description FROM wish_list_item WHERE wishlist_id = ? AND item_id = ?", String.class, wishListId, itemId);
+        String checkForDescription = jdbcTemplate.queryForObject("SELECT wish_description FROM wish_list_item WHERE wishlist_id = ? AND item_id = ?", String.class, wishListId, item.getItemId());
         assertEquals("Something you wear", checkForDescription);
     }
 
@@ -188,18 +189,19 @@ public class WishListRepositoryTest {
         Long wishListId = 100L;
         jdbcTemplate.update("INSERT INTO wish_list (wishList_id, wishlist_name, wishlist_desc, user_id) VALUES (?, ?, ?, ?)", wishListId, "JackWishes", "This is the description", userId);
 
-        Long itemId = 7L;
-        jdbcTemplate.update("INSERT INTO item (item_id, item_name, item_url, item_price) VALUES (?, ?, ?, ?)", itemId, "Pants", "Random//URL.com", 300L);
+        Item item = new Item();
+        item.setItemName("Shoes");
+        item.setItemDescription("Something you wear");
+        item.setUrl("Random//URL.com");
+        item.setPrice(300L);
+
+        repository.createItem(item);
 
         Member member = new Member();
         member.setMemberId(userId);
 
         WishList wishList = new WishList();
         wishList.setWishListId(wishListId);
-
-        Item item = new Item();
-        item.setItemId(itemId);
-        item.setItemDescription("Something you wear");
 
         repository.addItemToWishList(wishList, item);
         repository.setDeleteItemFromWishlist(wishList, item);

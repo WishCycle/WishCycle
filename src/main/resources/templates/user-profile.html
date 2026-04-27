@@ -50,7 +50,7 @@
         <div class="profile-details">
             <div class="detail-item">
                 <label>Email Address</label>
-                <p th:text="${member.   email}">user@example.com</p>
+                <p th:text="${member.email}">user@example.com</p>
             </div>
 
             <div class="detail-item">
@@ -61,9 +61,18 @@
         </div>
 
         <div class="profile-actions">
+            <a th:href="@{/wishcycle/edit-member/{id}(id=${member.memberId})}" class="btn-secondary" style="text-decoration: none; display: inline-block;">
+                Edit Profile
+            </a>
             <button class="btn-secondary">Edit Profile</button>
             <a th:href="@{/wishcycle/logout}" href="login-page.html" class="btn-logout">Logout</a>
         </div>
+
+        <form th:action="@{/wishcycle/logout}" method="post">
+            <button type="submit" class="btn-logout" style="background:none; border:none; color:blue; cursor:pointer; text-decoration:underline;">
+                Logout
+            </button>
+        </form>
     </section>
 
 </main>

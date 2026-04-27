@@ -1,9 +1,7 @@
 package com.example.wishcycle.repository.mapper;
-
 import com.example.wishcycle.model.Item;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

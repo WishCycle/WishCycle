@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 @RequestMapping("/wishcycle")
@@ -45,11 +46,18 @@ public class MemberController {
     }
 
     @PostMapping("/signup/save")
-    public String saveNewMember(@ModelAttribute Member member, HttpSession session) {
-        memberService.createMember(member);
-        Member savedMember = memberService.getMemberByEmail(member.getEmail());
-        session.setAttribute("member", savedMember);
-        return "redirect:/wishcycle/homepage";
+    public String saveNewMember(@ModelAttribute Member member, Model model, HttpSession session) {
+        try {
+            memberService.createMember(member);
+            Member savedMember = memberService.getMemberByEmail(member.getEmail());
+            session.setAttribute("member", savedMember);
+
+            return "redirect:/wishcycle/homepage";
+        } catch (ResponseStatusException ex) {
+
+            model.addAttribute("errorMessage", ex.getReason());
+            return"signup-page";
+        }
     }
 
     @PostMapping("/login/save")
@@ -60,13 +68,13 @@ public class MemberController {
 
             return "redirect:/wishcycle/homepage";
         } catch (Exception e) {
-            // If password/email is wrong, send them back to login with an error message
+            // If password/email is wrong, send them back to log in with an error message
             model.addAttribute("error", "Invalid credentials. Please try again.");
             return "login-page";
         }
     }
 
-    @GetMapping("/logout")  // Invalidate session and return landing page
+    @PostMapping("/logout")  // Invalidate session and return landing page
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/wishcycle/index";
@@ -100,5 +108,20 @@ public class MemberController {
         model.addAttribute("member", member);
         memberService.deleteMember(member);
         return "redirect:/wishcycle/homepage";
+    }
+
+    @GetMapping("/edit-member/{id}")
+    public String showEditForm(@PathVariable("id") Long id, Model model) {
+        Member member = memberService.getMemberById(id);
+        model.addAttribute("member", member);
+        return "edit-member";
+    }
+
+    @PostMapping("/update-member")
+    public String updateMember(@ModelAttribute("member") Member member, HttpSession session) {
+        memberService.updateMember(member);
+        Member updatedMember = memberService.getMemberById(member.getMemberId());
+        session.setAttribute("member", updatedMember);
+        return "redirect:/wishcycle/login/profile/" + updatedMember.getMemberId();
     }
 }

@@ -2,7 +2,6 @@ package com.example.wishcycle.controller;
 import com.example.wishcycle.model.Item;
 import com.example.wishcycle.model.Member;
 import com.example.wishcycle.model.WishList;
-import com.example.wishcycle.repository.mapper.WishListMapper;
 import com.example.wishcycle.service.MemberService;
 import com.example.wishcycle.service.WishService;
 import org.springframework.stereotype.Controller;
@@ -18,12 +17,10 @@ public class WishController {
 
     private final WishService wishService;
     private final MemberService memberService;
-    private final WishListMapper wishListMapper;
 
-    public WishController(WishService wishService, MemberService memberService, WishListMapper wishListMapper) {
+    public WishController(WishService wishService, MemberService memberService) {
         this.wishService = wishService;
         this.memberService = memberService;
-        this.wishListMapper = wishListMapper;
     }
 
     @GetMapping("/social-wishlists/{memberId}")
@@ -96,7 +93,7 @@ public class WishController {
         Member member = (Member) session.getAttribute("member");
         wishService.addItemToWishList(wishList, item);
         wishService.getWishListsByMemberId(member.getMemberId());
-        return "redirect:/wishcycle/wishlist/view/" + member.getMemberId();
+        return "redirect:/wishcycle/wishlists/" + member.getMemberId();
     }
 
     @PostMapping("/wishlist/delete/item")
@@ -106,13 +103,13 @@ public class WishController {
         return "redirect:/wishcycle/wishlists/" + member.getMemberId();
     }
 
-
     @PostMapping("/personal-wishcycles/wishlist/view/{id}")
-    public String updateItemOnWishlist(@ModelAttribute WishList wishlist, @ModelAttribute Item item, HttpSession session) {
+    public String updateItemOnWishlist(@ModelAttribute WishList wishlist, @ModelAttribute Item item, HttpSession session, @PathVariable String id) {
         Member member = (Member) session.getAttribute("member");
         wishService.setUpdateItemFromWishList(wishlist, item);
         return "redirect:/wishcycle/wishlist/view/" + member.getMemberId();
     }
 }
+
 
 

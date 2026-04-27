@@ -1,5 +1,4 @@
 package com.example.wishcycle.config;
-
 import com.example.wishcycle.interceptor.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +32,8 @@ public class WebConfig  implements WebMvcConfigurer {
                         "/**/about-us",        // Usually public
                         "/**/css/**",          // Static files must be public
                         "/**/images/**",
-                        "/**/js/**"
+                        "/**/js/**",
+                        "/**/register"
                 );
     }
 }
