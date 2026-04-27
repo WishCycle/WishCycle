@@ -62,7 +62,7 @@
 
         <div class="profile-actions">
             <button class="btn-secondary">Edit Profile</button>
-            <button class="btn-logout">Logout</button>
+            <a th:href="@{/wishcycle/logout}" href="login-page.html" class="btn-logout">Logout</a>
         </div>
     </section>
 
@@ -75,10 +75,7 @@
                  class="footer-logo">
         </a>
         <span class="footer-tag">@WishCycle 2026</span>
-        <a th:href="@{about-us}" href="about-us.html" class="footer-link">About Us</a>
-        <a href="#" class="footer-link">Terms</a>
-        <a href="#" class="footer-link">Privacy</a>
-        <a href="#" class="footer-link">Contact</a>
+        <a th:href="@{/wishcycle/about-us}" href="about-us.html" class="footer-link">About WishCycle</a>
     </div>
 </footer>
 
